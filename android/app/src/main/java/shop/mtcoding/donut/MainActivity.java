@@ -1,4 +1,4 @@
-package shop.mtcoding.donut;
+package shop.donutmarket.donut;
 
 import io.flutter.embedding.android.FlutterActivity;
 

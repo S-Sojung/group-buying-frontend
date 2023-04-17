@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="shop.mtcoding.donut">
+    package="shop.donutmarket.donut">
     <application
         android:label="donut"
         android:name="${applicationName}"
