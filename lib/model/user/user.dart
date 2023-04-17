@@ -1,33 +1,70 @@
-import 'package:intl/intl.dart';
+
 
 class User {
   final int id;
   final String username;
   final String email;
+  final String name;
+  final String profile;
+  final int rateId;
+  final String type;
+  final String role;
+  final int statusCode;
   final DateTime created;
-  final DateTime updated;
 
   User({
     required this.id,
     required this.username,
     required this.email,
+    required this.name,
+    required this.profile,
+    required this.rateId,
+    required this.type,
+    required this.role,
+    required this.statusCode,
     required this.created,
-    required this.updated,
   });
-
-  // 통신을 위해서 json 처럼 생긴 문자열 {"id":1} => Dart 오브젝트
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "username": username,
-    "email": email,
-    "created": created,
-    "updated": updated
-  };
-
-  User.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
-        username = json["username"],
-        email = json["email"],
-        created = DateFormat("yyyy-mm-dd").parse(json["created"]),
-        updated = DateFormat("yyyy-mm-dd").parse(json["updated"]);
 }
+
+List<User> users = [
+  User(id: 1,
+      username: "ssar",
+      email: "ssar@naver.com",
+      name: "ssar",
+      profile: "null",
+      rateId: 1,
+      type: "naver",
+      role: "user",
+      statusCode: 100,
+      created: DateTime.now()),
+  User(id: 2,
+      username: "zzxc",
+      email: "zzxc@naver.com",
+      name: "zzxc",
+      profile: "null",
+      rateId: 2,
+      type: "naver",
+      role: "user",
+      statusCode: 100,
+      created: DateTime.now()),
+  User(id: 3,
+      username: "qqwe",
+      email: "qqwe@naver.com",
+      name: "qqwe",
+      profile: "null",
+      rateId: 3,
+      type: "naver",
+      role: "user",
+      statusCode: 100,
+      created: DateTime.now()),
+  User(id: 4,
+      username: "ppoi",
+      email: "ppoi@naver.com",
+      name: "ppoi",
+      profile: "null",
+      rateId: 4,
+      type: "null",
+      role: "user",
+      statusCode: 100,
+      created: DateTime.now())
+];
