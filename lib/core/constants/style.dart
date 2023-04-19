@@ -19,7 +19,7 @@ TextStyle title2({Color mColor = Colors.black}) {
 
 TextStyle donutTitle() {
   return const TextStyle(
-      fontSize: 20,
+      fontSize: 30,
       fontWeight: FontWeight.bold,
       shadows: [
         Shadow(

@@ -1,56 +1,37 @@
-import 'package:donut/core/constants/style.dart';
-import 'package:donut/core/utils/validator_util.dart';
-import 'package:donut/model/rate/rate.dart';
-import 'package:donut/views/components/donut_button.dart';
-import 'package:donut/views/components/donut_label_round_textbox.dart';
-import 'package:donut/views/components/donut_rate_bar.dart';
-import 'package:donut/views/components/donut_round_tag.dart';
-import 'package:donut/views/components/donut_text_form_field.dart';
+import 'package:donut/core/constants/move.dart';
+import 'package:donut/views/pages/auth/join_page/join_page.dart';
+import 'package:donut/views/pages/board/home_page/board_home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
+  //WidgetsFlutterBinding.ensureInitialized();
+  // SessionUser sessionUser = await UserRepository().fetchJwtVerify();
+  // runApp(
+  //   ProviderScope(
+  //     overrides: [
+  //       sessionProvider.overrideWithValue(sessionUser)
+  //     ],
+  //     child: MyApp(),
+  //   ),
+  // );
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //SessionUser sessionUser = ref.read(sessionProvider);
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'HallymGothic',
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          DonutTextFormField(title: "email", hint: "email", funValidator: validateTitle()),
-          DonutButton(text: "버튼", funPageRoute: () {
-
-            }),
-          Row(
-            children: [
-              DonutRoundTag("comment"),
-              DonutRoundTag("comment",code: "1",)],
-          ),
-          DonutLabelRoundTextbox(),
-          DonutRoundButton(text: "안녕하세요 조금 더 길어요", funPageRoute: (){}),
-          DonutRoundButton(text: "안녕", funPageRoute: (){}),
-          DonutRateBar(rates[0])
-        ],
-      )
+      // initialRoute: sessionUser.isLogin! ? Move.postHomePage : Move.loginPage,
+      routes: getRouters(),
+      home: JoinPage(),
     );
   }
 }
