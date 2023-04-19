@@ -8,10 +8,10 @@ TextStyle largeTitle({Color mColor = Colors.black}) {
   return TextStyle(fontSize: 34, fontWeight: FontWeight.bold, color: mColor);
 }
 
-TextStyle Title1({Color mColor = Colors.black}) {
+TextStyle title1({Color mColor = Colors.black}) {
   return TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: mColor);
 }
-TextStyle Title2({Color mColor = Colors.black}) {
+TextStyle title2({Color mColor = Colors.black}) {
   return TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: mColor);
 }
 
