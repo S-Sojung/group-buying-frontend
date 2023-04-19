@@ -1,6 +1,7 @@
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/utils/validator_util.dart';
 import 'package:donut/views/components/donut_button.dart';
+import 'package:donut/views/components/donut_label_round_textbox.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +42,8 @@ class HomePage extends StatelessWidget {
             children: [
               DonutRoundTag("comment"),
               DonutRoundTag("comment",code: "1",)],
-          )
-
+          ),
+          DonutLabelRoundTextbox()
         ],
       )
     );

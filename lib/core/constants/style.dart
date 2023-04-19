@@ -44,7 +44,7 @@ TextStyle callout({Color mColor = Colors.black}) {
 }
 
 TextStyle subHead({Color mColor = Colors.black}) {
-  return TextStyle(fontSize: 15, color: mColor);
+  return TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: mColor);
 }
 TextStyle footnote({Color mColor = Colors.black}) {
   return TextStyle(fontSize: 13, color: mColor);
