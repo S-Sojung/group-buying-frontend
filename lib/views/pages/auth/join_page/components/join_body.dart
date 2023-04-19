@@ -7,13 +7,15 @@ class JoinBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ListView(
-        children: [
-          JoinHeader(),
-          JoinForm(),
-        ],
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: [
+            JoinHeader(),
+            JoinForm(),
+          ],
+        ),
       ),
     );
   }

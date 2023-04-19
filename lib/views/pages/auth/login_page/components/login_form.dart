@@ -4,13 +4,12 @@ import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class JoinForm extends StatelessWidget {
+class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
-  final _nickname = TextEditingController();
 
-  JoinForm({Key? key}) : super(key: key);
+  LoginForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +37,9 @@ class JoinForm extends StatelessWidget {
                     hint: "password",
                     funValidator: validatePassword(),
                   ),
-                  DonutTextFormField(
-                    controller: _password,
-                    title: "pwcheck",
-                    hint: "password",
-                    funValidator: validatePassword(),
-                  ),
-                  DonutTextFormField(
-                    controller: _nickname,
-                    title: "nickname",
-                    hint: "nickname",
-                    funValidator: validateNikename(),
-                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                    child: DonutButton(text: "회원 가입", funPageRoute: (){}),
+                    child: DonutButton(text: "로그인", funPageRoute: (){}),
                   ),
                 ],
               ),
