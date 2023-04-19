@@ -1,7 +1,9 @@
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/utils/validator_util.dart';
+import 'package:donut/model/rate/rate.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_label_round_textbox.dart';
+import 'package:donut/views/components/donut_rate_bar.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +46,9 @@ class HomePage extends StatelessWidget {
               DonutRoundTag("comment",code: "1",)],
           ),
           DonutLabelRoundTextbox(),
-          DonutRoundButton(text: "gd", funPageRoute: (){}),
+          DonutRoundButton(text: "안녕하세요 조금 더 길어요", funPageRoute: (){}),
+          DonutRoundButton(text: "안녕", funPageRoute: (){}),
+          DonutRateBar(rates[0])
         ],
       )
     );
