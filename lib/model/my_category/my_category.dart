@@ -3,14 +3,16 @@ class MyCatagory {
   final int id;
   final int userId;
   final int categoryId;
+  final DateTime createdAt;
 
   MyCatagory({
     required this.id,
     required this.userId,
     required this.categoryId,
+    required this.createdAt
   });
 }
 
 List<MyCatagory> myCategorys = [
-  MyCatagory(id: 1, userId: 1, categoryId: 1)
+  MyCatagory(id: 1, userId: 1, categoryId: 1,createdAt: DateTime.now())
 ];

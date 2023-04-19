@@ -4,18 +4,18 @@ class Participant {
   final int eventId; // 이벤트 id
   final int userId; // 참가자 id
   final int qty; // 신청수량
-  final DateTime createdAt; // 신청 일자
   final DateTime? limitTime;
   final int statusCode;
+  final DateTime createdAt; // 신청 일자
 
   Participant({
     required this.id,
     required this.eventId,
     required this.userId,
     required this.qty,
-    required this.createdAt,
      this.limitTime,
     required this.statusCode,
+    required this.createdAt,
   });
 }
 

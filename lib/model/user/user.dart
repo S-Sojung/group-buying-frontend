@@ -2,19 +2,17 @@
 
 class User {
   final int id;
-  final String username;
   final String email;
-  final String name;
-  final String profile;
+  String? name;
+  String? profile;
   final int rateId;
   final String type;
   final String role;
-  final int statusCode;
+  int? statusCode;
   final DateTime created;
 
   User({
     required this.id,
-    required this.username,
     required this.email,
     required this.name,
     required this.profile,
@@ -28,7 +26,6 @@ class User {
 
 List<User> users = [
   User(id: 1,
-      username: "ssar",
       email: "ssar@naver.com",
       name: "ssar",
       profile: "null",
@@ -38,7 +35,6 @@ List<User> users = [
       statusCode: 100,
       created: DateTime.now()),
   User(id: 2,
-      username: "zzxc",
       email: "zzxc@naver.com",
       name: "zzxc",
       profile: "null",
@@ -48,7 +44,6 @@ List<User> users = [
       statusCode: 100,
       created: DateTime.now()),
   User(id: 3,
-      username: "qqwe",
       email: "qqwe@naver.com",
       name: "qqwe",
       profile: "null",
@@ -58,7 +53,6 @@ List<User> users = [
       statusCode: 100,
       created: DateTime.now()),
   User(id: 4,
-      username: "ppoi",
       email: "ppoi@naver.com",
       name: "ppoi",
       profile: "null",

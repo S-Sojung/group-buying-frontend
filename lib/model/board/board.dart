@@ -2,14 +2,17 @@ class Board {
   // 게시글
   final int id;
   final int categoryId;
-  final String title;
+  final String? title;
   final int organizerId;
-  final String content;
-  final String img;
+  final String? content;
+  final String? img;
   final int eventId;
-  final int statusCode;
-  final int views;
-  final bool wish;
+  final int? statusCode;
+  final int? views;
+  final bool recommend;
+  final String? state;
+  final String? city;
+  final String? town;
   final DateTime createdAt;
 
   Board(
@@ -22,8 +25,11 @@ class Board {
       required this.eventId,
       required this.statusCode,
       required this.views,
-      required this.wish,
-      required this.createdAt});
+        required this.recommend,
+        required this.state,
+        required this.city,
+        required this.town,
+        required this.createdAt});
 }
 
 List<Board> boards = [
@@ -37,8 +43,11 @@ List<Board> boards = [
       eventId: 1,
       statusCode: 200,
       views: 50,
-      wish: false,
-      createdAt: DateTime.now()),
+      recommend: false,
+      state: "부산",
+      city: "부산진구",
+      town: "부전동",
+      createdAt: DateTime.now(),),
   Board(
       id: 2,
       categoryId: 3,
@@ -49,6 +58,9 @@ List<Board> boards = [
       eventId: 2,
       statusCode: 200,
       views: 50,
-      wish: false,
+      recommend: false,
+      state: "부산",
+      city: "부산진구",
+      town: "부전동",
       createdAt: DateTime.now()),
 ];
