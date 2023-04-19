@@ -1,3 +1,4 @@
+import 'package:donut/core/constants/style.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Text("안녕하세요 한림고딕체입니다.")
+      body: Text("안녕하세요 한림고딕체입니다.",style: donutTitle(),)
     );
   }
 }

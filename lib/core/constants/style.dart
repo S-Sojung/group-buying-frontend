@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'theme.dart';
+
 
 
 
@@ -16,13 +18,13 @@ TextStyle title2({Color mColor = Colors.black}) {
 }
 
 TextStyle donutTitle() {
-  return TextStyle(
+  return const TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
       shadows: [
         Shadow(
-          blurRadius: 5.0,
-          color: Colors.black,
+          blurRadius: 10.0,
+          color: donutColorBase,
           offset: Offset(0.0, 0.0),
         ),
       ],
