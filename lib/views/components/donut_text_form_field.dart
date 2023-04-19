@@ -23,7 +23,7 @@ class DonutTextFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment:  CrossAxisAlignment.start,
         children: [
-          Text("${title}",style: subHead(),),
+          Text("${title}",style: callout(),),
           TextFormField(
             controller: controller,
             validator: funValidator,
