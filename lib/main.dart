@@ -1,3 +1,4 @@
+import 'package:donut/core/constants/move.dart';
 import 'package:donut/views/pages/board/home_page/board_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +29,7 @@ class MyApp extends ConsumerWidget {
       ),
       debugShowCheckedModeBanner: false,
       // initialRoute: sessionUser.isLogin! ? Move.postHomePage : Move.loginPage,
-      // routes: getRouters(),
+      routes: getRouters(),
       home: BoardHomePage(),
     );
   }

@@ -14,7 +14,7 @@ class DonutButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: donutColorBasic,
-        minimumSize: Size(double.infinity,50),
+        minimumSize: Size(double.infinity, 50),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

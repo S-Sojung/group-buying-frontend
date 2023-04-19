@@ -19,14 +19,31 @@ class DonutRoundTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20,
       decoration: BoxDecoration(
         color: setColor(code),
         borderRadius: BorderRadius.circular(20),
       ),
-      margin: EdgeInsets.symmetric(vertical: 5,horizontal: 2),
+      margin: EdgeInsets.symmetric(vertical: 0,horizontal: 2),
       padding: EdgeInsets.all(1),
       child: Text(" ${comment} ",style: caption1()
     ),);
+  }
+}
+
+class DonutRectTag extends StatelessWidget {
+  final String comment;
+  final String code;
+  const DonutRectTag(this.comment,{this.code="0" ,Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: setColor(code),
+      ),
+      margin: EdgeInsets.symmetric(vertical: 5,horizontal: 2),
+      padding: EdgeInsets.all(1),
+      child: Text(" ${comment} ",style: caption2()
+      ),);
   }
 }
