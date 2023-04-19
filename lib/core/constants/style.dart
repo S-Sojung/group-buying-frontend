@@ -46,7 +46,7 @@ TextStyle callout({Color mColor = Colors.black}) {
 TextStyle subHead({Color mColor = Colors.black}) {
   return TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: mColor);
 }
-TextStyle footnote({Color mColor = Colors.black}) {
+TextStyle footnote({Color mColor = donutColorBase}) {
   return TextStyle(fontSize: 13, color: mColor);
 }
 TextStyle caption1({Color mColor = Colors.black}) {

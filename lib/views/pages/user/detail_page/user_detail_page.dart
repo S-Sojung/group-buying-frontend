@@ -5,6 +5,8 @@ class UserDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+        child: Align(alignment:Alignment.center ,child: Text("내 정보 화면 "))
+    );
   }
 }
