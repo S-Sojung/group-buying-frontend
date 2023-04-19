@@ -43,7 +43,8 @@ class HomePage extends StatelessWidget {
               DonutRoundTag("comment"),
               DonutRoundTag("comment",code: "1",)],
           ),
-          DonutLabelRoundTextbox()
+          DonutLabelRoundTextbox(),
+          DonutRoundButton(text: "gd", funPageRoute: (){}),
         ],
       )
     );
