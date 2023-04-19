@@ -32,19 +32,19 @@ class DonutTextFormField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: "Enter $hint",
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: donutColorBase),
+                borderSide: const BorderSide(color: donutColorBasic),
                 borderRadius: BorderRadius.circular(20),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: donutColorBase),
+                borderSide: const BorderSide(color: donutColorBasic),
                 borderRadius: BorderRadius.circular(20),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: donutColorBase),
+                borderSide: const BorderSide(color: donutColorBasic),
                 borderRadius: BorderRadius.circular(20),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: donutColorBase),
+                borderSide: const BorderSide(color: donutColorBasic),
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
