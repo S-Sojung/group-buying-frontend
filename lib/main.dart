@@ -1,4 +1,6 @@
 import 'package:donut/core/constants/style.dart';
+import 'package:donut/core/utils/validator_util.dart';
+import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,7 +29,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Text("안녕하세요 한림고딕체입니다.",style: donutTitle(),)
+      body: Column(
+        children: [
+          DonutTextFormField(title: "email", hint: "email", funValidator: validateTitle())
+        ],
+      )
     );
   }
 }
