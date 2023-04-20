@@ -28,6 +28,11 @@ class _BoardHomePageState extends State<BoardHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        backgroundColor: donutColorBase,
+        child: Icon(Icons.add,size: 50,),
+      ),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
