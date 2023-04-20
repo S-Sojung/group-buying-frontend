@@ -21,7 +21,7 @@ class DonutResultTextField extends StatelessWidget {
         height: 40,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: donutColorBase),
+            border: Border.all(color: donutColorBasic),
             color: donutColor1
         ),
         child: Row(children: [
