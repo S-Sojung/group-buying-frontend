@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:validators/validators.dart';
 
 //추후 수정
@@ -74,6 +76,40 @@ Function validateNikename() {
     if (value!.isEmpty) {
       return "내용은 공백이 들어갈 수 없습니다.";
     } else if (value.length > 10) {
+      return "내용의 길이를 초과하였습니다.";
+    } else {
+      return null;
+    }
+  };
+}
+
+Function validateCount() {
+  return (String? value) {
+    if (value!.isNotEmpty) {
+      return "";
+    } else if (int.parse(value) > 100) {
+      return "최대 수량은 100개 입니다.";
+    } else {
+      return null;
+    }
+  };
+}
+Function validPrice() {
+  return (String? value) {
+    if (value!.isNotEmpty) {
+      return "";
+    } else {
+      return null;
+    }
+  };
+}
+Function validBoardContent() {
+  return (String? value) {
+    if (value!.isEmpty) {
+      return "내용은 공백이 들어갈 수 없습니다.";
+    } else if (value.length < 10 ) {
+      return "최소 10글자를 작성하여야 합니다.";
+    }else if (value.length > 500) {
       return "내용의 길이를 초과하였습니다.";
     } else {
       return null;

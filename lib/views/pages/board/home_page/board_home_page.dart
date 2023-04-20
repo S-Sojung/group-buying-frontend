@@ -35,7 +35,7 @@ class _BoardHomePageState extends State<BoardHomePage> {
       ),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white10,
         actionsIconTheme: IconThemeData(color: donutColorBase),
         title: Text("부전동"),
         titleTextStyle:TextStyle(fontSize: 17, fontWeight: FontWeight.bold,color: donutColorBase),
