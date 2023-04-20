@@ -49,4 +49,64 @@ List<Event> events = [
       price: 900,
       createdAt: DateTime.now()
   ),
+  Event(
+      id: 3,
+      latitude: 35.156834,
+      longitude: 129.058987,
+      qty: 1,
+      paymentType: "직거래",
+      startAt: DateTime.now(),
+      endAt: DateTime.now(), // 수정 필요
+      statusCode: 200,
+      price: 900,
+      createdAt: DateTime.now()
+  ),
+  Event(
+      id: 4,
+      latitude: 35.156834,
+      longitude: 129.058987,
+      qty: 1,
+      paymentType: "직거래",
+      startAt: DateTime.now(),
+      endAt: DateTime.now(), // 수정 필요
+      statusCode: 200,
+      price: 900,
+      createdAt: DateTime.now()
+  ),
+  Event(
+      id: 5,
+      latitude: 35.156834,
+      longitude: 129.058987,
+      qty: 1,
+      paymentType: "직거래",
+      startAt: DateTime.now(),
+      endAt: DateTime.now(), // 수정 필요
+      statusCode: 200,
+      price: 900,
+      createdAt: DateTime.now()
+  ),
+  Event(
+      id: 6,
+      latitude: 35.156834,
+      longitude: 129.058987,
+      qty: 1,
+      paymentType: "직거래",
+      startAt: DateTime.now(),
+      endAt: DateTime.now(), // 수정 필요
+      statusCode: 200,
+      price: 900,
+      createdAt: DateTime.now()
+  ),
+  Event(
+      id: 7,
+      latitude: 35.156834,
+      longitude: 129.058987,
+      qty: 1,
+      paymentType: "직거래",
+      startAt: DateTime.now(),
+      endAt: DateTime.now(), // 수정 필요
+      statusCode: 200,
+      price: 900,
+      createdAt: DateTime.now()
+  ),
 ];
