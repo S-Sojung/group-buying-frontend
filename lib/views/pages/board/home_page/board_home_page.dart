@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/views/pages/board/home_page/component/board_home_list_page.dart';
@@ -29,7 +30,9 @@ class _BoardHomePageState extends State<BoardHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.pushNamed(context, Move.boardWritePage);
+        },
         backgroundColor: donutColorBase,
         child: Icon(Icons.add,size: 50,),
       ),
