@@ -31,7 +31,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: sessionUser.isLogin! ? Move.postHomePage : Move.loginPage,
       routes: getRouters(),
-      home: BoardWritePage(),
+      home: BoardHomePage(),
     );
   }
 }

@@ -9,11 +9,11 @@ class BoardWritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white10,
-        actionsIconTheme: IconThemeData(color: donutColorBase),
-      ),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white10,
+          foregroundColor: donutColorBase,
+        ),
       body: BoardWriteBodyForm(),
     );
   }
