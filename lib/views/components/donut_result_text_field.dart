@@ -15,9 +15,9 @@ class DonutResultTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: getScreenWidth(context) * 0.05, vertical: 5),
+      padding: EdgeInsets.only(right: 10),
       child: Container(
+        width: 100,
         height: 40,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

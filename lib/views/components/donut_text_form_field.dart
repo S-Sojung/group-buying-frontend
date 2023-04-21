@@ -134,6 +134,9 @@ class DonutCountFormField extends StatelessWidget {
           Container(
             height: 40,
             child: TextFormField(
+              onSaved: (newValue) {
+                controller.text = newValue;
+              },
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly
@@ -166,3 +169,5 @@ class DonutCountFormField extends StatelessWidget {
     );
   }
 }
+
+
