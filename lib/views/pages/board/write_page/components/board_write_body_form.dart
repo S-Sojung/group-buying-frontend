@@ -1,16 +1,20 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/core/utils/validator_util.dart';
 import 'package:donut/model/category/category.dart';
 import 'package:donut/views/components/donut_button.dart';
-import 'package:donut/views/components/donut_result_text_field.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/components/donut_text_area.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:donut/views/pages/board/write_page/components/board_write_pay_field.dart';
 import 'package:donut/views/pages/board/write_page/components/donut_category_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 class BoardWriteBodyForm extends StatefulWidget {
   BoardWriteBodyForm({Key? key}) : super(key: key);
@@ -31,6 +35,20 @@ class _BoardWriteBodyFormState extends State<BoardWriteBodyForm> {
 
   int onePrice = 0;
   int myPrice = 0;
+  Image? _image;
+
+  final _picker = ImagePicker();
+  Future<void> _setImage() async {
+    var xfile = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 30,);
+
+    if (xfile != null) {
+      setState(() {
+        _image = Image.file(File(xfile.path), fit: BoxFit.cover);
+        // dynamic sendData = xfile.path;
+        // var formData = FormData.fromMap({'images': await MultipartFile.fromFile(sendData)});
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +61,25 @@ class _BoardWriteBodyFormState extends State<BoardWriteBodyForm> {
             SizedBox(
               height: 20,
             ),
-
             //사진 등록
+            Container(
+              height: getScreenWidth(context) * 0.7,
+              width: getScreenWidth(context) * 0.7,
+              child: OutlinedButton(
+                  onPressed: _setImage,
+                  child: AspectRatio(
+                    aspectRatio: 1 / 1,
+                    child: _image == null
+                        ? const Icon(
+                            Icons.camera_alt,
+                            color: donutColorBase,
+                          )
+                        : _image as Image,
+                  )),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             DonutTextFormFieldSlim(
                 title: "제목",
                 funValidator: validateTitle(),
@@ -54,9 +89,15 @@ class _BoardWriteBodyFormState extends State<BoardWriteBodyForm> {
             ),
 
             DonutCategoryDropdown(
+              fun: (value) {
+                setState(() {
+                  setDropdownItem = value;
+                });
+              },
               dropDownList: cate,
               dropDownitem: setDropdownItem,
             ),
+
             SizedBox(
               height: 20,
             ),
@@ -79,19 +120,22 @@ class _BoardWriteBodyFormState extends State<BoardWriteBodyForm> {
                 controller: _countController),
             //OnePrice 를 바뀌게 하고 싶음 위의 값이 바뀌면
 
-            BoardWritePayField(funPay: (){
-              setState(() {
-                if (_priceController.text.isEmpty ||
-                    _countController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("총 금액과 총 수량을 작성해주세요")));
-                  onePrice = 0;
-                }else {
-                  onePrice = (int.parse(_priceController.text) /
-                      int.parse(_countController.text))
-                      .round();
-                }
-              });
-            }, onePrice: onePrice),
+            BoardWritePayField(
+                funPay: () {
+                  setState(() {
+                    if (_priceController.text.isEmpty ||
+                        _countController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("총 금액과 총 수량을 작성해주세요")));
+                      onePrice = 0;
+                    } else {
+                      onePrice = (int.parse(_priceController.text) /
+                              int.parse(_countController.text))
+                          .round();
+                    }
+                  });
+                },
+                onePrice: onePrice),
 
             SizedBox(
               height: 20,
@@ -102,15 +146,19 @@ class _BoardWriteBodyFormState extends State<BoardWriteBodyForm> {
                 funValidator: validateCount(),
                 controller: _myCountController),
 
-            BoardWritePayField(funPay: (){
-              setState(() {
-                if (_myCountController.text.isEmpty || onePrice==0) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("개당 예상 금액과 구매할 수량을 체크해주세요")));
-                  myPrice = 0;
-                }else{
-                myPrice = (onePrice * int.parse(_myCountController.text));}
-              });
-            }, onePrice: myPrice),
+            BoardWritePayField(
+                funPay: () {
+                  setState(() {
+                    if (_myCountController.text.isEmpty || onePrice == 0) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("개당 예상 금액과 구매할 수량을 체크해주세요")));
+                      myPrice = 0;
+                    } else {
+                      myPrice = (onePrice * int.parse(_myCountController.text));
+                    }
+                  });
+                },
+                onePrice: myPrice),
             SizedBox(
               height: 20,
             ),
@@ -129,6 +177,8 @@ class _BoardWriteBodyFormState extends State<BoardWriteBodyForm> {
               child: DonutButton(
                   text: "장소와 시간 설정하기",
                   funPageRoute: () {
+
+                    print("사진 : ${_image}");
                     print("제목 : ${_titleController.text}");
                     print("카테고리 : ${setDropdownItem}");
                     print("총 금액 : ${_priceController.text}");

@@ -3,19 +3,17 @@ import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:flutter/material.dart';
 
-class DonutCategoryDropdown extends StatefulWidget {
-  List<String> dropDownList;
-  String dropDownitem;
+class DonutCategoryDropdown extends StatelessWidget {
 
   DonutCategoryDropdown(
-      {required this.dropDownitem, required this.dropDownList, Key? key})
+      {required this.fun, required this.dropDownitem, required this.dropDownList,
+        Key? key})
       : super(key: key);
 
-  @override
-  State<DonutCategoryDropdown> createState() => _DonutCategoryDropdownState();
-}
+  List<String> dropDownList;
+  String dropDownitem;
+  final fun;
 
-class _DonutCategoryDropdownState extends State<DonutCategoryDropdown> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,18 +34,14 @@ class _DonutCategoryDropdownState extends State<DonutCategoryDropdown> {
               child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30),
                   child: DropdownButton(
-                    value: widget.dropDownitem,
-                    items: widget.dropDownList.map((String item) {
+                    value: dropDownitem,
+                    items: dropDownList.map((String item) {
                       return DropdownMenuItem<String>(
                         child: Text('$item'),
                         value: item,
                       );
                     }).toList(),
-                    onChanged: (dynamic value) {
-                      setState(() {
-                        widget.dropDownitem = value;
-                      });
-                    },
+                    onChanged: fun,
                     style: bodyText(),
                     underline: Container(
                       color: donutColorBase,
