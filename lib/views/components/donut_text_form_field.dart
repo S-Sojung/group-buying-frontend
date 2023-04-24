@@ -62,8 +62,10 @@ class DonutTextFormFieldSlim extends StatelessWidget {
   final String hint;
   final funValidator;
   final controller;
+  final readOnly;
 
   const DonutTextFormFieldSlim({
+    this.readOnly = false,
     required this.title,
     this.hint = "",
     required this.funValidator,
@@ -81,6 +83,7 @@ class DonutTextFormFieldSlim extends StatelessWidget {
           Container(
             height: 40,
             child: TextFormField(
+              readOnly: readOnly,
               textAlign: TextAlign.start,
               controller: controller,
               validator: funValidator,

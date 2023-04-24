@@ -31,7 +31,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
   final _priceController = TextEditingController();
   final _countController = TextEditingController();
   final _myCountController = TextEditingController();
-  final _contentController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
   List<String> cate = categorys.map((e) => e.name).toList();
   var setDropdownItem = categorys[0].name;
@@ -173,14 +173,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                 height: 20,
               ),
 
-              DonutTextArea(
-                  title: "상세 내용",
-                  hint: "같이 사고 싶은 상품의 정보와 그 외의 필요 정보를 알려주세요.",
-                  funValidator: validBoardContent(),
-                  controller: _contentController),
-              SizedBox(
-                height: 20,
-              ),
+
 
               Container(
                 width: getScreenWidth(context) * 0.9,
