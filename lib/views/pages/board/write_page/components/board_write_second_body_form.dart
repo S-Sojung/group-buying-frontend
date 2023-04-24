@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:donut/core/constants/size.dart';
+import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/core/utils/validator_util.dart';
 import 'package:donut/views/components/donut_button.dart';
+import 'package:donut/views/components/donut_text_area.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
+import 'package:donut/views/components/donut_text_title_and_content.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -21,9 +24,14 @@ class BoardDonutWriteSecondBodyForm extends StatefulWidget {
 
 class _BoardDonutWriteSecondBodyFormState
     extends State<BoardDonutWriteSecondBodyForm> {
+  final _contentController = TextEditingController();
   final _placeController = TextEditingController();
-  final _timeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  String result = '';
+  bool isDirect = true;
+  bool isApp = false;
+  late List<bool> isSelectedPayment = [isDirect, isApp];
 
   late LatLng currentLatLng = LatLng(37.33500926, -122.03272188);
   Marker? _marker;
@@ -58,102 +66,167 @@ class _BoardDonutWriteSecondBodyFormState
       );
     }
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              DonutTextFormFieldSlim(
-                title: "거래 희망 장소",
-                funValidator: validateTitle(),
-                controller: _placeController,
-              ),
-              Container(
-                  width: getScreenWidth(context) * 0.9,
-                  height: getScreenWidth(context) * 0.9,
-                  decoration:
-                      BoxDecoration(border: Border.all(color: donutColorBasic)),
-                  child: GoogleMap(
-                    mapType: MapType.normal,
-                    myLocationEnabled: true,
-                    myLocationButtonEnabled: true,
-                    initialCameraPosition: CameraPosition(
-                      target: currentLatLng,
-                      zoom: 17,
-                    ),
-                    onMapCreated: (GoogleMapController controller) {
-                      setState(() {
-                        _mapController.complete(controller);
-                      });
-                    },
-                    markers: _marker != null ? Set.of([_marker!]) : Set(),
-                    onTap: _onMapTapped,
-                  )),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: getScreenWidth(context)*0.9,
-                height: 40,
+        body: Form(
+      key: _formKey,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            DonutTextFormFieldSlim(
+              readOnly: true,
+              hint: "지도를 클릭하면 주소가 나와요",
+              title: "거래 희망 장소",
+              funValidator: validateTitle(),
+              controller: _placeController,
+            ),
+            Container(
+                width: getScreenWidth(context) * 0.9,
+                height: getScreenWidth(context) * 0.9,
                 decoration:
-                    BoxDecoration(border: Border.all(color: donutColorBasic),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('$_selectedDate'),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text('$_selectedTime'),
-                  ],
-                ),
-              ),
-              Row(
+                    BoxDecoration(border: Border.all(color: donutColorBasic)),
+                child: GoogleMap(
+                  mapType: MapType.normal,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
+                  initialCameraPosition: CameraPosition(
+                    target: currentLatLng,
+                    zoom: 17,
+                  ),
+                  onMapCreated: (GoogleMapController controller) {
+                    setState(() {
+                      _mapController.complete(controller);
+                    });
+                  },
+                  markers: _marker != null ? Set.of([_marker!]) : Set(),
+                  onTap: _onMapTapped,
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            DonutTextTitleAndContent(
+                title: "마감 시간 설정", content: "마감 시간 까지 사람이 모이지 않으면 자동으로 종료됩니다."),
+            Container(
+              width: getScreenWidth(context) * 0.9,
+              height: 40,
+              decoration: BoxDecoration(
+                  border: Border.all(color: donutColorBasic),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  DonutRoundButton(
-                    text: '날짜 설정',
-                    funPageRoute: () {
-                      Future<DateTime?> selectedDate = showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2018),
-                        lastDate: DateTime(2030),
-                      );
-
-                      selectedDate.then((dateTime) {
-                        setState(() {
-                          _selectedDate = DateFormat("yyyy년 MM월 dd일").format(dateTime!);
-                        });
-                      });
-                    },
-                  ),
+                  Text('$_selectedDate'),
                   SizedBox(
                     width: 20,
                   ),
-                  DonutRoundButton(
-                    funPageRoute: () {
-                      Future<TimeOfDay?> selectedTime = showTimePicker(
-                        initialTime: TimeOfDay.now(),
-                        context: context,
-                      );
-                      selectedTime.then((timeOfDay) {
-                        setState(() {
-                          _selectedTime =
-                              '${timeOfDay!.hour}시 ${timeOfDay.minute}분';
-                        });
-                      });
-                    },
-                    text: '시간 설정',
-                  ),
+                  Text('$_selectedTime'),
                 ],
               ),
-            ],
-          )),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DonutRoundButton(
+                  text: '날짜 설정',
+                  funPageRoute: () {
+                    Future<DateTime?> selectedDate = showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2030),
+                      initialEntryMode: DatePickerEntryMode.calendarOnly,
+                    );
+
+                    selectedDate.then((dateTime) {
+                      setState(() {
+                        _selectedDate =
+                            DateFormat("yyyy년 MM월 dd일").format(dateTime!);
+                      });
+                    });
+                  },
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                DonutRoundButton(
+                  funPageRoute: () {
+                    Future<TimeOfDay?> selectedTime = showTimePicker(
+                      initialTime: TimeOfDay.now(),
+                      context: context,
+                      initialEntryMode: TimePickerEntryMode.dialOnly,
+                    );
+                    selectedTime.then((timeOfDay) {
+                      setState(() {
+                        _selectedTime =
+                            '${timeOfDay!.hour}시 ${timeOfDay.minute}분';
+                      });
+                    });
+                  },
+                  text: '시간 설정',
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            DonutTextTitleAndContent(
+              title: "결제 방식 설정",
+              content: "앱 결제의 경우 거래 확정 후 완료될 시 도넛마켓에 모인 돈을 주최자에게 줍니다",
+            ),
+            ToggleButtons(
+              fillColor: donutColor2,
+              selectedColor: donutColorBase,
+              borderRadius: BorderRadius.circular(20),
+              renderBorder: true,
+              children: [
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    child: Text(
+                      '직거래',
+                      style: TextStyle(fontSize: 18),
+                    )),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    child: Text('앱결제', style: TextStyle(fontSize: 18))),
+              ],
+              isSelected: isSelectedPayment,
+              onPressed: toggleSelect,
+            ),
+            SizedBox(height: 20,),
+            DonutTextArea(
+                title: "상세 내용",
+                hint: "같이 사고 싶은 상품의 정보와 그 외의 필요 정보를 알려주세요.",
+                funValidator: validBoardContent(),
+                controller: _contentController),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: getScreenWidth(context) * 0.9,
+              child: DonutButton(
+                  text: "공동구매 주최하기",
+                  funPageRoute: () {
+                    //글쓰기 완료
+                  }),
+            )
+          ],
+        ),
+      ),
     ));
   }
 
+  void toggleSelect(value) {
+    if (value == 0) {
+      isDirect = true;
+      isApp = false;
+    } else {
+      isDirect = false;
+      isApp = true;
+    }
+    setState(() {
+      isSelectedPayment = [isDirect, isApp];
+    });
+  }
+
+  //지도 마커
   Future<void> _onMapTapped(LatLng latLng) async {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
@@ -172,6 +245,7 @@ class _BoardDonutWriteSecondBodyFormState
     });
   }
 
+  //지도 현재 위치
   Future<void> _getCurrentLocation() async {
     await _determinePosition();
     final GoogleMapController controller = await _mapController.future;
@@ -181,6 +255,7 @@ class _BoardDonutWriteSecondBodyFormState
     )));
   }
 
+  //지도 권한
   Future<void> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;

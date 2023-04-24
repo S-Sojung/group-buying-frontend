@@ -1,5 +1,6 @@
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
+import 'package:donut/core/constants/theme.dart';
 import 'package:flutter/material.dart';
 
 class DonutTextArea extends StatelessWidget {
@@ -26,15 +27,19 @@ class DonutTextArea extends StatelessWidget {
             decoration: InputDecoration(
               hintText: "$hint",
               enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: donutColorBasic),
                 borderRadius: BorderRadius.circular(5),
               ),
               focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: donutColorBasic),
                 borderRadius: BorderRadius.circular(5),
               ),
               errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: donutColorBasic),
                 borderRadius: BorderRadius.circular(5),
               ),
               focusedErrorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: donutColorBasic),
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
