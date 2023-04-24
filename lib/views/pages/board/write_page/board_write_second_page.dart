@@ -1,9 +1,9 @@
 import 'package:donut/core/constants/theme.dart';
-import 'package:donut/views/pages/board/write_page/components/board_write_body2_form.dart';
+import 'package:donut/views/pages/board/write_page/components/board_write_second_body_form.dart';
 import 'package:flutter/material.dart';
 
-class BoardWrite2Page extends StatelessWidget {
-  const BoardWrite2Page({Key? key}) : super(key: key);
+class BoardWriteSecondPage extends StatelessWidget {
+  const BoardWriteSecondPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class BoardWrite2Page extends StatelessWidget {
         backgroundColor: Colors.white10,
         foregroundColor: donutColorBase,
       ),
-      body: BoardWriteBody2Form(),
+      body: BoardDonutWriteSecondBodyForm(),
     );
   }
 }

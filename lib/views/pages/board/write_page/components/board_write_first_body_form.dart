@@ -10,21 +10,23 @@ import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/components/donut_text_area.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
-import 'package:donut/views/pages/board/write_page/board_write_2page.dart';
+import 'package:donut/views/pages/board/write_page/board_write_first_page.dart';
+import 'package:donut/views/pages/board/write_page/board_write_second_page.dart';
 import 'package:donut/views/pages/board/write_page/components/board_write_pay_field.dart';
+import 'package:donut/views/pages/board/write_page/components/board_write_second_body_form.dart';
 import 'package:donut/views/pages/board/write_page/components/donut_category_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-class BoardWriteBodyForm extends StatefulWidget {
-  BoardWriteBodyForm({Key? key}) : super(key: key);
+class BoardWriteFirstBodyForm extends StatefulWidget {
+  BoardWriteFirstBodyForm({Key? key}) : super(key: key);
 
   @override
-  State<BoardWriteBodyForm> createState() => _BoardWriteBodyFormState();
+  State<BoardWriteFirstBodyForm> createState() => _BoardWriteFirstBodyFormState();
 }
 
-class _BoardWriteBodyFormState extends State<BoardWriteBodyForm> {
+class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
   final _titleController = TextEditingController();
   final _priceController = TextEditingController();
   final _countController = TextEditingController();
@@ -195,7 +197,7 @@ class _BoardWriteBodyFormState extends State<BoardWriteBodyForm> {
                         print("총 금액 : ${_priceController.text}");
                         print("총 수량 : ${_countController.text}");
                         print("내가 구매할 수량 : ${_myCountController.text}");
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => BoardWrite2Page(),));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => BoardWriteSecondPage(),));
                       }
                     }),
               ),

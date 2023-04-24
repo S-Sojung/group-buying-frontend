@@ -1,5 +1,9 @@
 import 'dart:async';
 
+import 'package:donut/core/constants/size.dart';
+import 'package:donut/core/constants/theme.dart';
+import 'package:donut/core/utils/validator_util.dart';
+import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,10 +16,15 @@ class DonutMap extends StatefulWidget {
 }
 
 class _DonutMapState extends State<DonutMap> {
+  final _placeController = TextEditingController();
   late LatLng currentLatLng = LatLng(37.33500926, -122.03272188);
   bool isInitialized = false;
   bool isPermission = false;
-  final Completer<GoogleMapController> _controller = Completer();
+
+  late Position _currentPosition;
+  Set<Marker> _markers = {};
+
+  final Completer<GoogleMapController> _mapController = Completer();
   @override
   void initState() {
     _getCurrentLocation();
@@ -29,20 +38,20 @@ class _DonutMapState extends State<DonutMap> {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
+      return Future.error('위치 서비스를 사용할 수 없습니다.');
     }
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        return Future.error('위치 권한이 거부되었습니다');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+          '위치 권한이 영구적으로 거부되었습니다. 권한을 요청할 수 없습니다.');
     }
     setState(() {
       isPermission = true;
@@ -66,44 +75,15 @@ class _DonutMapState extends State<DonutMap> {
       }
       return const Scaffold(
         body: Center(
-          child: Text('You need location permission to view this page'),
+          child: Text('이 페이지를 보려면 위치 권한이 필요합니다'),
         ),
       );
     }
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          GoogleMap(
-            myLocationEnabled: true,
-            myLocationButtonEnabled: true,
-            initialCameraPosition: CameraPosition(
-              target: currentLatLng,
-              zoom: 17,
-            ),
-            onMapCreated: (GoogleMapController controller) {
-              setState(() {
-                _controller.complete(controller);
-              });
-            },
-            // markers: <Marker>{
-            //   Marker(
-            //     markerId: const MarkerId("1"),
-            //     position: currentLatLng,
-            //     icon: BitmapDescriptor.defaultMarker,
-            //     infoWindow: const InfoWindow(
-            //       title: "My Location",
-            //     ),
-            //   ),
-            //   Marker(
-            //     markerId: const MarkerId("2"),
-            //     position: destinationLatLng,
-            //     icon: BitmapDescriptor.defaultMarker,
-            //     infoWindow: const InfoWindow(
-            //       title: "Destination",
-            //     ),
-            //   ),
-            // },
-          ),
+          DonutTextFormFieldSlim(title: "거래 희망 장소", funValidator: validateTitle(),controller: _placeController,),
+
         ],
       ),
     );
@@ -111,7 +91,7 @@ class _DonutMapState extends State<DonutMap> {
 
   Future<void> _getCurrentLocation() async {
     await _determinePosition();
-    final GoogleMapController controller = await _controller.future;
+    final GoogleMapController controller = await _mapController.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: currentLatLng,
       zoom: 17,
