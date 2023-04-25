@@ -6,6 +6,7 @@ import 'package:donut/model/event/event.dart';
 import 'package:donut/model/participant/participant.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_label_round_textbox.dart';
+import 'package:donut/views/pages/board/selete_participant_page/select_participant_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -84,8 +85,12 @@ class OrganizerButton extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      DonutButton(text: "공동구매 마감하기", funPageRoute: () {}),
-                      DonutButton(text: "예약중으로 변경하기", funPageRoute: () {}),
+                      DonutButton(text: "공동구매 마감하기", funPageRoute: () {
+                        //예약자가 한 명이라고 있는데 마감하면 취소 알림보내줌
+                      }),
+                      DonutButton(text: "예약중으로 변경하기", funPageRoute: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SeleteParticipantPage(),));
+                      }),
                     ],
                   ),
                 ), // 모달 내부 디자인 영역
@@ -307,6 +312,7 @@ class ParticipantButton extends StatelessWidget {
                             child: DonutButton(
                                 text: "구매 확정",
                                 funPageRoute: () {
+                                  //예약자 일 경우 활성화 된다.
                                   //결제 완료된 사람이면 구매 확정 버튼 비활성화 -> 구매 확정으로 바뀜
                                   //혹은 아직 결제 전이면서 앱 결제라면  결제 창을 띄워줌.
                                 })),
