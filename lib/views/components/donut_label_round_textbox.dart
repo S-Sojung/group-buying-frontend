@@ -3,7 +3,9 @@ import 'package:donut/core/constants/style.dart';
 import 'package:flutter/material.dart';
 
 class DonutLabelRoundTextbox extends StatelessWidget {
-  const DonutLabelRoundTextbox({Key? key}) : super(key: key);
+  final String title;
+  final String content;
+  const DonutLabelRoundTextbox({required this.title, required this.content, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,8 @@ class DonutLabelRoundTextbox extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Align(alignment:Alignment(-0.9, 0),child: Text("결제 방식",style: subHead(),)),
-          Text("페이 결제",style: bodyText(),),
+          Align(alignment:Alignment(-0.9, 0),child: Text("${title}",style: subHead(),)),
+          Text("${content}",style: bodyText(),),
         ],
       ),
     );

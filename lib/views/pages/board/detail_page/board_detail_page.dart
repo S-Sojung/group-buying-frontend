@@ -22,10 +22,13 @@ class BoardDetailPage extends StatelessWidget {
           backgroundColor: Colors.white10,
           elevation: 0,
           foregroundColor: donutColorBasic,
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
+          actions: [IconButton(onPressed: () {
+
+          }, icon: Icon(Icons.more_vert))],
         ),
         body: BoardDetailBody(
           board: board,
-        ));
+        ),
+    );
   }
 }
