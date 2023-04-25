@@ -1,8 +1,8 @@
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/event/event.dart';
-import 'package:donut/model/wishlist/wishlist.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
+import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -25,6 +25,7 @@ class BoardListTile extends StatelessWidget {
       padding: EdgeInsets.only(top: 20),
       child: ListTile(
         onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BoardDetailPage(board: board),));
           // 게시글 클릭하면 게시글 상세보기 만들기
         },
         dense: false,

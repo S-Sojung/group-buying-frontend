@@ -63,6 +63,8 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
 
   @override
   Widget build(BuildContext context) {
+    _tagController.text = "#";
+
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -189,7 +191,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                         return null;
                       } else {
                         tags.add(_tagController.text);
-                        _tagController.text = "";
+                        _tagController.text = "#";
                       }
                     });
                   }),
