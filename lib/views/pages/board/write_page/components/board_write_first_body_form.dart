@@ -15,6 +15,7 @@ import 'package:donut/views/pages/board/write_page/board_write_second_page.dart'
 import 'package:donut/views/pages/board/write_page/components/board_write_pay_field.dart';
 import 'package:donut/views/pages/board/write_page/components/board_write_second_body_form.dart';
 import 'package:donut/views/pages/board/write_page/components/donut_category_dropdown.dart';
+import 'package:donut/views/pages/board/write_page/components/donut_tag_button.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,7 +24,8 @@ class BoardWriteFirstBodyForm extends StatefulWidget {
   BoardWriteFirstBodyForm({Key? key}) : super(key: key);
 
   @override
-  State<BoardWriteFirstBodyForm> createState() => _BoardWriteFirstBodyFormState();
+  State<BoardWriteFirstBodyForm> createState() =>
+      _BoardWriteFirstBodyFormState();
 }
 
 class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
@@ -31,11 +33,13 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
   final _priceController = TextEditingController();
   final _countController = TextEditingController();
   final _myCountController = TextEditingController();
+  final _tagController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   List<String> cate = categorys.map((e) => e.name).toList();
   var setDropdownItem = categorys[0].name;
 
+  List<String> tags = [""];
   int onePrice = 0;
   int myPrice = 0;
   Image? _image;
@@ -65,6 +69,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               DonutRoundTag("  같이 나눠사고 싶은 상품에 대해 적어주세요.  "),
               SizedBox(
@@ -119,7 +124,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                 "참여자에겐 개당 예상 금액만 보여요!",
                 style: caption1(mColor: donutColor2),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -135,7 +140,8 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                       if (_priceController.text.isEmpty ||
                           _countController.text.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("총 금액과 총 수량을 작성해주세요")));
+                            const SnackBar(
+                                content: Text("총 금액과 총 수량을 작성해주세요")));
                         onePrice = 0;
                       } else {
                         onePrice = (int.parse(_priceController.text) /
@@ -146,7 +152,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                   },
                   onePrice: onePrice),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -159,8 +165,9 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                   funPay: () {
                     setState(() {
                       if (_myCountController.text.isEmpty || onePrice == 0) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("개당 예상 금액과 구매할 수량을 체크해주세요")));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("개당 예상 금액과 구매할 수량을 체크해주세요")));
                         myPrice = 0;
                       } else {
                         myPrice =
@@ -169,28 +176,75 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                     });
                   },
                   onePrice: myPrice),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
+              DonutTagButton(
+                  tagController: _tagController,
+                  funAdd: () {
+                    setState(() {
+                      if (tags.length >= 4) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("해시태그는 최대 세개입니다.")));
+                        return null;
+                      } else {
+                        tags.add(_tagController.text);
+                        _tagController.text = "";
+                      }
+                    });
+                  }),
+              Text(
+                "해시태그는 최대 3개 까지 가능합니다.\n"
+                    "해시태그는 클릭하면 삭제할 수 있습니다",
+                style: caption1(mColor: donutColor2),
+              ),
+              Container(
+                width: getScreenWidth(context) * 0.9,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(tags.length, (index) {
+                    if (tags[index] == "") {
+                      return Text("");
+                    } else {
+                      return InkWell(
+                        child: DonutRoundTag(tags[index]),
+                        onTap: () {
+                          setState(() {
+                            tags.removeAt(index);
+                          });
+                        },
+                      );
+                    }
+                  }),
+                ),
+              ),
 
-
-
+              const SizedBox(
+                height: 20,
+              ),
               Container(
                 width: getScreenWidth(context) * 0.9,
                 child: DonutButton(
                     text: "장소와 시간 설정하기",
                     funPageRoute: () {
-                      if(_image == null || _titleController.text.isEmpty || onePrice ==0 || myPrice ==0 ){
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("빈칸이 없는지 확인해주세요")));
-                      }else {
+                      if (_image == null ||
+                          _titleController.text.isEmpty ||
+                          onePrice == 0 ||
+                          myPrice == 0) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("빈칸이 없는지 확인해주세요")));
+                      } else {
                         print("사진 : ${_image}");
                         print("제목 : ${_titleController.text}");
                         print("카테고리 : ${setDropdownItem}");
                         print("총 금액 : ${_priceController.text}");
                         print("총 수량 : ${_countController.text}");
                         print("내가 구매할 수량 : ${_myCountController.text}");
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => BoardWriteSecondPage(),));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BoardWriteSecondPage(),
+                            ));
                       }
                     }),
               ),

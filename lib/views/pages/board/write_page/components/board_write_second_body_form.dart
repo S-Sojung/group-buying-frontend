@@ -202,7 +202,7 @@ class _BoardDonutWriteSecondBodyFormState
             Container(
               width: getScreenWidth(context) * 0.9,
               child: DonutButton(
-                  text: "공동구매 주최하기",
+                  text: "모집 글 쓰기 완료",
                   funPageRoute: () {
                     //글쓰기 완료
                   }),
