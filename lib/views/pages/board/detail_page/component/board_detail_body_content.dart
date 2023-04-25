@@ -62,9 +62,14 @@ class BoardDetailBodyContent extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getScreenWidth(context) * 0.05, vertical: 5),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text("${board.content} ${board.content} ${board.content} ${board.content}")),
+            child: Container(
+              constraints:BoxConstraints(
+                minHeight: 120
+              ),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("${board.content} ${board.content} ${board.content} ${board.content}")),
+            ),
           ),
           SizedBox(height: 20,),
           Divider(color: donutColorBasic, thickness: 2),

@@ -13,6 +13,7 @@ class BoardDetailBody extends StatelessWidget {
 //  List<String> tags = [events[board.eventId].paymentType];
   List<String> tags = ["모집 중", "앱결제", "식품", "#편의점", "#삼김"];
 
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
