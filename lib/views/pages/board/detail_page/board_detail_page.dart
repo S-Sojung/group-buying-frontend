@@ -12,17 +12,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class BoardDetailPage extends StatelessWidget {
   final Board board;
+
   BoardDetailPage({required this.board, Key? key}) : super(key: key);
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: BoardDetailBody(board: board,)
-    );
+        appBar: AppBar(
+          backgroundColor: Colors.white10,
+          elevation: 0,
+          foregroundColor: donutColorBasic,
+          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
+        ),
+        body: BoardDetailBody(
+          board: board,
+        ));
   }
 }
