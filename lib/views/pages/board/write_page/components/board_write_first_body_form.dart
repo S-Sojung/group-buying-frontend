@@ -229,13 +229,15 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                 child: DonutButton(
                     text: "장소와 시간 설정하기",
                     funPageRoute: () {
-                      if (_image == null ||
-                          _titleController.text.isEmpty ||
+                      if (_titleController.text.isEmpty ||
                           onePrice == 0 ||
                           myPrice == 0) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("빈칸이 없는지 확인해주세요")));
                       } else {
+                        if(_image==null){
+                          _image = Image.asset("assets/images/categorys/${searchCategory(setDropdownItem)}");
+                        }
                         print("사진 : ${_image}");
                         print("제목 : ${_titleController.text}");
                         print("카테고리 : ${setDropdownItem}");
@@ -256,4 +258,14 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
       ),
     );
   }
+  String searchCategory(setDropdownItem){
+    String itme = "";
+    categorys.forEach((element) {
+      if(element == setDropdownItem){
+        itme = category_eng[element.id-1];
+      }
+    });
+    return itme;
+  }
 }
+
