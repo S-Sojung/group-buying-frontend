@@ -5,7 +5,7 @@ class Participant {
   final int userId; // 참가자 id
   final int qty; // 신청수량
   final DateTime? limitTime;
-  final int statusCode;
+  int statusCode;
   final DateTime createdAt; // 신청 일자
 
   Participant({
@@ -13,10 +13,11 @@ class Participant {
     required this.eventId,
     required this.userId,
     required this.qty,
-     this.limitTime,
+    this.limitTime,
     required this.statusCode,
     required this.createdAt,
   });
+
 }
 
 List<Participant> participants = [
