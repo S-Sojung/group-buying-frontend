@@ -8,6 +8,8 @@ import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_text_area.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:donut/views/components/donut_text_title_and_content.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -84,6 +86,9 @@ class _BoardDonutWriteSecondBodyFormState
                 decoration:
                     BoxDecoration(border: Border.all(color: donutColorBasic)),
                 child: GoogleMap(
+                  gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                    Factory<OneSequenceGestureRecognizer>(
+                            () => EagerGestureRecognizer())},
                   mapType: MapType.normal,
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
@@ -98,7 +103,8 @@ class _BoardDonutWriteSecondBodyFormState
                   },
                   markers: _marker != null ? Set.of([_marker!]) : Set(),
                   onTap: _onMapTapped,
-                )),
+                )
+            ),
             SizedBox(
               height: 20,
             ),
