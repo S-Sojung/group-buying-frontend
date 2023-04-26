@@ -5,6 +5,7 @@ import 'package:donut/model/event/event.dart';
 import 'package:donut/model/participant/participant.dart';
 import 'package:donut/model/user/user.dart';
 import 'package:donut/views/components/donut_button.dart';
+import 'package:donut/views/pages/board/selete_participant_page/select_account_page.dart';
 import 'package:flutter/material.dart';
 
 class SelectParticipantBody extends StatefulWidget {
@@ -13,8 +14,6 @@ class SelectParticipantBody extends StatefulWidget {
   @override
   State<SelectParticipantBody> createState() => _SelectParticipantBodyState();
 }
-
-
 
 class _SelectParticipantBodyState extends State<SelectParticipantBody> {
   List<Participant> partics = participants; // 이 게시글의 신청자들 이때, 취소한 사람은 여기서 걸러내도록 하거나 서버측에서 걸러서 와주겟지
@@ -84,8 +83,11 @@ class _SelectParticipantBodyState extends State<SelectParticipantBody> {
               ),
             ),
             //앱결제인지 직거래인지에 따라서 변경
-            DonutButton(text: "계좌 선택하기", funPageRoute: (){}),
-            DonutButton(text: "완료 하기", funPageRoute: (){}),
+            //
+            DonutButton(text: "계좌 선택하기", funPageRoute: (){
+              Navigator.push(context,MaterialPageRoute(builder: (context) => SelectAccountPage(),));
+            } ),
+            DonutButton(text: "예약중으로 변경하고 채팅하기", funPageRoute: (){}),
             
           ],
         ),
