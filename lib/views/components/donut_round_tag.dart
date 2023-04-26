@@ -23,9 +23,9 @@ class DonutRoundTag extends StatelessWidget {
         color: setColor(code),
         borderRadius: BorderRadius.circular(20),
       ),
-      margin: EdgeInsets.symmetric(vertical: 0,horizontal: 2),
-      padding: EdgeInsets.all(1),
-      child: Text("  ${comment}  ",style: caption1(),textAlign: TextAlign.center
+      margin: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 1, horizontal: 2),
+      child: Text(" ${comment} ",style: caption1(),textAlign: TextAlign.center
     ),);
   }
 }
