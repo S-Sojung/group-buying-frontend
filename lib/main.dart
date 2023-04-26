@@ -1,6 +1,5 @@
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/views/pages/board/home_page/board_home_page.dart';
-import 'package:donut/views/pages/board/write_page/board_write_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
