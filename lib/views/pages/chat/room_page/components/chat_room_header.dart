@@ -3,6 +3,7 @@ import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/event/event.dart';
+import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:flutter/material.dart';
 
@@ -39,8 +40,24 @@ class ChatRoomHeader extends StatelessWidget {
                 ),
               ],
             ),
-            Text("${boards[0].city} ${boards[0].town}"),
-            Text("${events[0].endAt}"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                  Text("${boards[0].city} ${boards[0].town}"),
+                  Text("${events[0].endAt}"),
+                ],),
+                Container(
+                  width: 70,
+                  child: DonutButton(text:"송금",funPageRoute: (){
+
+                  }),
+                )
+              ],
+            ),
+
             SizedBox(height: 10,)
           ],
         ),
