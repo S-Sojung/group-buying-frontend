@@ -3,8 +3,10 @@ import 'dart:ffi';
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
+import 'package:donut/model/chatter_list/chatter_list.dart';
 import 'package:donut/views/pages/board/home_page/component/board_home_list_page.dart';
 import 'package:donut/views/pages/board/map_page/board_map_page.dart';
+import 'package:donut/views/pages/chat/list_page/chat_list_page.dart';
 import 'package:donut/views/pages/chat/room_page/chat_room_page.dart';
 import 'package:donut/views/pages/user/detail_page/user_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +54,7 @@ class _BoardHomePageState extends State<BoardHomePage> {
         children: [
           BoardHomeListPage(), //스크록
           BoardMapPage(),
-          ChatRoomPage(), // 스크롤
+          ChatListPage(chatterList: chatterLists[0]),// 스크롤
           UserDetailPage(),
         ],
       ),

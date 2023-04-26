@@ -25,10 +25,11 @@ class DonutRoundTag extends StatelessWidget {
       ),
       margin: EdgeInsets.symmetric(vertical: 0,horizontal: 2),
       padding: EdgeInsets.all(1),
-      child: Text(" ${comment} ",style: caption1()
+      child: Text("  ${comment}  ",style: caption1(),textAlign: TextAlign.center
     ),);
   }
 }
+
 
 class DonutRectTag extends StatelessWidget {
   final String comment;
@@ -43,7 +44,7 @@ class DonutRectTag extends StatelessWidget {
       ),
       margin: EdgeInsets.symmetric(vertical: 5,horizontal: 2),
       padding: EdgeInsets.all(1),
-      child: Text(" ${comment} ",style: caption2()
+      child: Text(" ${comment} ",style: caption2(),
       ),);
   }
 }
