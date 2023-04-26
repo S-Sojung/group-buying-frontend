@@ -29,7 +29,7 @@ class BoardDetailBodyContent extends StatelessWidget {
                   style: bodyText(),
                 )),
           ),
-          Divider(color: donutColorBasic, thickness: 2),
+          Divider(color: donutColorBasic, thickness: 1),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getScreenWidth(context) * 0.05, vertical: 5),
@@ -58,7 +58,7 @@ class BoardDetailBodyContent extends StatelessWidget {
               ],
             ),
           ),
-          Divider(color: donutColorBasic, thickness: 2),
+          Divider(color: donutColorBasic, thickness: 1),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getScreenWidth(context) * 0.05, vertical: 5),
@@ -72,7 +72,7 @@ class BoardDetailBodyContent extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20,),
-          Divider(color: donutColorBasic, thickness: 2),
+          Divider(color: donutColorBasic, thickness: 1),
         ]),
       ),
     );
