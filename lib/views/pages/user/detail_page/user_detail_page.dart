@@ -1,3 +1,4 @@
+import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/rate/rate.dart';
 import 'package:donut/views/components/donut_button.dart';
@@ -15,44 +16,65 @@ class UserDetailPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(height: 100),
-                  SvgPicture.asset("assets/images/donut.svg", height: 80, width: 80,
+                  Row(
+                    children: [
+                      SizedBox(height: 100),
+                      SvgPicture.asset(
+                        "assets/images/donut.svg",
+                        height: 70,
+                        width: 70,
+                      ),
+                      SizedBox(width: 15,),
+                      Text("도넛이",style: headLine(),),
+                    ],
                   ),
-                  Text("도넛이"),
+                  DonutRoundButton(text: "프로필수정", funPageRoute: () {}),
                 ],
               ),
-              DonutRoundButton(text: "프로필수정", funPageRoute: (){}),
+              DonutRateBar(rates[1]),
+              SizedBox(height: 10,),
+              Divider(color: donutColorBasic,thickness: 1),
             ],
           ),
-          DonutRateBar(rates[1]),
-          Divider(color: donutColorBasic,thickness: 1),
-          DonutTextButton(icon: Icon(Icons.ac_unit), text: "관심 게시글 목록", funRoute: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UserWishlistPage())
-            );
-          }),
-          DonutTextButton(icon: Icon(Icons.ac_unit), text: "관심 카테고리 설정", funRoute: (){}),
-          DonutTextButton(icon: Icon(Icons.ac_unit), text: "구매 내역", funRoute: (){}),
-          DonutTextButton(icon: Icon(Icons.ac_unit), text: "내가 올린 글", funRoute: (){}),
-          DonutTextButton(icon: Icon(Icons.ac_unit), text: "계좌번호 등록", funRoute: (){}),
-          DonutTextButton(icon: Icon(Icons.ac_unit), text: "우리 동네 설정", funRoute: (){}),
-          Divider(color: donutColorBasic,thickness: 1),
-          DonutTextButton(icon: Icon(Icons.add_alert), text: "알람 설정", funRoute: (){}),
-          DonutTextButton(icon: Icon(Icons.add_alert), text: "기타 설정", funRoute: (){}),
-          Divider(color: donutColorBasic,thickness: 1),
-          DonutTextButton(icon: Icon(Icons.add_alert), text: "차단 목록 관리", funRoute: (){}),
-          DonutTextButton(icon: Icon(Icons.add_alert), text: "신고 목록 관리", funRoute: (){}),
-          Divider(color: donutColorBasic,thickness: 1),
-          DonutTextButton(icon: Icon(Icons.add_alert), text: "공지사항", funRoute: (){}),
+          DonutTextButton(
+              icon: Icon(Icons.ac_unit),
+              text: "관심 게시글 목록",
+              funRoute: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UserWishlistPage()));
+              }),
+          DonutTextButton(
+              icon: Icon(Icons.ac_unit), text: "관심 카테고리 설정", funRoute: () {}),
+          DonutTextButton(
+              icon: Icon(Icons.ac_unit), text: "구매 내역", funRoute: () {}),
+          DonutTextButton(
+              icon: Icon(Icons.ac_unit), text: "내가 올린 글", funRoute: () {}),
+          DonutTextButton(
+              icon: Icon(Icons.ac_unit), text: "계좌번호 등록", funRoute: () {}),
+          DonutTextButton(
+              icon: Icon(Icons.ac_unit), text: "우리 동네 설정", funRoute: () {}),
+          Divider(color: donutColorBasic, thickness: 1),
+          DonutTextButton(
+              icon: Icon(Icons.add_alert), text: "알람 설정", funRoute: () {}),
+          DonutTextButton(
+              icon: Icon(Icons.add_alert), text: "기타 설정", funRoute: () {}),
+          Divider(color: donutColorBasic, thickness: 1),
+          DonutTextButton(
+              icon: Icon(Icons.add_alert), text: "차단 목록 관리", funRoute: () {}),
+          DonutTextButton(
+              icon: Icon(Icons.add_alert), text: "신고 목록 관리", funRoute: () {}),
+          Divider(color: donutColorBasic, thickness: 1),
+          DonutTextButton(
+              icon: Icon(Icons.add_alert), text: "공지사항", funRoute: () {}),
         ],
       ),
     );
   }
 }
-
