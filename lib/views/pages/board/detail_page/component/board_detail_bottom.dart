@@ -89,7 +89,7 @@ class OrganizerButton extends StatelessWidget {
                         //예약자가 한 명이라고 있는데 마감하면 취소 알림보내줌
                       }),
                       DonutButton(text: "예약중으로 변경하기", funPageRoute: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SeleteParticipantPage(),));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SelectParticipantPage(),));
                       }),
                     ],
                   ),

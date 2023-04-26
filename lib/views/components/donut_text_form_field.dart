@@ -173,4 +173,54 @@ class DonutCountFormField extends StatelessWidget {
   }
 }
 
+class DonutAccountFormFieldSlim extends StatelessWidget {
+  final bool readOnly;
+  final funValidator;
+  final controller;
+
+  const DonutAccountFormFieldSlim({
+    this.readOnly = true,
+    required this.funValidator,
+    this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5),
+      child: Container(
+        height: 40,
+        child: TextFormField(
+          readOnly: readOnly,
+          textAlign: TextAlign.start,
+          controller: controller,
+          validator: funValidator,
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly
+          ],
+          decoration: InputDecoration(
+            hintText: "계좌번호 설정",
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: donutColorBasic),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: donutColorBasic),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: donutColorBasic),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: donutColorBasic),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
