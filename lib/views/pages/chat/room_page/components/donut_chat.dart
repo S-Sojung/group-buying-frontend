@@ -41,10 +41,7 @@ class donutUserChat extends StatelessWidget {
               child: Text("${user.profile}",style: caption1(),),
             ),
             Text("${user.name}",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black54,
-              ),
+              style: bodyText(),
             ),
           ],
         ),
@@ -61,10 +58,10 @@ class donutUserChat extends StatelessWidget {
           ),
           child: Text(
             message,
-            style: TextStyle(fontSize: 16.0),
+            style: bodyText(),
           ),
         ),
-        Text("10시10분"),
+        const Text("10시10분"),
       ],
     );
   }
@@ -97,10 +94,10 @@ class donutMyChat extends StatelessWidget {
           ),
           child: Text(
             message,
-            style: TextStyle(fontSize: 16.0),
+            style: bodyText(),
           ),
         ),
-
+        const SizedBox(width: 10,)
       ],
     );
   }
