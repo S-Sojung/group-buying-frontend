@@ -1,3 +1,4 @@
+import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/user/user.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/pages/chat/room_page/components/donut_chat.dart';
@@ -22,23 +23,14 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     });
   }
 
-  Widget _buildChatList() {
-    return Flexible(
-      child: ListView.builder(
-        padding: EdgeInsets.all(8.0),
-        reverse: true,
-        itemCount: _messages.length,
-        itemBuilder: (BuildContext context, int index) {
-          // 유저가 현재 로그인한 내정보인지
-          return DonutChat(message:_messages[index], user: users[0]);
-        },
-      ),
-    );
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        foregroundColor: donutColorBasic,
         title: Text("채팅"),
       ),
       body: Container(
@@ -52,7 +44,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
               padding: const EdgeInsets.all(5),
               child: DonutRoundTag("도넛 마켓은 당사자간의 거래에는 개입하지 않으며 페이 사용 시 거래 확정 후 개설자에게 돈이 지급 됩니다.",code: "1"),
             ),
-            _buildChatList(),//내 채팅인지? 아니면 다른 유저 채팅인지 구분
+            _buildChatList(),
             Divider(
               height: 1.0,
             ),
@@ -63,6 +55,20 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildChatList() {
+    return Flexible(
+      child: ListView.builder(
+        padding: EdgeInsets.all(8.0),
+        reverse: true,
+        itemCount: _messages.length,
+        itemBuilder: (BuildContext context, int index) {
+          // 유저가 현재 로그인한 내정보인지
+          return DonutChat(message:_messages[index], user: users[0]);
+        },
       ),
     );
   }
@@ -83,14 +89,14 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 },
                 controller: _textEditingController,
                 decoration: InputDecoration.collapsed(
-                  hintText: "메시지 보내기",
+                  hintText: "  메시지 보내기",
                 ),
               ),
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 4.0),
               child: IconButton(
-                icon: Icon(Icons.send,color: Colors.blueAccent),
+                icon: Icon(Icons.send,color: donutColorBasic),
                 onPressed: () =>
                     _handleSubmitted(_textEditingController.text),
               ),
