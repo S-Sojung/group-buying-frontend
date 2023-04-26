@@ -24,7 +24,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.joinPage: (context) => JoinPage(),
     Move.loginPage: (context) => LoginPage(),
     Move.boardHomePage: (context) => BoardHomePage(),
-    Move.boardMapPage: (context) => BoardMapPage(),
     Move.boardWritePage: (context) => BoardWriteFirstPage(),
   };
 }
