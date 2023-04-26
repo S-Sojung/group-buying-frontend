@@ -94,6 +94,20 @@ Function validateCount() {
     }
   };
 }
+Function validateAccount() {
+  return (String? value) {
+    if (value!.isNotEmpty) {
+      return "";
+    } else if (value.length <= 10) {
+      return "최소 10자리";
+    } else if (value.length >= 14) {
+      return "최대 14자리";
+    } else {
+      return null;
+    }
+  };
+}
+
 Function validPrice() {
   return (String? value) {
     if (value!.isNotEmpty) {
