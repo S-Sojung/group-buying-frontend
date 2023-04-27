@@ -1,4 +1,5 @@
 import 'package:donut/core/constants/style.dart';
+import 'package:donut/core/constants/theme.dart';
 import 'package:flutter/material.dart';
 
 class DonutTextButton extends StatelessWidget {
@@ -16,13 +17,16 @@ class DonutTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 2),
       child: Row(
         children: [
           icon,
-          TextButton(
-            child: Text("$text",style: bodyText(),),
-            onPressed: funRoute,
+          Expanded(
+            child: TextButton(
+              style: ButtonStyle(alignment: Alignment.centerLeft),
+              child: Text("$text",style: bodyText()),
+              onPressed: funRoute,
+            ),
           ),
         ],
       ),
