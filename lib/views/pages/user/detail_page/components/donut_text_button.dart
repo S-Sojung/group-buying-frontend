@@ -20,7 +20,7 @@ class DonutTextButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 2),
       child: Row(
         children: [
-          icon,
+          Icon(icon,color: donutColorBasic,),
           Expanded(
             child: TextButton(
               style: ButtonStyle(alignment: Alignment.centerLeft),
