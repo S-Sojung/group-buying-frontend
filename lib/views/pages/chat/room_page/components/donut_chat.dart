@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class DonutChat extends StatelessWidget {
   final message;
-  final User user;
+  final DonutUser user;
   const DonutChat({required this.message, required this.user, Key? key}) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class donutUserChat extends StatelessWidget {
     required this.message,
   });
 
-  final User user;
+  final DonutUser user;
   final String message;
 
   @override
