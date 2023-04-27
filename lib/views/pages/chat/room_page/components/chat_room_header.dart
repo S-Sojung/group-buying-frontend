@@ -5,10 +5,12 @@ import 'package:donut/model/board/board.dart';
 import 'package:donut/model/event/event.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
+import 'package:donut/views/pages/payment/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoomHeader extends StatelessWidget {
-  const ChatRoomHeader({Key? key}) : super(key: key);
+  final paymentFunc;
+  const ChatRoomHeader({required this.paymentFunc, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +53,7 @@ class ChatRoomHeader extends StatelessWidget {
                 ],),
                 Container(
                   width: 70,
-                  child: DonutButton(text:"송금",funPageRoute: (){
-
-                  }),
+                  child: DonutButton(text:"송금",funPageRoute: paymentFunc),
                 )
               ],
             ),

@@ -14,12 +14,12 @@ final sessionProvider = Provider<SessionUser>((ref) {
 // 3. OK -> loginSuccess() 호출
 // 4. FAIL -> loginPage로 이동
 class SessionUser {
-  User? user;
+  DonutUser? user;
   String? jwt;
   bool? isLogin;
 
 
-  void loginSuccess(User user, String jwt){
+  void loginSuccess(DonutUser user, String jwt){
     this.user = user;
     this.jwt = jwt;
     this.isLogin = true;
