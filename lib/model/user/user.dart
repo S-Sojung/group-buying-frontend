@@ -1,6 +1,6 @@
 
 
-class User {
+class DonutUser {
   final int id;
   final String email;
   String? name;
@@ -11,7 +11,7 @@ class User {
   int? statusCode;
   final DateTime created;
 
-  User({
+  DonutUser({
     required this.id,
     required this.email,
     required this.name,
@@ -24,8 +24,8 @@ class User {
   });
 }
 
-List<User> users = [
-  User(id: 1,
+List<DonutUser> users = [
+  DonutUser(id: 1,
       email: "ssar@naver.com",
       name: "ssar",
       profile: "null",
@@ -34,7 +34,7 @@ List<User> users = [
       role: "user",
       statusCode: 100,
       created: DateTime.now()),
-  User(id: 2,
+  DonutUser(id: 2,
       email: "zzxc@naver.com",
       name: "zzxc",
       profile: "null",
@@ -43,7 +43,7 @@ List<User> users = [
       role: "user",
       statusCode: 100,
       created: DateTime.now()),
-  User(id: 3,
+  DonutUser(id: 3,
       email: "qqwe@naver.com",
       name: "qqwe",
       profile: "null",
@@ -52,7 +52,7 @@ List<User> users = [
       role: "user",
       statusCode: 100,
       created: DateTime.now()),
-  User(id: 4,
+  DonutUser(id: 4,
       email: "ppoi@naver.com",
       name: "ppoi",
       profile: "null",
