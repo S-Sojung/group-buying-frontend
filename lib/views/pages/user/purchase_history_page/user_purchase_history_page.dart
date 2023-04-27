@@ -39,14 +39,22 @@ class _UserPurchaseHistoryPageState extends State<UserPurchaseHistoryPage>
           ]),
       body: Column(
         children: [
-          TabBar(controller: _tabController, tabs: [
-            Tab(
-              text: "구매 중",
-            ),
-            Tab(
-              text: "구매 완료",
-            ),
-          ]),
+          TabBar(
+              indicator: BoxDecoration(
+                  color: donutColorBasic,
+                  border: Border(
+                      bottom: BorderSide(color: donutColorBase, width: 2))),
+              controller: _tabController,
+              indicatorColor: donutColorBasic,
+              unselectedLabelColor: donutColorBasic,
+              tabs: [
+                Tab(
+                  text: "구매 중",
+                ),
+                Tab(
+                  text: "구매 완료",
+                ),
+              ]),
           Expanded(
             child: TabBarView(
               controller: _tabController,
