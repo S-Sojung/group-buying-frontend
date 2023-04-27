@@ -4,6 +4,7 @@ import 'package:donut/model/rate/rate.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_rate_bar.dart';
 import 'package:donut/views/pages/user/detail_page/components/donut_text_button.dart';
+import 'package:donut/views/pages/user/purchase_history_page/user_purchase_history_page.dart';
 import 'package:donut/views/pages/user/wishlist_page/user_wishlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -53,7 +54,9 @@ class UserDetailPage extends StatelessWidget {
           DonutTextButton(
               icon: Icon(Icons.ac_unit), text: "관심 카테고리 설정", funRoute: () {}),
           DonutTextButton(
-              icon: Icon(Icons.ac_unit), text: "구매 내역", funRoute: () {}),
+              icon: Icon(Icons.ac_unit), text: "구매 내역", funRoute: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UserPurchaseHistoryPage(),));
+          }),
           DonutTextButton(
               icon: Icon(Icons.ac_unit), text: "내가 올린 글", funRoute: () {}),
           DonutTextButton(
