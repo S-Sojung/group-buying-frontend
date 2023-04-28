@@ -44,19 +44,14 @@ class UserDetailPage extends StatelessWidget {
             ],
           ),
           DonutTextButton(
-              icon: Icons.favorite,
-              text: "관심 게시글 목록",
-              funRoute: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UserWishlistPage()));
+              icon: Icons.favorite, text: "관심 게시글 목록", funRoute: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UserWishlistPage()));
               }),
           DonutTextButton(
               icon: Icons.favorite_border, text: "관심 카테고리 설정", funRoute: () {}),
           DonutTextButton(
               icon: Icons.shopping_basket_sharp, text: "구매 내역", funRoute: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => UserPurchaseHistoryPage(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UserPurchaseHistoryPage()));
           }),
           DonutTextButton(
               icon: Icons.shopping_basket_outlined, text: "내가 올린 글", funRoute: () {
