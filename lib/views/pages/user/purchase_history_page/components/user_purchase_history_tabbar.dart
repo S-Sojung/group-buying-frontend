@@ -1,10 +1,10 @@
 import 'package:donut/core/constants/theme.dart';
 import 'package:flutter/material.dart';
 
-class UserTabbar extends StatelessWidget {
+class USerPurchaseHistoryTabbar extends StatelessWidget {
   final tabController;
   final List<String> tabTitle;
-  UserTabbar({required this.tabController,required this.tabTitle, Key? key}) : super(key: key);
+  USerPurchaseHistoryTabbar({required this.tabController,required this.tabTitle, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

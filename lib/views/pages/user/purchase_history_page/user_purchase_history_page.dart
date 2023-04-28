@@ -1,7 +1,7 @@
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/board/board.dart';
-import 'package:donut/views/pages/user/purchase_history_page/components/user_tabar_view.dart';
-import 'package:donut/views/pages/user/purchase_history_page/components/user_tabbar.dart';
+import 'package:donut/views/pages/user/purchase_history_page/components/user_purchase_history_tabar_view.dart';
+import 'package:donut/views/pages/user/purchase_history_page/components/user_purchase_history_tabbar.dart';
 import 'package:flutter/material.dart';
 
 class UserPurchaseHistoryPage extends StatefulWidget {
@@ -40,9 +40,9 @@ class _UserPurchaseHistoryPageState extends State<UserPurchaseHistoryPage>
           ]),
       body: Column(
         children: [
-          UserTabbar(tabController: _tabController, tabTitle: ["구매 중","구매 완료"]),
+          USerPurchaseHistoryTabbar(tabController: _tabController, tabTitle: ["구매 중","구매 완료"]),
           Expanded(
-            child: UserTabbarView(tabController: _tabController,ongoing: boards,completion: boards),
+            child: USerPurchaseHistoryTabbarView(tabController: _tabController,ongoing: boards,completion: boards),
           )
         ],
       ),
