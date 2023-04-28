@@ -37,10 +37,13 @@ class _BoardHomePageState extends State<BoardHomePage> {
   void initState() {
     boards.forEach((element) {
       Marker mark = Marker(
-        infoWindow: InfoWindow(title: "${boards[0].title}",
+        infoWindow: InfoWindow(
+            title: "${boards[0].title}",
+            snippet: "${events[0].price}원 ${events[0].qty}개 ${events[0].paymentType}",
             onTap: () =>
                 Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => BoardDetailPage(board: element)))),
+                    builder: (context) => BoardDetailPage(board: element)))
+        ),
         markerId: MarkerId(boards[0].id.toString()),
         position: LatLng(events[boards[0].eventId - 1].latitude,
             events[boards[0].eventId - 1].longitude),

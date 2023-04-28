@@ -28,7 +28,8 @@ class MyApp extends ConsumerWidget {
         fontFamily: 'HallymGothic',
       ),
       debugShowCheckedModeBanner: false,
-      // initialRoute: sessionUser.isLogin! ? Move.postHomePage : Move.loginPage,
+      // 로그인 상태일 경우, 내 위치 가 설정되어 있지 않다면? 내 위치 설정으로 가기
+      // initialRoute: sessionUser.isLogin! ? ( 1 == 1 ? Move.boardHomePage : Move.boardHomePage) : Move.loginPage,
       routes: getRouters(),
       home: BoardHomePage(),
     );
