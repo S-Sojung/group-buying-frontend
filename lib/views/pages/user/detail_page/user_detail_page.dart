@@ -3,6 +3,7 @@ import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/rate/rate.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_rate_bar.dart';
+import 'package:donut/views/pages/user/account_page/user_account_page.dart';
 import 'package:donut/views/pages/user/boardlist_page/user_boardlist_page.dart';
 import 'package:donut/views/pages/user/detail_page/components/donut_text_button.dart';
 import 'package:donut/views/pages/user/hometown_page/user_hometown_page.dart';
@@ -59,7 +60,9 @@ class UserDetailPage extends StatelessWidget {
             Navigator.push(context, MaterialPageRoute(builder: (context) => UserBoardlistPage()));
           }),
           DonutTextButton(
-              icon: Icons.account_balance, text: "계좌번호 등록", funRoute: () {}),
+              icon: Icons.account_balance, text: "계좌번호 등록", funRoute: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => UserAccountPage()));
+          }),
           DonutTextButton(
               icon: Icons.location_on, text: "내 동네", funRoute: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => UserHometownPage()));

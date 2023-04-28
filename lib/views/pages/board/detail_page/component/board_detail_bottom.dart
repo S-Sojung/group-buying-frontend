@@ -153,7 +153,7 @@ class _PurchaserButtonState extends State<PurchaserButton> {
                         alignment: Alignment(-0.7, 0),
                         child: Text("개설자가 정한 규칙이에요")),
                     DonutLabelRoundTextbox(
-                      title: "결제 방?식",
+                      title: "결제 방식",
                       content: events[0].paymentType,
                     ),
                     SizedBox(
