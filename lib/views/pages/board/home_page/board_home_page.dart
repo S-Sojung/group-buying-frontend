@@ -12,6 +12,8 @@ import 'package:donut/views/pages/board/map_page/board_map_page.dart';
 import 'package:donut/views/pages/chat/list_page/chat_list_page.dart';
 import 'package:donut/views/pages/user/detail_page/user_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -56,61 +58,67 @@ class _BoardHomePageState extends State<BoardHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, Move.boardWritePage);
-        },
-        backgroundColor: donutColorBase,
-        child: Icon(Icons.add, size: 50,),
-      ),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white10,
-        actionsIconTheme: IconThemeData(color: donutColorBase),
-        title: Text("부전동"),
-        titleTextStyle: TextStyle(
-            fontSize: 17, fontWeight: FontWeight.bold, color: donutColorBase),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search, size: 30,)),
-          IconButton(
-              onPressed: () {}, icon: Icon(Icons.notifications, size: 30,)),
-        ],
-      ),
-      body: IndexedStack(
-        index: _selectedIndex, //상태변수 세팅
-        children: [
-          BoardHomeListPage(), //스크록
-          BoardMapPage(
-            markers: _markers,
-            mapController: _mapController,
-            isInitialized: isInitialized,
-            isPermission: isPermission,
-            currentLatLng: currentLatLng,
-          ),
-          ChatListPage(chatterList: chatterLists[0]),// 스크롤
-          UserDetailPage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.grey[100],
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.black54,
-          onTap: (index) { //상태변수 변경
-            changeScreen(index);
+    return WillPopScope(
+      onWillPop: ()async{
+        await _onBackPressed(context);
+        return false;
+      },
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, Move.boardWritePage);
           },
-          currentIndex: _selectedIndex,
-          //상태변수 매칭
-          items: [
-            // 얘는 IndexedStack에 들어가는 것들을 매칭해주면 됨 : icon은 required지만 label은 필수라고 적혀있지 않지만 필요함
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "홈"),
-            BottomNavigationBarItem(icon: Icon(Icons.place), label: "위치"),
-            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble), label: "채팅"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "내정보"),
-          ]
+          backgroundColor: donutColorBase,
+          child: Icon(Icons.add, size: 50,),
+        ),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white10,
+          actionsIconTheme: IconThemeData(color: donutColorBase),
+          title: Text("부전동"),
+          titleTextStyle: TextStyle(
+              fontSize: 17, fontWeight: FontWeight.bold, color: donutColorBase),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.search, size: 30,)),
+            IconButton(
+                onPressed: () {}, icon: Icon(Icons.notifications, size: 30,)),
+          ],
+        ),
+        body: IndexedStack(
+          index: _selectedIndex, //상태변수 세팅
+          children: [
+            BoardHomeListPage(), //스크록
+            BoardMapPage(
+              markers: _markers,
+              mapController: _mapController,
+              isInitialized: isInitialized,
+              isPermission: isPermission,
+              currentLatLng: currentLatLng,
+            ),
+            ChatListPage(chatterList: chatterLists[0]),// 스크롤
+            UserDetailPage(),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.grey[100],
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.black54,
+            onTap: (index) { //상태변수 변경
+              changeScreen(index);
+            },
+            currentIndex: _selectedIndex,
+            //상태변수 매칭
+            items: [
+              // 얘는 IndexedStack에 들어가는 것들을 매칭해주면 됨 : icon은 required지만 label은 필수라고 적혀있지 않지만 필요함
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: "홈"),
+              BottomNavigationBarItem(icon: Icon(Icons.place), label: "위치"),
+              BottomNavigationBarItem(icon: Icon(Icons.chat_bubble), label: "채팅"),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: "내정보"),
+            ]
+        ),
       ),
     );
   }
@@ -155,5 +163,16 @@ class _BoardHomePageState extends State<BoardHomePage> {
       currentLatLng = LatLng(position.latitude, position.longitude);
       isInitialized = true;
     });
+  }
+  
+  Future<void> _onBackPressed(BuildContext context) async{
+    await showDialog(context: context, builder: (context) => AlertDialog(
+      title: Text("정말로 앱을 종료하시나요?"),
+      actions: <Widget>[
+        TextButton(onPressed: ()=>Navigator.pop(context), child: Text("아니요")),
+        TextButton(onPressed: ()=>SystemNavigator.pop(), child: Text("네"))
+      ],
+    ),
+    );
   }
 }
