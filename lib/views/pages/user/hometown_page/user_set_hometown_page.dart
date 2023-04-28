@@ -51,7 +51,7 @@ class _UserSetHometownPageState extends State<UserSetHometownPage> {
             AddressText(),
             SizedBox(height: 20,),
             DonutButton(text: "설정 완료", funPageRoute: (){
-
+              //
             })
           ],
         ),
