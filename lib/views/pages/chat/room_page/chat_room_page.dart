@@ -5,12 +5,12 @@ import 'package:bootpay/model/item.dart';
 import 'package:bootpay/model/payload.dart';
 import 'package:bootpay/model/stat_item.dart';
 import 'package:donut/core/constants/theme.dart';
+import 'package:donut/model/board/board.dart';
+import 'package:donut/model/event/event.dart';
 import 'package:donut/model/user/user.dart';
-import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/pages/chat/room_page/components/chat_list.dart';
 import 'package:donut/views/pages/chat/room_page/components/chat_room_header.dart';
 import 'package:donut/views/pages/chat/room_page/components/chat_text_field.dart';
-import 'package:donut/views/pages/chat/room_page/components/donut_chat.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bootpay/model/user.dart';
@@ -73,7 +73,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
         child: Column(
           children: [
             ChatRoomHeader(
-              paymentFunc: () => goBootpayTest(context),
+              paymentFunc: () => bootpay(context),
             ),
             ChatList(messages: _messages, user: users[0]), // 채팅 리스트
             Divider(
@@ -86,18 +86,6 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     );
   }
 
-
-  User generateUser() {
-    var user = User();
-    user.id = '123411aaaaaaaaaaaabd4ss11';
-    user.gender = 1;
-    user.email = 'test1234@gmail.com';
-    user.phone = '01012345678';
-    user.birth = '19880610';
-    user.username = '홍길동';
-    user.area = '서울';
-    return user;
-  }
 
 
   //통계용 함수
@@ -123,14 +111,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     item1.cat1 = '컴퓨터';
     item1.cat2 = '주변기기';
 
-    StatItem item2 = StatItem();
-    item2.itemName = "키보드"; // 주문정보에 담길 상품명
-    item2.unique = "ITEM_CODE_KEYBOARD"; // 해당 상품의 고유 키
-    item2.price = 500; // 상품의 가격
-    item2.cat1 = '컴퓨터';
-    item2.cat2 = '주변기기';
-
-    List<StatItem> items = [item1, item2];
+    List<StatItem> items = [item1];
 
     await Bootpay().pageTrace(
         url: 'main_1234',
@@ -143,29 +124,23 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 
   //결제용 데이터 init
   bootpayReqeustDataInit() {
-    Item item1 = Item();
-    item1.name = "미키 '마우스"; // 주문정보에 담길 상품명
-    item1.qty = 1; // 해당 상품의 주문 수량
-    item1.id = "ITEM_CODE_MOUSE"; // 해당 상품의 고유 키
-    item1.price = 500; // 상품의 가격
-
-    Item item2 = Item();
-    item2.name = "키보드"; // 주문정보에 담길 상품명
-    item2.qty = 1; // 해당 상품의 주문 수량
-    item2.id = "ITEM_CODE_KEYBOARD"; // 해당 상품의 고유 키
-    item2.price = 500; // 상품의 가격
-    List<Item> itemList = [item1, item2];
+    Item item = Item();
+    item.name = "${boards[0].title}"; // 주문정보에 담길 상품명
+    item.qty = events[0].qty ;// 해당 상품의 주문 수량
+    item.id = "${boards[0].id}"; // 해당 상품의 고유 키
+    item.price = events[0].price.toDouble() ; // 상품의 가격
+    List<Item> itemList = [item];
 
     payload.webApplicationId = webApplicationId; // web application id
     payload.androidApplicationId = androidApplicationId; // android application id
     payload.iosApplicationId = iosApplicationId; // ios application id
 
 
-    payload.pg = '나이스페이';
-    payload.method = '네이버페이';
+    // payload.pg = '나이스페이';
+    // payload.method = '네이버페이';
     // payload.methods = ['카드', '휴대폰', '가상계좌', '계좌이체', '카카오페이'];
-    payload.orderName = "테스트 상품"; //결제할 상품명
-    payload.price = 1000.0; //정기결제시 0 혹은 주석
+    payload.orderName = "도넛마켓"; //결제할 상품명
+    payload.price = item.price; //정기결제시 0 혹은 주석
 
 
     payload.orderId = DateTime.now().millisecondsSinceEpoch.toString(); //주문번호, 개발사에서 고유값으로 지정해야함
@@ -180,10 +155,9 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     payload.items = itemList; // 상품정보 배열
 
     User user = User(); // 구매자 정보
-    user.username = "사용자 이름";
-    user.email = "user1234@gmail.com";
-    user.area = "서울";
-    // user.phone = "010-0000-0000";
+    user.username = "${users[0].id}";
+    user.email = "${users[0].email}";
+    user.area = "부산";
     user.addr = 'null';
 
     Extra extra = Extra(); // 결제 옵션
@@ -198,11 +172,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     }
 
     // extra.cardQuota = '3';
-    // extra.openType = 'popup';
-
-    // extra.carrier = "SKT,KT,LGT"; //본인인증 시 고정할 통신사명
-    // extra.ageLimit = 20; // 본인인증시 제한할 최소 나이 ex) 20 -> 20살 이상만 인증이 가능
-
+    extra.openType = 'popup';
     payload.user = user;
     payload.items = itemList;
     payload.extra = extra;
@@ -210,17 +180,12 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   }
 
 
-  //버튼클릭시 부트페이 결제요청 실행
-  void goBootpayTest(BuildContext context) {
-    if(kIsWeb) {
-      //flutter web은 cors 이슈를 설정으로 먼저 해결해주어야 한다.
-      payload.extra?.openType = 'iframe';
-    }
-    // print('popup');
-    // payload.extra?.openType = 'popup';
+  void bootpay(BuildContext context) {
 
-    payload.pg = '나이스페이';
-    payload.method = "카드";
+    Payload payload = getPayload();
+    if(kIsWeb) {
+      payload.extra?.openType = "popup";
+    }
 
     Bootpay().requestPayment(
       context: context,
@@ -228,7 +193,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       showCloseButton: false,
       // closeButton: Icon(Icons.close, size: 35.0, color: Colors.black54),
       onCancel: (String data) {
-        print('------- onCancel 1 : $data');
+        print('------- onCancel: $data');
       },
       onError: (String data) {
         print('------- onError: $data');
@@ -241,13 +206,13 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       onIssued: (String data) {
         print('------- onIssued: $data');
       },
-      onConfirm: (String data)  {
-
-        // checkQtyFromServer(data, context).then((value) => print(1243));
-        // await check
-
+      onConfirm: (String data) {
         print('------- onConfirm: $data');
 
+        /***
+            3. 서버승인을 하고자 하실 때 (클라이언트 승인 X)
+            return false; 후에 서버에서 결제승인 수행
+         */
         // checkQtyFromServer(data);
         return true;
       },
@@ -257,6 +222,64 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     );
   }
 
+  Payload getPayload() {
+    Item item = Item();
+    item.name = "${boards[0].title}"; // 주문정보에 담길 상품명
+    item.qty = events[0].qty ;// 해당 상품의 주문 수량
+    item.id = "${boards[0].id}"; // 해당 상품의 고유 키
+    item.price = events[0].price.toDouble() ; // 상품의 가격
+    List<Item> itemList = [item];
+
+    payload.webApplicationId = webApplicationId; // web application id
+    payload.androidApplicationId = androidApplicationId; // android application id
+    payload.iosApplicationId = iosApplicationId; // ios application id
+
+
+    // payload.pg = '나이스페이';
+    // payload.method = '네이버페이';
+    // payload.methods = ['카드', '휴대폰', '가상계좌', '계좌이체', '카카오페이'];
+    payload.orderName = "도넛마켓"; //결제할 상품명
+    payload.price = item.price; //정기결제시 0 혹은 주석
+
+
+    payload.orderId = DateTime.now().millisecondsSinceEpoch.toString(); //주문번호, 개발사에서 고유값으로 지정해야함
+
+
+    payload.metadata = {
+      "callbackParam1" : "value12",
+      "callbackParam2" : "value34",
+      "callbackParam3" : "value56",
+      "callbackParam4" : "value78",
+    }; // 전달할 파라미터, 결제 후 되돌려 주는 값
+    payload.items = itemList; // 상품정보 배열
+
+    User user = User(); // 구매자 정보
+    user.username = "${users[0].id}";
+    user.email = "${users[0].email}";
+    user.area = "부산";
+    user.addr = 'null';
+
+
+
+    Extra extra = Extra(); // 결제 옵션
+    extra.appScheme = 'bootpayFlutterExample';
+
+    if(BootpayConfig.ENV == -1) {
+      payload.extra?.redirectUrl = 'https://dev-api.bootpay.co.kr/v2';
+    } else if(BootpayConfig.ENV == -2) {
+      payload.extra?.redirectUrl = 'https://stage-api.bootpay.co.kr/v2';
+    }  else {
+      payload.extra?.redirectUrl = 'https://api.bootpay.co.kr/v2';
+    }
+
+    // extra.cardQuota = '3';
+    extra.openType = 'popup';
+    payload.user = user;
+    payload.items = itemList;
+    payload.extra = extra;
+    // payload.extra?.openType = "iframe";
+    return payload;
+  }
 }
 
 
