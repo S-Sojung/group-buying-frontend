@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "438857152817",
+    "firebase_url": "https://group-buying-b98ef-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "group-buying-b98ef",
+    "storage_bucket": "group-buying-b98ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438857152817:android:bfcb4a6b192cb61a85d810",
+        "android_client_info": {
+          "package_name": "shop.donutmarket.donut"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "438857152817-reblvs1mjbs4qdkc00gaopdm7i5hfo4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrRdn-BcN7RH64-oOz0-UEvbjsVymOHjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "438857152817-76vaus03cr7fdhsr95l69oogk0u9a6sl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,12 @@
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/views/pages/board/home_page/board_home_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   // SessionUser sessionUser = await UserRepository().fetchJwtVerify();
   // runApp(
   //   ProviderScope(

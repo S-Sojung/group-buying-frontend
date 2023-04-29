@@ -1,10 +1,8 @@
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
-import 'package:donut/core/utils/validator_util.dart';
 import 'package:donut/model/my_location/my_location.dart';
 import 'package:donut/views/components/donut_button.dart';
-import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/chatter_list/chatter_list.dart';
@@ -32,6 +33,14 @@ class _BoardHomePageState extends State<BoardHomePage> {
   int _selectedIndex = 0;
   LatLng currentLatLng = LatLng(37.33500926, -122.03272188);
   List<Marker> _markers = [];
+  final firestore = FirebaseFirestore.instance;
+  
+  getData() async{
+    var result = await firestore.collection("chatroom").doc("1").get();
+    print("테스트!!!!! : ${result.get("createdAt")}");
+    print("테스트!!!!! : ${result.get("eventId")}");
+    print("테스트!!!!! : ${result.get("statusCode")}");
+  }
 
   @override
   void initState() {
@@ -51,6 +60,7 @@ class _BoardHomePageState extends State<BoardHomePage> {
       _markers.add(mark);
     });
     _getCurrentLocation();
+    getData();
   }
 
   void changeScreen(int index) {
