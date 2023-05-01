@@ -5,6 +5,7 @@ import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/core/utils/validator_util.dart';
 import 'package:donut/views/components/donut_appbar.dart';
+import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_text_area.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -109,6 +110,9 @@ class _ReportPageState extends State<ReportPage> {
 
               SizedBox(height:20,),
               DonutTextArea(title: "신고 내용", hint: "", funValidator: validateContent(),controller: _contentController,),
+              Container(
+                width: getScreenWidth(context)*0.9,
+                  child: DonutButton(text: "신고 하기", funPageRoute: (){}))
             ],
           ),
         ),
