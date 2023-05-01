@@ -23,13 +23,14 @@ class _SplashPageState extends State<SplashPage> {
     var duration = Duration(seconds: 5);
     return Timer(duration, () {
       //SessionUser sessionUser = ref.read(sessionProvider);
-      //sessionUser.isLogin! ? ( 1 == 1 ? Move.boardHomePage : Move.boardHomePage) : Move.loginPage,
+      //      // 로그인 상태일 경우, 내 위치 가 설정되어 있지 않다면? 내 위치 설정으로 가기
+      //sessionUser.isLogin! ? ( 1 == 1 ? Move.boardHomePage : Move.boardHomePage) : Move.AfterSplashPage,
       //여기서 세션이랑 확인하고 이동할 구간 정해야함.
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            // builder: (context) => BoardHomePage(),
-            builder: (context) => AfterSplashPage(),
+            builder: (context) => BoardHomePage(),
+            // builder: (context) => AfterSplashPage(),
           ),
           (route) => false);
     });

@@ -6,6 +6,7 @@ import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/chatter_list/chatter_list.dart';
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/event/event.dart';
+import 'package:donut/model/user/user.dart';
 import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
 import 'package:donut/views/pages/board/home_page/component/board_home_list_page.dart';
 import 'package:donut/views/pages/board/map_page/board_map_page.dart';
@@ -99,7 +100,7 @@ class _BoardHomePageState extends State<BoardHomePage> {
               currentLatLng: currentLatLng,
             ),
             ChatListPage(chatterList: chatterLists[0]),// 스크롤
-            UserDetailPage(),
+            UserDetailPage(user: users[0]), // priciparid
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
