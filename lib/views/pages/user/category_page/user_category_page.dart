@@ -1,9 +1,11 @@
+import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/category/category.dart';
 import 'package:donut/model/my_category/my_category.dart';
 import 'package:donut/views/components/donut_appbar.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:flutter/material.dart';
+import 'package:group_button/group_button.dart';
 
 class UserCategoryPage extends StatefulWidget {
   const UserCategoryPage({Key? key}) : super(key: key);
@@ -13,6 +15,22 @@ class UserCategoryPage extends StatefulWidget {
 }
 
 class _UserCategoryPageState extends State<UserCategoryPage> {
+  List<Category> notMyCategorylist = categorys.where((e) {
+    bool tri=false;
+    myCategorys.forEach((element) {
+      if(e.id == element.categoryId)
+        tri = true;
+    });
+    return !tri;
+  }).toList();
+
+  late Category? selectCategory;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +42,13 @@ class _UserCategoryPageState extends State<UserCategoryPage> {
             child: GridView.builder(
               itemCount: myCategorys.length + 1,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 100, mainAxisExtent: 120),
+                  maxCrossAxisExtent: 100, mainAxisExtent: 140),
               itemBuilder: (context, index) {
                 return index < myCategorys.length
                     ? InkWell(
                         onLongPress: () {
                           setState(() {
+                            notMyCategorylist.add(categorys[myCategorys[index].categoryId-1]);
                             myCategorys.removeAt(index);
                           });
                         },
@@ -39,26 +58,73 @@ class _UserCategoryPageState extends State<UserCategoryPage> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(color: donutColorBasic),
-                              color: Colors.white
-                            ),
+                                color: Colors.white),
                             child: Padding(
                               padding: const EdgeInsets.all(10),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Image.asset(
                                       "assets/categories/${category_eng[myCategorys[index].categoryId - 1]}.jpg"),
-                                  Text(categorys[myCategorys[index].categoryId - 1]
-                                      .name),
+                                  Text(
+                                    "${categorys[myCategorys[index].categoryId - 1].name}",
+                                  ),
                                 ],
                               ),
                             ),
                           ),
                         ),
                       )
-                    :  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: DonutButton(text: "╋", funPageRoute: () {}),
-                    );
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: myCategorys.length < categorys.length ? DonutButton(
+                            text: "╋",
+                            funPageRoute: () {
+                              return showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('추가할 카테고리 선택하기'),
+                                  content: GroupButton(
+                                    options: GroupButtonOptions(
+                                        borderRadius: BorderRadius.circular(10),
+                                        selectedColor: donutColorBasic),
+                                    isRadio: true,
+                                    onSelected: (value, index, isSelected) {
+                                      selectCategory = notMyCategorylist[index];
+                                    },
+                                    buttons:
+                                        notMyCategorylist.map((e) => e.name).toList(),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: ()
+                                  { selectCategory = null;
+                                    return Navigator.pop(context, 'Cancel');},
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+
+                                        setState(() {
+                                          myCategorys.add(MyCatagory(
+                                              id: 6,
+                                              userId: 1,
+                                              categoryId: selectCategory!.id,
+                                              createdAt: DateTime.now()));
+                                          notMyCategorylist
+                                              .remove(selectCategory);
+                                          selectCategory = null;
+                                          Navigator.pop(context, 'OK');
+                                        });
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }) : Container(),
+                      );
               },
             ),
           ),
