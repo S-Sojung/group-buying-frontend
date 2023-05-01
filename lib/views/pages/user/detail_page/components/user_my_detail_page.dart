@@ -2,6 +2,7 @@
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/views/pages/user/account_page/user_account_page.dart';
 import 'package:donut/views/pages/user/boardlist_page/user_boardlist_page.dart';
+import 'package:donut/views/pages/user/category_page/user_category_page.dart';
 import 'package:donut/views/pages/user/detail_page/components/donut_text_button.dart';
 import 'package:donut/views/pages/user/detail_page/components/user_header.dart';
 import 'package:donut/views/pages/user/hometown_page/user_hometown_page.dart';
@@ -24,7 +25,9 @@ class UserMyDetailPage extends StatelessWidget {
             Navigator.push(context, MaterialPageRoute(builder: (context) => UserWishlistPage()));
           }),
           DonutTextButton(
-              icon: Icons.favorite_border, text: "관심 카테고리 설정", funRoute: () {}),
+              icon: Icons.favorite_border, text: "관심 카테고리 설정", funRoute: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => UserCategoryPage()));
+          }),
           DonutTextButton(
               icon: Icons.shopping_basket_sharp, text: "구매 내역", funRoute: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => UserPurchaseHistoryPage()));
