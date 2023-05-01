@@ -7,6 +7,7 @@ import 'package:donut/views/pages/user/detail_page/components/donut_text_button.
 import 'package:donut/views/pages/user/detail_page/components/user_header.dart';
 import 'package:donut/views/pages/user/hometown_page/user_hometown_page.dart';
 import 'package:donut/views/pages/user/purchase_history_page/user_purchase_history_page.dart';
+import 'package:donut/views/pages/user/reportlist_page/user_reportlist_page.dart';
 import 'package:donut/views/pages/user/wishlist_page/user_wishlist_page.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,9 @@ class UserMyDetailPage extends StatelessWidget {
           DonutTextButton(
               icon: Icons.lock_person, text: "차단 목록 관리", funRoute: () {}),
           DonutTextButton(
-              icon: Icons.report, text: "신고 목록 관리", funRoute: () {}),
+              icon: Icons.report, text: "신고 목록 관리", funRoute: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => UserReposrtlistPage()));
+          }),
           Divider(color: donutColorBasic, thickness: 1),
           DonutTextButton(
               icon: Icons.summarize_outlined, text: "공지사항", funRoute: () {}),
