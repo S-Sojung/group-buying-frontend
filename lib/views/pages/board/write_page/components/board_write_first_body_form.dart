@@ -236,7 +236,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                             const SnackBar(content: Text("빈칸이 없는지 확인해주세요")));
                       } else {
                         if(_image==null){
-                          _image = Image.asset("assets/images/categorys/${searchCategory(setDropdownItem)}");
+                          _image = Image.asset("assets/images/categories/${searchCategory(setDropdownItem)}.jpg");
                         }
                         print("사진 : ${_image}");
                         print("제목 : ${_titleController.text}");
