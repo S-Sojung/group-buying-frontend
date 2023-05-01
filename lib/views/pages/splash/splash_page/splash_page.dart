@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:donut/views/pages/board/home_page/board_home_page.dart';
+import 'package:donut/views/pages/splash/after_splash_page/after_splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -27,7 +28,8 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => BoardHomePage(),
+            // builder: (context) => BoardHomePage(),
+            builder: (context) => AfterSplashPage(),
           ),
           (route) => false);
     });
