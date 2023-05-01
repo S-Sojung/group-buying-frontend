@@ -1,5 +1,5 @@
 import 'package:donut/core/constants/move.dart';
-import 'package:donut/views/pages/splash/splash_page.dart';
+import 'package:donut/views/pages/splash/splash_page/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
