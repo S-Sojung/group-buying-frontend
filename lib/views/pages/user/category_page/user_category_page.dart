@@ -42,7 +42,7 @@ class _UserCategoryPageState extends State<UserCategoryPage> {
             child: GridView.builder(
               itemCount: myCategorys.length + 1,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 100, mainAxisExtent: 140),
+                  maxCrossAxisExtent: 120, mainAxisExtent: 160),
               itemBuilder: (context, index) {
                 return index < myCategorys.length
                     ? _donutCategoryButton(index)
