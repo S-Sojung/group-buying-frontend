@@ -1,8 +1,8 @@
+import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/views/components/donut_button.dart';
-import 'package:donut/views/pages/user/detail_page/components/donut_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -35,14 +35,16 @@ class AfterSplashPage extends StatelessWidget {
             Column(
               children: [
                 DonutButton(text: "시작 하기", funPageRoute: (){
-
+                  Navigator.pushNamed(context, Move.joinPage);
                 }),
                 TextButton(child: Text.rich(TextSpan(
                     text: "이미 계정이 있나요?  ", style: bodyText(),
                     children: <TextSpan>[
                       TextSpan(text: "로그인",style: bodyText(mColor: donutColorBasic)),
                     ]
-                ) ),onPressed: (){} )
+                ) ),onPressed: (){
+                  Navigator.pushNamed(context, Move.loginPage);
+                } )
               ],
             )
           ],
