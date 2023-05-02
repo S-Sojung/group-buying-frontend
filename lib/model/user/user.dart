@@ -1,5 +1,7 @@
 
 
+import 'package:intl/intl.dart';
+
 class DonutUser {
   final int id;
   final String email;
@@ -22,6 +24,29 @@ class DonutUser {
     required this.statusCode,
     required this.created,
   });
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "email": email,
+    "name": name,
+    "profile": profile,
+    "rateId": rateId,
+    "type": type,
+    "role": role,
+    "statusCode": statusCode,
+    "created": created
+  };
+
+  DonutUser.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        email = json["email"],
+        name = json["name"],
+        profile = json["profile"],
+        rateId = json["rateId"],
+        type = json["type"],
+        role = json["role"],
+        statusCode = json["statusCode"],
+        created = DateFormat("yyyy-mm-dd").parse(json["created"]);
 }
 
 List<DonutUser> users = [
