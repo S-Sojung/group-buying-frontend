@@ -29,7 +29,7 @@ class DonutTextFormField extends StatelessWidget {
             controller: controller,
             validator: funValidator,
 
-            obscureText: hint == "Password" ? true : false,
+            obscureText: hint == "Password" || hint == "password" ? true : false,
             decoration: InputDecoration(
               hintText: "Enter $hint",
               enabledBorder: OutlineInputBorder(
