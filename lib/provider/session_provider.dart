@@ -8,16 +8,12 @@ final sessionProvider = Provider<SessionUser>((ref) {
   return SessionUser();
 });
 
-// 최초 앱이 실행될 때 초기화 되어야 함.
-// 1. JWT 존재 유무 확인 (I/O)
-// 2. JWT로 회원정보 받아봄 (I/O)
-// 3. OK -> loginSuccess() 호출
-// 4. FAIL -> loginPage로 이동
 class SessionUser {
-  DonutUser? user;
+
+  DonutUser? user; //추후 수정 user id와 role만 보이는 것으로
   String? jwt;
   bool? isLogin;
-
+  //getter setter 를 써야하지만 지금은 그냥 접근하기
 
   void loginSuccess(DonutUser user, String jwt){
     this.user = user;
