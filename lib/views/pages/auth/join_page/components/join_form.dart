@@ -3,14 +3,26 @@ import 'package:donut/core/utils/validator_util.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_naver_login/flutter_naver_login.dart';
 
-class JoinForm extends StatelessWidget {
+class JoinForm extends StatefulWidget {
+
+  JoinForm({Key? key}) : super(key: key);
+
+  @override
+  State<JoinForm> createState() => _JoinFormState();
+}
+
+class _JoinFormState extends State<JoinForm> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _nickname = TextEditingController();
 
-  JoinForm({Key? key}) : super(key: key);
+  bool isLogin = false;
+  String? email;
+  String? name;
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +70,30 @@ class JoinForm extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: DonutButton(text: "네이버로 간단 가입하기", funPageRoute: (){}),
-          ),
+          SizedBox(height: 20,),
+          InkWell(
+              onTap: buttonLoginPressed,
+              child: Image.asset("assets/images/btnG_완성형.png",height: 50,)
+          )
         ],
       ),
     );
+  }
+
+  Future<void> buttonLoginPressed() async {
+    try {
+      final NaverLoginResult res = await FlutterNaverLogin.logIn();
+      setState(() {
+        email = res.account.email;
+        name = res.account.nickname;
+        isLogin = true;
+        print("email : ${email}");
+        print("email : ${name}");
+        print("accessToken : ${res.accessToken}");
+      });
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("오류 : ${error.toString()}")));
+    }
   }
 }
