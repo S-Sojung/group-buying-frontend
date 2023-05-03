@@ -1,5 +1,5 @@
 
-import 'package:donut/model/user/user.dart';
+import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/views/pages/user/detail_page/components/user_my_detail_page.dart';
 import 'package:flutter/material.dart';
 

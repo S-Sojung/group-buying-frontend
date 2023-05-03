@@ -1,89 +1,82 @@
-
-
+import 'package:donut/model/rate/rate.dart';
 import 'package:intl/intl.dart';
 
-class DonutUser {
-  final int id;
-  final String email;
-  String? name;
-  String? profile;
-  final int rateId;
-  final String type;
-  final String role;
-  int? statusCode;
-  final DateTime created;
+class ParseUser{
+  DoUser user;
 
-  DonutUser({
+  ParseUser({
+    required this.user,
+  });
+
+  factory ParseUser.fromJson(Map<String, dynamic> json) => ParseUser(
+      user: DoUser.fromJson(json["user"])
+  );
+
+  Map<String, dynamic> toJson() => {
+    "user": user
+  };
+}
+
+class DoUser {
+  int id;
+  String username;
+  dynamic nickname;
+  String email;
+  String name;
+  dynamic profile;
+  Rate rate;
+  int ratePoint;
+  String role;
+  String? provider;
+  String? providerId;
+  int statusCode;
+  DateTime createdAt;
+
+  DoUser({
     required this.id,
+    required this.username,
+    this.nickname,
     required this.email,
     required this.name,
-    required this.profile,
-    required this.rateId,
-    required this.type,
+    this.profile,
+    required this.rate,
+    required this.ratePoint,
     required this.role,
+    this.provider,
+    this.providerId,
     required this.statusCode,
-    required this.created,
+    required this.createdAt,
   });
+
+  factory DoUser.fromJson(Map<String, dynamic> json) => DoUser(
+    id: json["id"],
+    username: json["username"],
+    nickname: json["nickname"],
+    email: json["email"],
+    name: json["name"],
+    profile: json["profile"],
+    rate: Rate.fromJson(json["rate"]),
+    ratePoint: json["ratePoint"],
+    role: json["role"],
+    provider: json["provider"],
+    providerId: json["providerId"],
+    statusCode: json["statusCode"],
+    createdAt: DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
+  );
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "username": username,
+    "nickname": nickname,
     "email": email,
     "name": name,
     "profile": profile,
-    "rateId": rateId,
-    "type": type,
+    "rate": rate.toJson(),
+    "ratePoint": ratePoint,
     "role": role,
+    "provider": provider,
+    "providerId": providerId,
     "statusCode": statusCode,
-    "created": created
+    "createdAt": createdAt.toIso8601String(),
   };
-
-  DonutUser.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
-        email = json["email"],
-        name = json["name"],
-        profile = json["profile"],
-        rateId = json["rateId"],
-        type = json["type"],
-        role = json["role"],
-        statusCode = json["statusCode"],
-        created = DateFormat("yyyy-mm-dd").parse(json["created"]);
 }
-
-List<DonutUser> users = [
-  DonutUser(id: 1,
-      email: "ssar@naver.com",
-      name: "ssar",
-      profile: "null",
-      rateId: 1,
-      type: "naver",
-      role: "user",
-      statusCode: 100,
-      created: DateTime.now()),
-  DonutUser(id: 2,
-      email: "zzxc@naver.com",
-      name: "zzxc",
-      profile: "null",
-      rateId: 2,
-      type: "naver",
-      role: "user",
-      statusCode: 100,
-      created: DateTime.now()),
-  DonutUser(id: 3,
-      email: "qqwe@naver.com",
-      name: "qqwe",
-      profile: "null",
-      rateId: 3,
-      type: "naver",
-      role: "user",
-      statusCode: 100,
-      created: DateTime.now()),
-  DonutUser(id: 4,
-      email: "ppoi@naver.com",
-      name: "ppoi",
-      profile: "null",
-      rateId: 4,
-      type: "null",
-      role: "user",
-      statusCode: 100,
-      created: DateTime.now())
-];

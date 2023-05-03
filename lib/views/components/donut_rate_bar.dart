@@ -5,7 +5,7 @@ import 'package:donut/model/rate/rate.dart';
 import 'package:flutter/material.dart';
 
 class DonutRateBar extends StatelessWidget {
-  final Rate rate;
+  final MocRate rate;
   const DonutRateBar(this.rate, {Key? key}) : super(key: key);
 
   @override
@@ -43,7 +43,7 @@ class DonutRateBar extends StatelessWidget {
 }
 
 class DonutMinRateBar extends StatelessWidget {
-  final Rate rate;
+  final MocRate rate;
   const DonutMinRateBar(this.rate, {Key? key}) : super(key: key);
 
   @override
