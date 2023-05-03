@@ -6,7 +6,7 @@ import 'package:donut/views/pages/board/detail_page/component/board_detail_heade
 import 'package:flutter/material.dart';
 
 class BoardDetailBody extends StatelessWidget {
-  final Board board;
+  final MocBoard board;
 
   BoardDetailBody({required this.board, Key? key}) : super(key: key);
 

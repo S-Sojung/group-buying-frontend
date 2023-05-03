@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class USerPurchaseHistoryTabbarView extends StatelessWidget {
   final tabController;
-  final List<Board> ongoing;
-  final List<Board> completion;
+  final List<MocBoard> ongoing;
+  final List<MocBoard> completion;
 
   const USerPurchaseHistoryTabbarView({required this.tabController, required this.ongoing, required this.completion, Key? key}) : super(key: key);
 

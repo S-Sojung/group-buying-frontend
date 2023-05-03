@@ -7,7 +7,7 @@ import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:flutter/material.dart';
 
 class BoardDetailBodyContent extends StatelessWidget {
-  final Board board;
+  final MocBoard board;
   final List<String> tags;
   BoardDetailBodyContent({required this.board, required this.tags, Key? key}) : super(key: key);
 

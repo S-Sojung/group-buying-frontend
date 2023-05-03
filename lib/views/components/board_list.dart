@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class BoardList extends StatelessWidget {
   final listSize;
-  final List<Board> boards;
+  final List<MocBoard> boards;
   const BoardList({
     this.listSize = 1.0, required this.boards, Key? key}) : super(key: key);
 
