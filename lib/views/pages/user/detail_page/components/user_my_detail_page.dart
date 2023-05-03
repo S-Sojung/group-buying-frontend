@@ -60,8 +60,28 @@ class UserMyDetailPage extends StatelessWidget {
           Divider(color: donutColorBasic, thickness: 1),
           DonutTextButton(
               icon: Icons.summarize_outlined, text: "공지사항", funRoute: () {}),
+          DonutTextButton(
+              icon: Icons.logout, text: "로그아웃", funRoute: () {
+
+          }),
         ],
       ),
     );
   }
+
+  /*
+   Future<void> buttonLogoutPressed() async {
+    try {
+      await FlutterNaverLogin.logOut();
+      setState(() {
+        isLogin = false;
+        accesToken = null;
+        tokenType = null;
+        name = null;
+      });
+    } catch (error) {
+      _showSnackError(error.toString());
+    }
+  }
+   */
 }
