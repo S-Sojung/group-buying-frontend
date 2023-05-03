@@ -1,4 +1,4 @@
-import 'package:donut/model/user/user.dart';
+import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/pages/chat/room_page/components/donut_chat.dart';
 import 'package:flutter/material.dart';

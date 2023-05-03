@@ -22,7 +22,7 @@ class UserController{
   Future<void> join(String username, String password, String email) async{
     JoinReqDTO joinReqDTO = JoinReqDTO(username: username, password: password, email: email);
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
-    if(responseDTO.code == 1){
+    if(responseDTO.status == 1){
       Navigator.pushNamed(mContext!, Move.loginPage);
     }else{
       final snackBar = SnackBar(content: Text("회원 가입 실패"));
@@ -35,10 +35,12 @@ class UserController{
 
     LoginReqDTO loginReqDTO = LoginReqDTO(username: username, password: password);
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
-    if(responseDTO.code == 1){
+
+    if(responseDTO.status == 200){
       await secureStorage.write(key: "jwt", value: responseDTO.token);
       ref.read (sessionProvider).loginSuccess(responseDTO.data, responseDTO.token!);
       Navigator.popAndPushNamed(mContext!, Move.boardHomePage);
+
     }else{
       final snackBar = SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}"));
       ScaffoldMessenger.of(mContext!).showSnackBar(snackBar);

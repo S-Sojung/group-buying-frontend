@@ -3,7 +3,7 @@ import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/event/event.dart';
 import 'package:donut/model/participant/participant.dart';
-import 'package:donut/model/user/user.dart';
+import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/pages/board/selete_participant_page/select_account_page.dart';
 import 'package:flutter/material.dart';

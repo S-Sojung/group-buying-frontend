@@ -1,7 +1,7 @@
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
-import 'package:donut/model/user/user.dart';
+import 'package:donut/model/user/donutuser.dart';
 import 'package:flutter/material.dart';
 
 class DonutChat extends StatelessWidget {
