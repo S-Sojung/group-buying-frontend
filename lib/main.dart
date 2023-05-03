@@ -28,6 +28,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //SessionUser sessionUser = ref.read(sessionProvider);
     return MaterialApp(
+
       title: "donut market",
       theme: ThemeData(
         fontFamily: 'HallymGothic',

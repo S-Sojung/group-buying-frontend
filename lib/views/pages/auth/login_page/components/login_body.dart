@@ -1,3 +1,5 @@
+import 'package:donut/core/constants/move.dart';
+import 'package:donut/core/constants/size.dart';
 import 'package:donut/views/pages/auth/login_page/components/login_form.dart';
 import 'package:donut/views/pages/auth/login_page/components/login_header.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +11,29 @@ class LoginBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:
+            EdgeInsets.symmetric(horizontal: getScreenWidth(context) * 0.05),
         child: ListView(
           children: [
-            LoginHeader(),
-            LoginForm(),
+            Container(
+              height: getScreenHeigth(context)*0.9,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  LoginHeader(),
+                  LoginForm(),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, Move.joinPage);
+                    },
+                    child: const Text("아직 회원가입이 안되어 있나요?"),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
