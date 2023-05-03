@@ -54,7 +54,9 @@ class LoginForm extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: DonutButton(text: "네이버", funPageRoute: (){}),
+            child: DonutButton(text: "네이버로 로그인 하기", funPageRoute: (){
+
+            }),
           ),
         ],
       ),
