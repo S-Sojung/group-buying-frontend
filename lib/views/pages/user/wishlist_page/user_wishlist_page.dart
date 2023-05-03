@@ -9,7 +9,7 @@ class UserWishlistPage extends StatelessWidget {
 
   UserWishlistPage({Key? key}) : super(key: key);
 
-  List<Board> wishboards = boards;
+  List<MocBoard> wishboards = boards;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

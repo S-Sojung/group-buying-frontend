@@ -15,7 +15,7 @@ String image(int index) {
 }
 
 class BoardListTile extends StatelessWidget {
-  final Board board;
+  final MocBoard board;
 
   const BoardListTile(this.board);
 

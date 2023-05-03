@@ -1,4 +1,4 @@
-class Board {
+class MocBoard {
   // 게시글
   final int id;
   final int categoryId;
@@ -15,7 +15,7 @@ class Board {
   final String? town;
   final DateTime createdAt;
 
-  Board(
+  MocBoard(
       {required this.id,
       required this.categoryId,
       required this.title,
@@ -32,8 +32,8 @@ class Board {
         required this.createdAt});
 }
 
-List<Board> boards = [
-  Board(
+List<MocBoard> boards = [
+  MocBoard(
       id: 1,
       categoryId: 3,
       title: "삼각김밥 1+1 같이 사실분?",
@@ -48,7 +48,7 @@ List<Board> boards = [
       city: "부산진구",
       town: "부전동",
       createdAt: DateTime.now(),),
-  Board(
+  MocBoard(
       id: 2,
       categoryId: 3,
       title: "편의점 할인 행사 같이 사실분",
@@ -63,7 +63,7 @@ List<Board> boards = [
       city: "부산진구",
       town: "부전동",
       createdAt: DateTime.now()),
-  Board(
+  MocBoard(
       id: 3,
       categoryId: 3,
       title: "편의점 할인 행사 같이 사실분",
@@ -78,7 +78,7 @@ List<Board> boards = [
       city: "부산진구",
       town: "부전동",
       createdAt: DateTime.now()),
-  Board(
+  MocBoard(
       id: 4,
       categoryId: 3,
       title: "편의점 할인 행사 같이 사실분",
@@ -93,7 +93,7 @@ List<Board> boards = [
       city: "부산진구",
       town: "부전동",
       createdAt: DateTime.now()),
-  Board(
+  MocBoard(
       id: 5,
       categoryId: 3,
       title: "편의점 할인 행사 같이 사실분",
@@ -108,7 +108,7 @@ List<Board> boards = [
       city: "부산진구",
       town: "부전동",
       createdAt: DateTime.now()),
-  Board(
+  MocBoard(
       id: 6,
       categoryId: 3,
       title: "편의점 할인 행사 같이 사실분",
@@ -123,7 +123,7 @@ List<Board> boards = [
       city: "부산진구",
       town: "부전동",
       createdAt: DateTime.now()),
-  Board(
+  MocBoard(
       id: 7,
       categoryId: 3,
       title: "편의점 할인 행사 같이 사실분",
