@@ -45,7 +45,7 @@ class MyApp extends ConsumerWidget {
           splash: Lottie.network("https://assets4.lottiefiles.com/packages/lf20_pjdN0Y.json"),
           animationDuration: const Duration(seconds: 5),
           nextScreen: sessionUser.isLogin!
-              ? (1 == 1 ? BoardHomePage() : BoardHomePage())
+              ? (1 == 1 ? BoardHomePage() : BoardHomePage()) //본인 위치가 설정 안되있다면.
               : AfterSplashPage(),
       ),
     );

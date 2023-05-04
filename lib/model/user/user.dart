@@ -77,6 +77,6 @@ class DoUser {
     "provider": provider,
     "providerId": providerId,
     "statusCode": statusCode,
-    "createdAt": createdAt.toIso8601String(),
+    "createdAt": createdAt,
   };
 }

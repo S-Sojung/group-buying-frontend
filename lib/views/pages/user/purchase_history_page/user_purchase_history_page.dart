@@ -1,23 +1,31 @@
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/board/board.dart';
+import 'package:donut/model/board/mock_board.dart';
+import 'package:donut/views/pages/board/home_page/board_home_page_view_model.dart';
 import 'package:donut/views/pages/user/purchase_history_page/components/user_purchase_history_tabar_view.dart';
 import 'package:donut/views/pages/user/purchase_history_page/components/user_purchase_history_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserPurchaseHistoryPage extends StatefulWidget {
+class UserPurchaseHistoryPage extends ConsumerStatefulWidget {
   const UserPurchaseHistoryPage({Key? key}) : super(key: key);
 
   @override
-  State<UserPurchaseHistoryPage> createState() =>
-      _UserPurchaseHistoryPageState();
+  UserPurchaseHistoryPageState createState() =>
+      UserPurchaseHistoryPageState();
 }
 
-class _UserPurchaseHistoryPageState extends State<UserPurchaseHistoryPage>
+class UserPurchaseHistoryPageState extends ConsumerState<UserPurchaseHistoryPage>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
+  List<Board> boardlist = [];
 
   @override
   void initState() {
+    BoardHomePageModel? model = ref.watch(boardHomePageProvider);
+    if (model != null) {
+      boardlist = model.BHPRdto.boards;
+    }
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -42,7 +50,7 @@ class _UserPurchaseHistoryPageState extends State<UserPurchaseHistoryPage>
         children: [
           USerPurchaseHistoryTabbar(tabController: _tabController, tabTitle: ["구매 중","구매 완료"]),
           Expanded(
-            child: USerPurchaseHistoryTabbarView(tabController: _tabController,ongoing: boards,completion: boards),
+            child: USerPurchaseHistoryTabbarView(tabController: _tabController,ongoing: boardlist,completion: boardlist),
           )
         ],
       ),
