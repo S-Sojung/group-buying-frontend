@@ -1,5 +1,6 @@
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/model/board/board.dart';
+import 'package:donut/model/board/mock_board.dart';
 import 'package:donut/model/event/event.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
@@ -15,7 +16,7 @@ String image(int index) {
 }
 
 class BoardListTile extends StatelessWidget {
-  final MocBoard board;
+  final Board board;
 
   const BoardListTile(this.board);
 
@@ -53,10 +54,10 @@ class BoardListTile extends StatelessWidget {
           children: [
             Row(children: [
               Text(
-                "${events[board.eventId - 1].price}원",
+                "${board.price}원",
                 style: bodyText(),
               ),
-              DonutRoundTag("${events[board.eventId - 1].paymentType}")
+              DonutRoundTag("${board.paymentType}")
               //태그 리스트
             ]),
             Row(
@@ -71,7 +72,7 @@ class BoardListTile extends StatelessWidget {
                       //   style: footnote(),
                       // ),
                       Text(
-                        "${events[board.eventId - 1].qty} 개",
+                        "${board.qty} 개",
                         style: footnote(mColor: Colors.black),
                       )
                     ]),
@@ -80,7 +81,7 @@ class BoardListTile extends StatelessWidget {
                       style: footnote(),
                     ),
                     Text(
-                      "${events[board.eventId - 1].endAt}", // 시간
+                      "${board.endAt}", // 시간
                       style: footnote(),
                     ),
                   ],

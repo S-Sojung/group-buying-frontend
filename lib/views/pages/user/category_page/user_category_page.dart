@@ -1,6 +1,5 @@
-import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
-import 'package:donut/model/category/category.dart';
+import 'package:donut/model/category/mock_category.dart';
 import 'package:donut/model/my_category/my_category.dart';
 import 'package:donut/views/components/donut_appbar.dart';
 import 'package:donut/views/components/donut_button.dart';
@@ -15,7 +14,7 @@ class UserCategoryPage extends StatefulWidget {
 }
 
 class _UserCategoryPageState extends State<UserCategoryPage> {
-  List<Category> notMyCategorylist = categorys.where((e) {
+  List<MockCategory> notMyCategorylist = categorys.where((e) {
     bool tri=false;
     myCategorys.forEach((element) {
       if(e.id == element.categoryId)
@@ -24,7 +23,7 @@ class _UserCategoryPageState extends State<UserCategoryPage> {
     return !tri;
   }).toList();
 
-  late Category? selectCategory;
+  late MockCategory? selectCategory;
 
   @override
   void initState() {
@@ -123,7 +122,7 @@ class _UserCategoryPageState extends State<UserCategoryPage> {
                                     onPressed: () {
 
                                       setState(() {
-                                        myCategorys.add(MyCatagory(
+                                        myCategorys.add(MyCategory(
                                             id: 6,
                                             userId: 1,
                                             categoryId: selectCategory!.id,

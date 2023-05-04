@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:donut/core/constants/http.dart';
 import 'package:donut/dto/auth_request.dart';
@@ -20,7 +22,6 @@ class UserRepository {
     SessionUser sessionUser = SessionUser();
     //앱이 제일 처음 켜질 때 얘가 실행 된다.
     String? deviceJwt = await secureStorage.read(key: "jwt");
-    //이게 없다면? deviceJwt을 Base64로 디코딩 - payload값에 id를 확인해서 요청
     if(deviceJwt != null){
       try{
         //jwtToken 을 요청하면 인증 정보를 보내줌
@@ -31,7 +32,10 @@ class UserRepository {
         ));
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
         responseDTO.token = deviceJwt;
+        // print("상태 변수 ${responseDTO.status}");
+        print("토큰 값 ${responseDTO.data}");
         responseDTO.data = ParseUser.fromJson(responseDTO.data);
+        //서버측 데이터 확인
 
         if(responseDTO.status == 200){
           sessionUser.loginSuccess(responseDTO.data, responseDTO.token!);
@@ -81,7 +85,7 @@ class UserRepository {
 
       // 3. 토큰 받기
       final authorization = response.headers["authorization"];
-      print("토큰 ${authorization}");
+      Logger().d("토큰 ${authorization}");
 
       if(authorization != null){
         responseDTO.token = authorization.first;

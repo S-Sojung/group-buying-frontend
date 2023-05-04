@@ -3,11 +3,13 @@ import 'dart:ffi';
 
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/theme.dart';
-import 'package:donut/model/chatter_list/chatter_list.dart';
 import 'package:donut/model/board/board.dart';
+import 'package:donut/model/chatter_list/chatter_list.dart';
+import 'package:donut/model/board/mock_board.dart';
 import 'package:donut/model/event/event.dart';
 import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
+import 'package:donut/views/pages/board/home_page/board_home_page_view_model.dart';
 import 'package:donut/views/pages/board/home_page/component/board_home_list_page.dart';
 import 'package:donut/views/pages/board/map_page/board_map_page.dart';
 import 'package:donut/views/pages/chat/list_page/chat_list_page.dart';
@@ -18,14 +20,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class BoardHomePage extends StatefulWidget {
+class BoardHomePage extends ConsumerStatefulWidget {
   const BoardHomePage({Key? key}) : super(key: key);
 
   @override
-  State<BoardHomePage> createState() => _BoardHomePageState();
+  BoardHomePageState createState() => BoardHomePageState();
 }
 
-class _BoardHomePageState extends State<BoardHomePage> {
+class BoardHomePageState extends ConsumerState<BoardHomePage> {
+
   //상태변수
   final Completer<GoogleMapController> _mapController = Completer();
   bool isInitialized = false;
@@ -33,24 +36,12 @@ class _BoardHomePageState extends State<BoardHomePage> {
   int _selectedIndex = 0;
   LatLng currentLatLng = LatLng(37.33500926, -122.03272188);
   List<Marker> _markers = [];
+  List<Board> boardlist = [];
+
 
   @override
-  void initState() {
-    boards.forEach((element) {
-      Marker mark = Marker(
-        infoWindow: InfoWindow(
-            title: "${boards[0].title}",
-            snippet: "${events[0].price}원 ${events[0].qty}개 ${events[0].paymentType}",
-            onTap: () =>
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => BoardDetailPage(board: element)))
-        ),
-        markerId: MarkerId(boards[0].id.toString()),
-        position: LatLng(events[boards[0].eventId - 1].latitude,
-            events[boards[0].eventId - 1].longitude),
-      );
-      _markers.add(mark);
-    });
+  void initState () {
+    super.initState();
     _getCurrentLocation();
   }
 
@@ -62,6 +53,26 @@ class _BoardHomePageState extends State<BoardHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    BoardHomePageModel? model = ref.watch(boardHomePageProvider);
+    if (model != null) {
+      boardlist = model!.BHPRdto.boards;
+    }
+    boards.forEach((element) {
+      Marker mark = Marker(
+        infoWindow: InfoWindow(
+            title: "${boards[0].title}",
+            snippet: "${events[0].price}원 ${events[0].qty}개 ${events[0].paymentType}",
+            onTap: () =>
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => BoardDetailPage(board: boardlist[0])))
+        ),
+        markerId: MarkerId(boards[0].id.toString()),
+        position: LatLng(events[boards[0].eventId - 1].latitude,
+            events[boards[0].eventId - 1].longitude),
+      );
+      _markers.add(mark);
+    });
+
     return WillPopScope(
       onWillPop: ()async{
         await _onBackPressed(context);
@@ -91,14 +102,15 @@ class _BoardHomePageState extends State<BoardHomePage> {
         body: IndexedStack(
           index: _selectedIndex, //상태변수 세팅
           children: [
-            BoardHomeListPage(), //스크록
-            BoardMapPage(
-              markers: _markers,
-              mapController: _mapController,
-              isInitialized: isInitialized,
-              isPermission: isPermission,
-              currentLatLng: currentLatLng,
-            ),
+            BoardHomeListPage(boards: boardlist), //스크록
+            Container(child: Text("임시 페이지"),),
+            // BoardMapPage(
+            //   markers: _markers,
+            //   mapController: _mapController,
+            //   isInitialized: isInitialized,
+            //   isPermission: isPermission,
+            //   currentLatLng: currentLatLng,
+            // ),
             ChatListPage(chatterList: chatterLists[0]),// 스크롤
             UserDetailPage(user: users[0]), // priciparid
           ],

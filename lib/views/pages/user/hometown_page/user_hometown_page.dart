@@ -1,7 +1,7 @@
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
-import 'package:donut/model/my_location/my_location.dart';
+import 'package:donut/model/my_location/mock_my_location.dart';
 import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/pages/user/hometown_page/user_set_hometown_page.dart';

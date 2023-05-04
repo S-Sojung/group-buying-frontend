@@ -1,12 +1,13 @@
 
 import 'package:donut/model/board/board.dart';
+import 'package:donut/model/board/mock_board.dart';
 import 'package:donut/views/pages/board/detail_page/component/board_detail_body_content.dart';
 import 'package:donut/views/pages/board/detail_page/component/board_detail_bottom.dart';
 import 'package:donut/views/pages/board/detail_page/component/board_detail_header.dart';
 import 'package:flutter/material.dart';
 
 class BoardDetailBody extends StatelessWidget {
-  final MocBoard board;
+  final Board board;
 
   BoardDetailBody({required this.board, Key? key}) : super(key: key);
 
