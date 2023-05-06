@@ -22,7 +22,6 @@ class DoUser {
   String username;
   dynamic nickname;
   String email;
-  String? name; //추후 삭제
   dynamic profile;
   Rate rate;
   int? ratePoint; //
@@ -37,7 +36,6 @@ class DoUser {
     required this.username,
     this.nickname,
     required this.email,
-    this.name, //추후 삭제
     this.profile,
     required this.rate,
     this.ratePoint,
@@ -53,7 +51,6 @@ class DoUser {
     username: json["username"],
     nickname: json["nickname"],
     email: json["email"],
-    name: json["name"], //추후 삭제
     profile: json["profile"],
     rate: Rate.fromJson(json["rate"]),
     ratePoint: json["ratePoint"],
@@ -69,7 +66,6 @@ class DoUser {
     "username": username,
     "nickname": nickname,
     "email": email,
-    "name": name, //추후 삭제
     "profile": profile,
     "rate": rate.toJson(),
     "ratePoint": ratePoint,
