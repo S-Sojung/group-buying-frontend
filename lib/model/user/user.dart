@@ -22,14 +22,14 @@ class DoUser {
   String username;
   dynamic nickname;
   String email;
-  String name;
+  String? name; //추후 삭제
   dynamic profile;
   Rate rate;
-  int ratePoint;
-  String role;
+  int? ratePoint; //
+  String? role; //
   String? provider;
   String? providerId;
-  int statusCode;
+  int? statusCode; // default 로 들어와야한다.
   DateTime createdAt;
 
   DoUser({
@@ -37,14 +37,14 @@ class DoUser {
     required this.username,
     this.nickname,
     required this.email,
-    required this.name,
+    this.name, //추후 삭제
     this.profile,
     required this.rate,
-    required this.ratePoint,
-    required this.role,
+    this.ratePoint,
+    this.role,
     this.provider,
     this.providerId,
-    required this.statusCode,
+    this.statusCode,
     required this.createdAt,
   });
 
@@ -53,7 +53,7 @@ class DoUser {
     username: json["username"],
     nickname: json["nickname"],
     email: json["email"],
-    name: json["name"],
+    name: json["name"], //추후 삭제
     profile: json["profile"],
     rate: Rate.fromJson(json["rate"]),
     ratePoint: json["ratePoint"],
@@ -69,7 +69,7 @@ class DoUser {
     "username": username,
     "nickname": nickname,
     "email": email,
-    "name": name,
+    "name": name, //추후 삭제
     "profile": profile,
     "rate": rate.toJson(),
     "ratePoint": ratePoint,

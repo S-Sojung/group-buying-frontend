@@ -60,7 +60,8 @@ class UserRepository {
     try{
       Response response = await dio.post("/join", data: joinReqDTO.toJson());
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      responseDTO.data = DonutUser.fromJson(responseDTO.data);
+      responseDTO.data = ParseUser.fromJson(responseDTO.data);
+      print("데이터 확인 : ${responseDTO.data}");
       return responseDTO;
     }catch(e){
       //만약 서버에서 이걸 안주면 이렇게 임의로 만들어야 함.

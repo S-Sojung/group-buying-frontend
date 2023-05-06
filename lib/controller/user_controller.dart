@@ -19,10 +19,10 @@ class UserController{
   final Ref ref;
   UserController(this.ref);
 
-  Future<void> join(String username, String password, String email) async{
-    JoinReqDTO joinReqDTO = JoinReqDTO(username: username, password: password, email: email);
+  Future<void> join(String email, String password, String nickname) async{
+    JoinReqDTO joinReqDTO = JoinReqDTO(email: email, password: password, nickname: nickname);
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
-    if(responseDTO.status == 1){
+    if(responseDTO.status == 200){
       Navigator.pushNamed(mContext!, Move.loginPage);
     }else{
       final snackBar = SnackBar(content: Text("회원 가입 실패"));
@@ -50,7 +50,7 @@ class UserController{
   Future<void> logout() async{
     try {
       await ref.read(sessionProvider).logoutSuccess();
-      Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.afterSplashPage, (route) => false);
     }catch(e){
       final snackBar = SnackBar(content: Text("로그아웃 실패"));
       ScaffoldMessenger.of(mContext!).showSnackBar(snackBar);
