@@ -1,6 +1,7 @@
 
 import 'package:donut/controller/user_controller.dart';
 import 'package:donut/core/constants/theme.dart';
+import 'package:donut/provider/session_provider.dart';
 import 'package:donut/views/pages/user/account_page/user_account_page.dart';
 import 'package:donut/views/pages/user/boardlist_page/user_boardlist_page.dart';
 import 'package:donut/views/pages/user/category_page/user_category_page.dart';
@@ -19,10 +20,11 @@ class UserMyDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser sessionUser = ref.read(sessionProvider);
     return SingleChildScrollView(
       child: Column(
         children: [
-          UserHeader(),
+          UserHeader(user: sessionUser.user!.user),
           DonutTextButton(
               icon: Icons.favorite, text: "관심 게시글 목록", funRoute: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => UserWishlistPage()));

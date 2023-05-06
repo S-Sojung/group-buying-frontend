@@ -5,8 +5,9 @@ import 'package:donut/model/rate/rate.dart';
 import 'package:flutter/material.dart';
 
 class DonutRateBar extends StatelessWidget {
-  final MocRate rate;
-  const DonutRateBar(this.rate, {Key? key}) : super(key: key);
+  final Rate rate;
+  final ratePoint;
+  const DonutRateBar(this.rate, {required this.ratePoint, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class DonutRateBar extends StatelessWidget {
                 ),
               ),
               Container(
-                width: getScreenWidth(context)*0.9*(rate.ratePoint!*0.01),
+                width: getScreenWidth(context)*0.9*((ratePoint?? 10)!*0.01),
                 height: 5,
                 margin: EdgeInsets.all(2.5),
                 alignment: Alignment.centerLeft,
