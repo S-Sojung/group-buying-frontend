@@ -33,7 +33,7 @@ class UserRepository {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
         responseDTO.token = deviceJwt;
         // print("상태 변수 ${responseDTO.status}");
-        print("토큰 값 ${responseDTO.data}");
+        // print("토큰 값 ${responseDTO.data}");
         responseDTO.data = ParseUser.fromJson(responseDTO.data);
         //서버측 데이터 확인
 
@@ -85,7 +85,7 @@ class UserRepository {
 
       // 3. 토큰 받기
       final authorization = response.headers["authorization"];
-      Logger().d("토큰 ${authorization}");
+      // Logger().d("토큰 ${authorization}");
 
       if(authorization != null){
         responseDTO.token = authorization.first;
