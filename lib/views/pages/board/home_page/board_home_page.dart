@@ -8,6 +8,7 @@ import 'package:donut/model/chatter_list/chatter_list.dart';
 import 'package:donut/model/board/mock_board.dart';
 import 'package:donut/model/event/event.dart';
 import 'package:donut/model/user/donutuser.dart';
+import 'package:donut/provider/session_provider.dart';
 import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
 import 'package:donut/views/pages/board/home_page/board_home_page_view_model.dart';
 import 'package:donut/views/pages/board/home_page/component/board_home_list_page.dart';
@@ -53,6 +54,7 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SessionUser sessionUser = ref.read(sessionProvider);
     BoardHomePageModel? model = ref.watch(boardHomePageProvider);
     if (model != null) {
       boardlist = model!.BHPRdto.boards;
@@ -112,7 +114,7 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
             //   currentLatLng: currentLatLng,
             // ),
             ChatListPage(chatterList: chatterLists[0]),// 스크롤
-            UserDetailPage(user: users[0]), // priciparid
+            UserDetailPage(user: sessionUser.user!.user), // priciparid
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

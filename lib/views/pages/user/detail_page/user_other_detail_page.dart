@@ -1,4 +1,5 @@
 import 'package:donut/core/constants/theme.dart';
+import 'package:donut/model/user/user.dart';
 import 'package:donut/views/pages/user/boardlist_page/user_boardlist_page.dart';
 import 'package:donut/views/pages/user/detail_page/components/donut_text_button.dart';
 import 'package:donut/views/pages/user/detail_page/components/user_header.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 
 
 class UserOtherDetailPage extends StatelessWidget {
-  const UserOtherDetailPage({Key? key}) : super(key: key);
+  DoUser user;
+  UserOtherDetailPage({required this.user, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class UserOtherDetailPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          UserHeader(),
+          UserHeader(user: user),
           DonutTextButton(
               icon: Icons.shopping_basket_outlined, text: "판매 상품", funRoute: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => UserBoardlistPage())); //여기에 유저도 넣어야겠다.
