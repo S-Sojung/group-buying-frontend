@@ -8,7 +8,7 @@ import 'package:donut/model/my_location/my_location.dart';
 
 class BoardHomePageResponseDto {
   List<Category> myCategories;
-  MyLocation myLocation;
+  Location myLocation;
   List<Board> boards;
 
   BoardHomePageResponseDto({
@@ -19,7 +19,7 @@ class BoardHomePageResponseDto {
 
   factory BoardHomePageResponseDto.fromJson(Map<String, dynamic> json) => BoardHomePageResponseDto(
     myCategories: List<Category>.from(json["myCategories"].map((x) => Category.fromJson(x))),
-    myLocation: MyLocation.fromJson(json["myLocation"]),
+    myLocation: Location.fromJson(json["myLocation"]),
     boards: List<Board>.from(json["boards"].map((x) => Board.fromJson(x))),
   );
 
