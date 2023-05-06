@@ -1,22 +1,25 @@
+import 'package:donut/controller/user_controller.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/core/utils/validator_util.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class JoinForm extends StatefulWidget {
+class JoinForm extends ConsumerStatefulWidget {
 
   JoinForm({Key? key}) : super(key: key);
 
   @override
-  State<JoinForm> createState() => _JoinFormState();
+  _JoinFormState createState() => _JoinFormState();
 }
 
-class _JoinFormState extends State<JoinForm> {
+class _JoinFormState extends ConsumerState<JoinForm> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  final _passwordCheck = TextEditingController();
   final _nickname = TextEditingController();
 
   bool isLogin = false;
@@ -51,7 +54,7 @@ class _JoinFormState extends State<JoinForm> {
                     funValidator: validatePassword(),
                   ),
                   DonutTextFormField(
-                    controller: _password,
+                    controller: _passwordCheck,
                     title: "pwcheck",
                     hint: "password",
                     funValidator: validatePassword(),
@@ -64,7 +67,13 @@ class _JoinFormState extends State<JoinForm> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                    child: DonutButton(text: "회원 가입", funPageRoute: (){}),
+                    child: DonutButton(text: "회원 가입", funPageRoute: (){
+                      if(_password.text.trim() != _passwordCheck.text.trim()){
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("비밀번호가 다릅니다.")));
+                      }else{
+                      ref.read(userControllerProvider).join(_email.text.trim(), _password.text.trim(), _nickname.text.trim(),);
+                      }
+                    }),
                   ),
                 ],
               ),

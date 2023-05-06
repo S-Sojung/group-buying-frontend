@@ -1,4 +1,5 @@
 
+import 'package:donut/controller/user_controller.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/views/pages/user/account_page/user_account_page.dart';
 import 'package:donut/views/pages/user/boardlist_page/user_boardlist_page.dart';
@@ -10,13 +11,14 @@ import 'package:donut/views/pages/user/purchase_history_page/user_purchase_histo
 import 'package:donut/views/pages/user/reportlist_page/user_reportlist_page.dart';
 import 'package:donut/views/pages/user/wishlist_page/user_wishlist_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class UserMyDetailPage extends StatelessWidget {
+class UserMyDetailPage extends ConsumerWidget {
   const UserMyDetailPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -62,7 +64,7 @@ class UserMyDetailPage extends StatelessWidget {
               icon: Icons.summarize_outlined, text: "공지사항", funRoute: () {}),
           DonutTextButton(
               icon: Icons.logout, text: "로그아웃", funRoute: () {
-
+            ref.read(userControllerProvider).logout();
           }),
         ],
       ),
