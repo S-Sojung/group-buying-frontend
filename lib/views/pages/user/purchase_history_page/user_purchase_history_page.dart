@@ -22,16 +22,16 @@ class UserPurchaseHistoryPageState extends ConsumerState<UserPurchaseHistoryPage
 
   @override
   void initState() {
-    BoardHomePageModel? model = ref.watch(boardHomePageProvider);
-    if (model != null) {
-      boardlist = model.BHPRdto.boards;
-    }
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    BoardHomePageModel? model = ref.watch(boardHomePageProvider);
+    if (model != null) {
+      boardlist = model.BHPRdto.boards;
+    }
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
