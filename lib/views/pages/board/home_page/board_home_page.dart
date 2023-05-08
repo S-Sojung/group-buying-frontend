@@ -110,15 +110,14 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
         body: IndexedStack(
           index: _selectedIndex, //상태변수 세팅
           children: [
-            BoardHomeListPage(boards: boardlist), //스크록
-            Container(child: Text("임시 페이지"),),
-            // BoardMapPage(
-            //   markers: _markers,
-            //   mapController: _mapController,
-            //   isInitialized: isInitialized,
-            //   isPermission: isPermission,
-            //   currentLatLng: currentLatLng,
-            // ),
+            BoardHomeListPage(categories: categories,boards: boardlist), //스크록
+            BoardMapPage(
+              markers: _markers,
+              mapController: _mapController,
+              isInitialized: isInitialized,
+              isPermission: isPermission,
+              currentLatLng: currentLatLng,
+            ),
             ChatListPage(chatterList: chatterLists[0]),// 스크롤
             UserDetailPage(user: sessionUser.user!.user), // priciparid
           ],
