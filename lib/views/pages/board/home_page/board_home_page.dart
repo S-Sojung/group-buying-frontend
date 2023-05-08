@@ -4,9 +4,12 @@ import 'dart:ffi';
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/board/board.dart';
+import 'package:donut/model/category/category.dart';
 import 'package:donut/model/chatter_list/chatter_list.dart';
 import 'package:donut/model/board/mock_board.dart';
 import 'package:donut/model/event/event.dart';
+import 'package:donut/model/my_category/my_category.dart';
+import 'package:donut/model/my_location/my_location.dart';
 import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/provider/session_provider.dart';
 import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
@@ -38,7 +41,8 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
   LatLng currentLatLng = LatLng(37.33500926, -122.03272188);
   List<Marker> _markers = [];
   List<Board> boardlist = [];
-
+  List<Category> categories = [];
+  late Location mylocation;
 
   @override
   void initState () {
@@ -57,7 +61,9 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
     SessionUser sessionUser = ref.read(sessionProvider);
     BoardHomePageModel? model = ref.watch(boardHomePageProvider);
     if (model != null) {
-      boardlist = model!.BHPRdto.boards;
+      boardlist = model.BHPRdto.boards;
+      categories = model.BHPRdto.myCategories;
+      mylocation = model.BHPRdto.myLocation;
     }
     boards.forEach((element) {
       Marker mark = Marker(
@@ -92,7 +98,7 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
           elevation: 0,
           backgroundColor: Colors.white10,
           actionsIconTheme: IconThemeData(color: donutColorBase),
-          title: Text("부전동"),
+          title: Text("${mylocation.town}"),
           titleTextStyle: TextStyle(
               fontSize: 17, fontWeight: FontWeight.bold, color: donutColorBase),
           actions: [

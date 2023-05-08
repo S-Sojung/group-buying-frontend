@@ -1,32 +1,40 @@
+import 'package:donut/controller/location_controller.dart';
+import 'package:donut/controller/user_controller.dart';
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/core/utils/validator_util.dart';
 import 'package:donut/model/my_location/mock_my_location.dart';
+import 'package:donut/model/my_location/my_location.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_text_form_field.dart';
+import 'package:donut/views/pages/board/home_page/board_home_page_view_model.dart';
+import 'package:donut/views/pages/user/hometown_page/user_hometown_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
 
-class UserSetHometownPage extends StatefulWidget {
+class UserSetHometownPage extends ConsumerStatefulWidget {
   const UserSetHometownPage({Key? key}) : super(key: key);
 
   @override
-  State<UserSetHometownPage> createState() => _UserSetHometownPageState();
+  _UserSetHometownPageState createState() => _UserSetHometownPageState();
 }
 
-class _UserSetHometownPageState extends State<UserSetHometownPage> {
+class _UserSetHometownPageState extends ConsumerState<UserSetHometownPage> {
   TextEditingController _AddressController = TextEditingController();
 
-  @override
-  void initState() {
-    _AddressController.text="${myLocations[0].state} ${myLocations[0].city} ${myLocations[0].town}";
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+    UserHomeTownPageModel? model = ref.watch(userHomeTownPageProvider);
+    MyLocation? myLocation ;
+    if (model != null) {
+      myLocation = model.myLocation;
+      _AddressController.text="${myLocation!.state} ${myLocation.city} ${myLocation.town}";
+    }
+
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
@@ -51,7 +59,9 @@ class _UserSetHometownPageState extends State<UserSetHometownPage> {
             AddressText(),
             SizedBox(height: 20,),
             DonutButton(text: "설정 완료", funPageRoute: (){
-              //
+              List<String> myLocas = _AddressController.text.split(" ");
+              ref.read(locationControllerProvider).updateLocation(myLocas[0], myLocas[1], myLocas[2]);
+
             })
           ],
         ),
@@ -97,6 +107,7 @@ class _UserSetHometownPageState extends State<UserSetHometownPage> {
     );
     _AddressController.text =
     '${model.sido} ${model.sigungu} ${model.bname}';
+
     // print("테스트 ${model.sido}"); // state
     // print("테스트 ${model.sigungu}"); // city
     // print("테스트 ${model.bname}"); //town

@@ -19,7 +19,7 @@ class Rate {
   Map<String, dynamic> toJson() => {
     "id": id,
     "rateName": rateName,
-    "createdAt": createdAt.toIso8601String(),
+    "createdAt": createdAt,
   };
 }
 
