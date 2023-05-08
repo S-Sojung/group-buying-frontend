@@ -53,7 +53,7 @@ class BoardDetailBottom extends StatelessWidget {
             Container(
                 width: 200,
                 child:
-                    board.organizer == sessionUser.user!.user.id ?
+                    board.organizer.id == sessionUser.user!.user.id ?
                 // Organizer ID를 통해서 주최자인지 확인, 혹은 내가 참여한 게시글인지 확인
                     OrganizerButton():
                     PurchaserButton(board: board,)
