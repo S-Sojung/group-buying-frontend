@@ -44,8 +44,9 @@ class DonutRateBar extends StatelessWidget {
 }
 
 class DonutMinRateBar extends StatelessWidget {
-  final MocRate rate;
-  const DonutMinRateBar(this.rate, {Key? key}) : super(key: key);
+  final Rate rate;
+  final int ratePoint;
+  const DonutMinRateBar(this.rate, {required this.ratePoint, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class DonutMinRateBar extends StatelessWidget {
                 ),
               ),
               Container(
-                width: getScreenWidth(context)*0.9*(rate.ratePoint!*0.002),
+                width: getScreenWidth(context)*0.9*(ratePoint!*0.002),
                 height: 5,
                 margin: EdgeInsets.all(2.5),
                 alignment: Alignment.centerLeft,

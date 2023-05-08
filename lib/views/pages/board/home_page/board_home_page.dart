@@ -3,7 +3,7 @@ import 'dart:ffi';
 
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/theme.dart';
-import 'package:donut/dto/board_home_page_response_dto.dart';
+import 'package:donut/dto/board/board_home_page_response_dto.dart';
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/category/category.dart';
 import 'package:donut/model/chatter_list/chatter_list.dart';
@@ -71,18 +71,18 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
       categories = model.BHPRdto.myCategories;
       mylocation = model.BHPRdto.myLocation;
     }
-    boards.forEach((element) {
+    boardlist.forEach((element) {
       Marker mark = Marker(
         infoWindow: InfoWindow(
-            title: "${boards[0].title}",
-            snippet: "${events[0].price}원 ${events[0].qty}개 ${events[0].paymentType}",
+            title: "${element.title}",
+            snippet: "${element.price}원 ${element.qty}개 ${element.paymentType}",
             onTap: () =>
                 Navigator.push(context, MaterialPageRoute(
                     builder: (context) => BoardDetailPage(board: boardlist[0])))
         ),
-        markerId: MarkerId(boards[0].id.toString()),
-        position: LatLng(events[boards[0].eventId - 1].latitude,
-            events[boards[0].eventId - 1].longitude),
+        markerId: MarkerId(element.id.toString()),
+        position: LatLng(element.latitude,
+            element.longtitude),
       );
       _markers.add(mark);
     });

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:donut/core/constants/http.dart';
-import 'package:donut/dto/board_home_page_response_dto.dart';
+import 'package:donut/dto/board/board_detail.dart';
+import 'package:donut/dto/board/board_home_page_response_dto.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/model/board/board.dart';
 
@@ -36,9 +37,15 @@ class BoardRepository {
           options: Options(headers: {"Authorization": "$jwt"}));
 
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      responseDTO.data = Board.fromJson(responseDTO.data);
+
+      print("${responseDTO.data}");
+      responseDTO.data = BoardDetailDto.fromJson(responseDTO.data);
+
+      print("데이터~!~! ${responseDTO.data}");
+
       return responseDTO;
     } catch (e) {
+      print(e);
       return ResponseDTO(status: -1, msg: "실패 : ${e}");
     }
   }

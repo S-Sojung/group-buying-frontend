@@ -1,9 +1,11 @@
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
+import 'package:donut/dto/board/board_detail.dart';
 import 'package:donut/model/board/mock_board.dart';
 import 'package:donut/model/event/event.dart';
 import 'package:donut/model/participant/participant.dart';
+import 'package:donut/provider/session_provider.dart';
 import 'package:donut/views/components/donut_button.dart';
 import 'package:donut/views/components/donut_label_round_textbox.dart';
 import 'package:donut/views/pages/board/selete_participant_page/select_participant_page.dart';
@@ -11,8 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BoardDetailBottom extends StatelessWidget {
-
-  const BoardDetailBottom({Key? key}) : super(key: key);
+  BoardDetail board;
+  SessionUser sessionUser;
+  BoardDetailBottom({required this.board, required this.sessionUser, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +39,11 @@ class BoardDetailBottom extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      " 수량 : ${events[0].qty}",
+                      " 수량 : ${board.event.qty}",
                       style: bodyText(),
                     ),
                     Text(
-                      " 개당 ${events[0].price}원",
+                      " 개당 ${board.event.price}원",
                       style: bodyText(),
                     ),
                   ],
@@ -50,9 +53,10 @@ class BoardDetailBottom extends StatelessWidget {
             Container(
                 width: 200,
                 child:
+                    board.organizer == sessionUser.user!.user.id ?
                 // Organizer ID를 통해서 주최자인지 확인, 혹은 내가 참여한 게시글인지 확인
-                    OrganizerButton(),
-                //     PurchaserButton()
+                    OrganizerButton():
+                    PurchaserButton(board: board,)
                 //     ParticipantButton()
                 )
           ],
@@ -104,7 +108,9 @@ class OrganizerButton extends StatelessWidget {
 
 
 class PurchaserButton extends StatefulWidget {
-  const PurchaserButton({
+  BoardDetail board;
+  PurchaserButton({
+    required this.board,
     super.key,
   });
 
@@ -154,21 +160,21 @@ class _PurchaserButtonState extends State<PurchaserButton> {
                         child: Text("개설자가 정한 규칙이에요")),
                     DonutLabelRoundTextbox(
                       title: "결제 방식",
-                      content: events[0].paymentType,
+                      content: widget.board.event.paymentType,
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     DonutLabelRoundTextbox(
                       title: "위치",
-                      content: "${boards[0].city} ${boards[0].town}",
+                      content: "${widget.board.city} ${widget.board.town}",
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     DonutLabelRoundTextbox(
                       title: "시간",
-                      content: "${events[0].endAt}",
+                      content: "${widget.board.event.endAt}",
                     ),
                     SizedBox(
                       height: 10,
@@ -187,9 +193,9 @@ class _PurchaserButtonState extends State<PurchaserButton> {
                               value: _currentSliderValue,
                               // max: double.parse("${events[0].qty}"),
                               // divisions: events[0].qty,
-                              max: 20,
-                              min: 1,
-                              divisions: 20,
+                              max: double.parse("${widget.board.event.qty}"),
+                              min: 0,
+                              divisions: widget.board.event.qty,
                               label: _currentSliderValue.round().toString(),
                               onChanged: (double value) {
                                 state((){

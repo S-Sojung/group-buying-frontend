@@ -1,5 +1,5 @@
 
-import 'package:donut/dto/board_home_page_response_dto.dart';
+import 'package:donut/dto/board/board_home_page_response_dto.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/model/board/board_repository.dart';
 import 'package:donut/model/my_location/my_location.dart';
