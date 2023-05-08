@@ -17,7 +17,7 @@ class SelectAccountBody extends StatefulWidget {
 }
 
 class _SelectAccountBodyState extends State<SelectAccountBody> {
-  MyAccount myAccounts = MyAccount(id: 1, userId: 1, brand: "농협", accountNumber: "0000000000000", createdAt: DateTime.now());
+  MyAccount myAccounts = MyAccount(id: 1, userId: 1, brand: "농협", accountNumber: "0000000000000");
 
 
   @override
