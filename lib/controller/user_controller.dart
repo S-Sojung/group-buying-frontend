@@ -1,6 +1,7 @@
 import 'package:donut/core/constants/http.dart';
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/dto/auth_request.dart';
+import 'package:donut/dto/my_page/user_profile.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/main.dart';
 import 'package:donut/model/user/user_repository.dart';
@@ -56,4 +57,19 @@ class UserController{
       ScaffoldMessenger.of(mContext!).showSnackBar(snackBar);
     }
   }
+
+  Future<void> updateProfile(String password, String profile,String jwt) async{
+
+    UserProfileUpdateReq updateReq = UserProfileUpdateReq(password: password, profile: profile);
+    ResponseDTO responseDTO = await UserRepository().fetchUpdate(updateReq,jwt);
+
+    if(responseDTO.status == 200){
+      ref.read(sessionProvider).updateSuccess(profile, jwt);
+      Navigator.pop(mContext!);
+    }else{
+      final snackBar = SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}"));
+      ScaffoldMessenger.of(mContext!).showSnackBar(snackBar);
+    }
+  }
+
 }
