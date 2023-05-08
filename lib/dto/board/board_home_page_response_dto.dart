@@ -1,6 +1,3 @@
-
-import 'dart:convert';
-
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/category/category.dart';
 import 'package:donut/model/my_location/my_location.dart';

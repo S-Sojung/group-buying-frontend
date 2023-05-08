@@ -36,8 +36,8 @@ class BoardListTile extends StatelessWidget {
           child: Stack(
             alignment: Alignment(1.2, 1.3),
             children: [
-              Image.asset('assets/images/testimage.jpg', fit: BoxFit.fill),
-              DonutRectTag("모집중",code: "201"), // 상태에 따라서 이거 변화
+              Image(image: NetworkImage(board.img)),
+              // Image.asset('assets/images/testimage.jpg', fit: BoxFit.fill),
             ],
           ),
         ),

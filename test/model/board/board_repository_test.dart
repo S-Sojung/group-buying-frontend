@@ -1,9 +1,9 @@
-import 'package:donut/dto/board_home_page_response_dto.dart';
+import 'package:donut/dto/board/board_home_page_response_dto.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/model/board/board_repository.dart';
 
 void main() async {
-  await fetchPostList_test();
+  await fetchPost_test();
 }
 
 Future<void> fetchPostList_test() async {
@@ -25,4 +25,12 @@ Future<void> fetchPostList_test() async {
   print(dto.boards[0].endAt);
   print(dto.boards[0].recommend);
   print(dto.myCategories[0].name);
+}
+
+Future<void> fetchPost_test() async {
+  String jwt = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqd3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImV4cCI6MTY4MzU0MzgyN30.Pm5XdZ0tHbgAivASVTGlHsIIVjRm3VGiRzSN9JQb6xFjrJQiqxHKM6Hs122_EkUFoEDS_qUL_qL5DFXcqJPPqA";
+  ResponseDTO responseDTO =await BoardRepository().fetchPost(1,jwt);
+  print(responseDTO.status);
+  print(responseDTO.msg);
+  print(responseDTO.data);
 }
