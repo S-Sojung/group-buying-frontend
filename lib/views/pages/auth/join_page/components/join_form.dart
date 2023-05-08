@@ -66,7 +66,7 @@ class _JoinFormState extends ConsumerState<JoinForm> {
                     funValidator: validateNikename(),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    padding: const EdgeInsets.only(left: 50,right: 50,bottom: 5),
                     child: DonutButton(text: "회원 가입", funPageRoute: (){
                       if(_password.text.trim() != _passwordCheck.text.trim()){
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("비밀번호가 다릅니다.")));
@@ -79,7 +79,7 @@ class _JoinFormState extends ConsumerState<JoinForm> {
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 10,),
           InkWell(
               onTap: buttonLoginPressed,
               child: Image.asset("assets/images/btnG_완성형.png",height: 50,)

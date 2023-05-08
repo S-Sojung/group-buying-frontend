@@ -24,21 +24,8 @@ class AfterSplashPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 1,),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  SvgPicture.asset(
-                    "assets/images/donut.svg",
-                    height: 200,
-                    width: 200,
-                  ),
-                  Text(
-                    "도넛 마켓",
-                    style: donutTitle(),
-                  ),
-                ],
-              ),
+              SizedBox(height: 1,), 
+              Image.asset("assets/images/donutmarket_logo.png", width: getScreenWidth(context)*0.7,height: getScreenWidth(context)*0.7),
               Column(
                 children: [
                   DonutButton(text: "시작 하기", funPageRoute: (){

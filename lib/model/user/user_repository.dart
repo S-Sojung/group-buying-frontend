@@ -1,11 +1,11 @@
-import 'dart:math';
+
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:donut/core/constants/http.dart';
 import 'package:donut/dto/auth_request.dart';
 import 'package:donut/dto/my_page/user_profile.dart';
 import 'package:donut/dto/response_dto.dart';
-import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/model/user/user.dart';
 import 'package:donut/provider/session_provider.dart';
 import 'package:logger/logger.dart';
@@ -99,13 +99,25 @@ class UserRepository {
       UserProfileUpdateReq userProfile, String jwt) async {
     try {
       // 1. 통신 시작
-      Response response = await dio.put("/users/update",
-          options: Options(headers: {"Authorization": "$jwt"}),
-          data: userProfile.toJson());
+      // var formData = FormData.fromMap({
+      //   'profile': await MultipartFile.fromFile(userProfile.profile.path),
+      //   'password' : "${userProfile.password}"
+      // });
 
-      // 2. DTO 파싱
+      Response response = await dio.put(
+        "/users/update",
+        options: Options(
+          headers: {"Authorization": "$jwt"},
+          followRedirects: false,
+          validateStatus: (status) => true,
+        ),
+        data: userProfile.toJson()
+      );
+
       print("데이터 : ${response.data}");
+      // 2. DTO 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      print("데이터 : ${responseDTO.data}");
 
       responseDTO.data = UserProfileRes.fromJson(responseDTO.data);
       // print("데이터 : ${responseDTO.data}");

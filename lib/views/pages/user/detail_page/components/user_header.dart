@@ -28,7 +28,7 @@ class UserHeader extends StatelessWidget {
                   height: 70,
                   width: 70,
                 ):
-                Image(image: NetworkImage(user.profile)),
+                Image(image: NetworkImage(user.profile),height: 70,width: 70,),
                 SizedBox(width: 15,),
                 Text("${user.nickname}",style: headLine(),),
               ],
