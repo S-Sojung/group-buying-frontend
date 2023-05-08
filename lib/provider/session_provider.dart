@@ -30,4 +30,11 @@ class SessionUser {
 
     Logger().d("세션 종료 및 디바이스 JWT 삭제");
   }
+
+  Future<void> updateSuccess(String profile, String jwt) async{
+
+    this.user!.user.profile = profile;
+    this.jwt = jwt;
+    this.isLogin = true;
+  }
 }
