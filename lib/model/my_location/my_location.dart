@@ -20,30 +20,22 @@ class MyLocation {
   String state;
   String city;
   String town;
-  DoUser user;
-  DateTime createdAt;
 
   MyLocation({
     required this.state,
     required this.city,
-    required this.town,
-    required this.user,
-    required this.createdAt,
+    required this.town
   });
 
   factory MyLocation.fromJson(Map<String, dynamic> json) => MyLocation(
     state: json["state"],
     city: json["city"],
-    town: json["town"],
-    user: DoUser.fromJson(json["user"]),
-    createdAt: DateTime.parse(json["createdAt"]),
+    town: json["town"]
   );
 
   Map<String, dynamic> toJson() => {
     "state": state,
     "city": city,
-    "town": town,
-    "user": user.toJson(),
-    "createdAt": createdAt.toIso8601String(),
+    "town": town
   };
 }

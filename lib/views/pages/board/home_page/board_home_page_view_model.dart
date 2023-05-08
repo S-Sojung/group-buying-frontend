@@ -2,6 +2,7 @@
 import 'package:donut/dto/board_home_page_response_dto.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/model/board/board_repository.dart';
+import 'package:donut/model/my_location/my_location.dart';
 import 'package:donut/provider/session_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -54,5 +55,12 @@ class BoardHomePageViewModel extends StateNotifier<BoardHomePageModel?>{
   //   List<Post> newPosts = posts.map((e) => e.id == post.id ? post : e).toList();
   //   state = PostHomePageModel(posts: newPosts);
   // }
+
+  void notifyLocationUpdate(String jwt, String town) async {
+    ResponseDTO responseDTO = await BoardRepository().fetchPostList(jwt);
+    BoardHomePageResponseDto dto = responseDTO.data;
+    dto.myLocation = Location(town: town);
+    state = BoardHomePageModel(BHPRdto: dto);
+  }
 }
 

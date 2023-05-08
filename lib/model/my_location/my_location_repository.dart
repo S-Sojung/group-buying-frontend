@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:donut/core/constants/http.dart';
-import 'package:donut/dto/my_page/my_location.dart';
+import 'package:donut/dto/my_page/my_location_dto.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/model/my_location/my_location.dart';
 
@@ -15,15 +15,14 @@ class MyLocationRepository {
   MyLocationRepository._single();
 
   //목적 : 통신 + 파싱
-  Future<ResponseDTO> fetchPostList(String jwt) async {
+  Future<ResponseDTO> fetchMyLocation(String jwt) async {
     try {
       Response response = await dio.post("/myLocations/default",
           options: Options(headers: {"Authorization": "$jwt"}));
 
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-      MyLocation mylocation = MyLocation.fromJson(response.data);
-      responseDTO.data = mylocation;
+      responseDTO.data = MyLocationResDTO.fromJson(responseDTO.data);
       return responseDTO;
     } catch (e) {
       return ResponseDTO(status: -1, msg: "실패 : ${e}");
@@ -31,7 +30,7 @@ class MyLocationRepository {
   }
 
 
-  Future<ResponseDTO> fetchUpdate(int id,
+  Future<ResponseDTO> fetchLocationUpdate(
       MyLocationUpdateReqDTO myLocationUpdateReqDTO, String jwt) async {
     try {
       Response response = await dio.put(

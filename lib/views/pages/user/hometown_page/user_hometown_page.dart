@@ -2,16 +2,26 @@ import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/my_location/mock_my_location.dart';
+import 'package:donut/model/my_location/my_location.dart';
 import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/views/components/donut_button.dart';
+import 'package:donut/views/pages/user/hometown_page/user_hometown_page_view_model.dart';
 import 'package:donut/views/pages/user/hometown_page/user_set_hometown_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserHometownPage extends StatelessWidget {
+class UserHometownPage extends ConsumerWidget {
   const UserHometownPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    UserHomeTownPageModel? model = ref.watch(userHomeTownPageProvider);
+    MyLocation? myLocation ;
+    if (model != null) {
+      myLocation = model.myLocation;
+    }
+
+
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
@@ -40,7 +50,7 @@ class UserHometownPage extends StatelessWidget {
                 border: Border.all(color: donutColorBasic,width: 2),
                 borderRadius: BorderRadius.circular(10)
               ),
-              child: Align(alignment: Alignment.center,child: Text("${myLocations[0].state} ${myLocations[0].city} ${myLocations[0].town}",style: title2(),)),
+              child: Align(alignment: Alignment.center,child: Text("${myLocation!.state} ${myLocation.city} ${myLocation.town}",style: title2(),)),
             ),
             SizedBox(height: 50,),
             // DonutButton(text: "내 동네 인증하기", funPageRoute: (){
