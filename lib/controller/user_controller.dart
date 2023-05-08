@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:donut/core/constants/http.dart';
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/dto/auth_request.dart';
@@ -58,16 +61,18 @@ class UserController{
     }
   }
 
-  Future<void> updateProfile(String password, String profile,String jwt) async{
+  Future<void> updateProfile(String password, File profile,String jwt) async{
 
-    UserProfileUpdateReq updateReq = UserProfileUpdateReq(password: password, profile: profile);
+    String base64 = base64Encode(profile.readAsBytesSync());
+    UserProfileUpdateReq updateReq = UserProfileUpdateReq(password: password, profile: base64);
     ResponseDTO responseDTO = await UserRepository().fetchUpdate(updateReq,jwt);
 
     if(responseDTO.status == 200){
-      ref.read(sessionProvider).updateSuccess(profile, jwt);
+      UserProfileRes dto = responseDTO.data;
+      ref.read(sessionProvider).updateSuccess(dto.profile, jwt);
       Navigator.pop(mContext!);
     }else{
-      final snackBar = SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}"));
+      final snackBar = SnackBar(content: Text("프로필 업데이트 실패 : ${responseDTO.msg}"));
       ScaffoldMessenger.of(mContext!).showSnackBar(snackBar);
     }
   }

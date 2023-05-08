@@ -1,24 +1,24 @@
 
-
 class UserProfileUpdateReq {
   String password;
   String profile;
 
   UserProfileUpdateReq({
-    required this.password,
-    required this.profile,
+  required this.password,
+  required this.profile,
   });
 
   factory UserProfileUpdateReq.fromJson(Map<String, dynamic> json) => UserProfileUpdateReq(
-    password: json["password"],
-    profile: json["profile"],
+  password: json["password"],
+  profile: json["profile"],
   );
 
   Map<String, dynamic> toJson() => {
-    "password": password,
-    "profile": profile,
+  "password": password,
+  "profile": profile,
   };
 }
+
 
 
 class UserProfileRes {

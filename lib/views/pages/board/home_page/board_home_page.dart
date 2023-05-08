@@ -3,6 +3,7 @@ import 'dart:ffi';
 
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/theme.dart';
+import 'package:donut/dto/board_home_page_response_dto.dart';
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/category/category.dart';
 import 'package:donut/model/chatter_list/chatter_list.dart';
@@ -25,7 +26,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class BoardHomePage extends ConsumerStatefulWidget {
-  const BoardHomePage({Key? key}) : super(key: key);
+  // BoardHomePageResponseDto BHPRdto;
+  BoardHomePage({Key? key}) : super(key: key);
 
   @override
   BoardHomePageState createState() => BoardHomePageState();
@@ -42,7 +44,7 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
   List<Marker> _markers = [];
   List<Board> boardlist = [];
   List<Category> categories = [];
-  late Location mylocation;
+  Location mylocation = Location(town: "town");
 
   @override
   void initState () {
@@ -58,6 +60,10 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // boardlist = widget.BHPRdto.boards;
+    // categories = widget.BHPRdto.myCategories;
+    // mylocation = widget.BHPRdto.myLocation;
+
     SessionUser sessionUser = ref.read(sessionProvider);
     BoardHomePageModel? model = ref.watch(boardHomePageProvider);
     if (model != null) {

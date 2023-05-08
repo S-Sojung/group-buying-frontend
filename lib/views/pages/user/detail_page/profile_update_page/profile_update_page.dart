@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:donut/controller/user_controller.dart';
 import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/theme.dart';
@@ -27,6 +28,7 @@ class _ProfileUpdatePageState extends ConsumerState<ProfileUpdatePage> {
 
   Image? _image;
   final _picker = ImagePicker();
+  var imgFile ;
 
   Future<void> _setImage() async {
     var xfile = await _picker.pickImage(
@@ -36,6 +38,7 @@ class _ProfileUpdatePageState extends ConsumerState<ProfileUpdatePage> {
     if (xfile != null) {
       setState(() {
         _image = Image.file(File(xfile.path), fit: BoxFit.cover);
+        imgFile = File(xfile.path);
       });
     }
   }
@@ -77,10 +80,15 @@ class _ProfileUpdatePageState extends ConsumerState<ProfileUpdatePage> {
             ),
             Container(
               width: getScreenWidth(context)*0.9,
-              child: DonutButton(text: "프로필 수정 완료", funPageRoute: (){
-                ref.read(userControllerProvider).updateProfile(_passwordController.text, _image!.image.toString().split("\"")[1], sessionUser.jwt!);
+              child: DonutButton(text: "프로필 수정 완료", funPageRoute: () {
+                if(imgFile != null) {
+                  // print("${Image.file(File(imgPath!)).}");
+                  ref.read(userControllerProvider).updateProfile(
+                      _passwordController.text, imgFile, sessionUser.jwt!);
+                }
               }),
-            )
+            ),
+            // imgPath != null ? Image.file(File(imgPath!)) : Container()
           ],
         ),
       ),
