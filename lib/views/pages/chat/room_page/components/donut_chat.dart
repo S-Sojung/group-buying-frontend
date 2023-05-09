@@ -2,21 +2,28 @@ import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/user/donutuser.dart';
+import 'package:donut/model/user/user.dart';
+import 'package:donut/provider/session_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DonutChat extends StatelessWidget {
+class DonutChat extends ConsumerWidget {
   final message;
-  final DonutUser user;
-  const DonutChat({required this.message, required this.user, Key? key}) : super(key: key);
+  final DoUser user;
+
+  const DonutChat({required this.message, required this.user, Key? key})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser sessionUser = ref.read(sessionProvider);
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child:donutMyChat(message: message),
+      child: user.id == sessionUser.user!.user.id
+          ? donutMyChat(message: message)
+          : donutUserChat(user: user,message: message),
     );
   }
-
 }
 
 class donutUserChat extends StatelessWidget {
@@ -26,7 +33,7 @@ class donutUserChat extends StatelessWidget {
     required this.message,
   });
 
-  final DonutUser user;
+  final DoUser user;
   final String message;
 
   @override
@@ -38,9 +45,12 @@ class donutUserChat extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              child: Text("${user.profile}",style: caption1(),),
+              child: Image.asset("${user.profile}"),
+              backgroundColor: Colors.transparent,
+              // Text("${user.profile}", style: caption1(),),
             ),
-            Text("${user.name}",
+            Text(
+              "${user.nickname}",
               style: bodyText(),
             ),
           ],
@@ -49,7 +59,7 @@ class donutUserChat extends StatelessWidget {
         Container(
           constraints: BoxConstraints(
             minHeight: 60,
-            maxWidth: getScreenWidth(context)*0.5,
+            maxWidth: getScreenWidth(context) * 0.5,
           ),
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -61,7 +71,7 @@ class donutUserChat extends StatelessWidget {
             style: bodyText(),
           ),
         ),
-        const Text("10시10분"),
+        const Text("오전 8:21"),
       ],
     );
   }
@@ -81,11 +91,11 @@ class donutMyChat extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text("10시10분"),
+        Text("오전 8:23"),
         Container(
           constraints: BoxConstraints(
             minHeight: 60,
-            maxWidth: getScreenWidth(context)*0.5,
+            maxWidth: getScreenWidth(context) * 0.5,
           ),
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -97,7 +107,9 @@ class donutMyChat extends StatelessWidget {
             style: bodyText(),
           ),
         ),
-        const SizedBox(width: 10,)
+        const SizedBox(
+          width: 10,
+        )
       ],
     );
   }
