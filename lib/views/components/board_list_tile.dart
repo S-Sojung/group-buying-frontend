@@ -8,26 +8,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
-String image(int index) {
-  if (index % 2 == 1) {
-    return "assets/images/regular_heart.svg";
-  } else {
-    return "assets/images/heart_donut.svg";
-  }
-}
 
-class BoardListTile extends StatelessWidget {
+
+class BoardListTile extends StatefulWidget {
   final Board board;
 
   const BoardListTile(this.board);
 
   @override
+  State<BoardListTile> createState() => _BoardListTileState();
+}
+class _BoardListTileState extends State<BoardListTile> {
+  int like = 0;
+
+  @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: EdgeInsets.only(top: 20),
       child: ListTile(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => BoardDetailPage(board: board),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BoardDetailPage(board: widget.board),));
           // 게시글 클릭하면 게시글 상세보기 만들기
         },
         dense: false,
@@ -37,7 +38,7 @@ class BoardListTile extends StatelessWidget {
           child: Stack(
             alignment: Alignment(1.2, 1.3),
             children: [
-              Image(image: NetworkImage(board.img),height: 80,width: 80),
+              Image(image: NetworkImage(widget.board.img),height: 80,width: 80),
               // Image.asset('assets/images/testimage.jpg', fit: BoxFit.fill),
             ],
           ),
@@ -45,7 +46,7 @@ class BoardListTile extends StatelessWidget {
         title: Container(
           height: 45,
           child: Text(
-            "${board.title}",
+            "${widget.board.title}",
             style: headLine(),
             overflow: TextOverflow.clip,
             maxLines: 2,
@@ -55,10 +56,10 @@ class BoardListTile extends StatelessWidget {
           children: [
             Row(children: [
               Text(
-                "${board.price}원",
+                "${widget.board.price}원",
                 style: bodyText(),
               ),
-              DonutRoundTag("${board.paymentType}"),
+              DonutRoundTag("${widget.board.paymentType}"),
 
               //태그 리스트
             ]),
@@ -74,16 +75,16 @@ class BoardListTile extends StatelessWidget {
                       //   style: footnote(),
                       // ),
                       Text(
-                        "${board.qty} 개",
+                        "${widget.board.qty} 개",
                         style: footnote(mColor: Colors.black),
                       )
                     ]),
                     Text(
-                      "${board.state} ${board.city} ${board.town}",
+                      "${widget.board.state} ${widget.board.city} ${widget.board.town}",
                       style: footnote(),
                     ),
                     Text(
-                      "${DateFormat.Md().add_jm().format(board.endAt)}", // 시간
+                      "${DateFormat.Md().add_jm().format(widget.board.endAt)}", // 시간
                       style: footnote(),
                     ),
                   ],
@@ -93,9 +94,15 @@ class BoardListTile extends StatelessWidget {
                   // isSelected: ,
                   // iconSize: 0,
                   onPressed: () {
-
+                    setState(() {
+                      if(like==1){
+                        like = 0;
+                      }else{
+                        like = 1;
+                      }
+                    });
                   }, // 누를 시 SvgPicture 색 바뀜
-                  icon: SvgPicture.asset(image(1)), //내가 마음 했는지 봐야함
+                  icon: SvgPicture.asset(image(like)), //내가 마음 했는지 봐야함
                 )
               ],
             ),
@@ -103,5 +110,13 @@ class BoardListTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String image(int like) {
+    if (like == 0) {
+      return "assets/images/regular_heart.svg";
+    } else {
+      return "assets/images/heart_donut.svg";
+    }
   }
 }
