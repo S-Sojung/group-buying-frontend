@@ -16,7 +16,7 @@ class UserHometownPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserHomeTownPageModel? model = ref.watch(userHomeTownPageProvider);
-    MyLocation? myLocation ;
+    MyLocation? myLocation =MyLocation(state: "state", city: "city", town: "town");
     if (model != null) {
       myLocation = model.myLocation;
     }

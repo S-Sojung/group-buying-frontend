@@ -43,12 +43,12 @@ class BoardMapPage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            DonutTextFormFieldSlim(
-              hint: "지도를 클릭하면 주소가 나와요",
-              title: "거래 희망 장소",
-              funValidator: validateTitle(),
-              controller: _placeController,
-            ),
+            // DonutTextFormFieldSlim(
+            //   hint: "지도를 클릭하면 주소가 나와요",
+            //   title: "거래 희망 장소",
+            //   funValidator: validateTitle(),
+            //   controller: _placeController,
+            // ),
             Container(
               padding: EdgeInsets.all(20),
                 height: getScreenHeigth(context) * 0.7,

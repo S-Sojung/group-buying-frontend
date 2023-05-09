@@ -58,7 +58,8 @@ class BoardListTile extends StatelessWidget {
                 "${board.price}원",
                 style: bodyText(),
               ),
-              DonutRoundTag("${board.paymentType}")
+              DonutRoundTag("${board.paymentType}"),
+
               //태그 리스트
             ]),
             Row(
