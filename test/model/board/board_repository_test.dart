@@ -14,7 +14,7 @@ Future<void> fetchPostList_test() async {
   print(responseDTO.msg);
   BoardHomePageResponseDto dto = responseDTO.data;
 
-  print(dto.myLocation.town);
+  print(dto.myLocation!.town);
   print(dto.boards[0].id);
   print(dto.boards[0].title);
   print(dto.boards[0].city);

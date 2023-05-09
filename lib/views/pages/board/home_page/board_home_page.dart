@@ -1,17 +1,11 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/theme.dart';
-import 'package:donut/dto/board/board_home_page_response_dto.dart';
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/category/category.dart';
 import 'package:donut/model/chatter_list/chatter_list.dart';
-import 'package:donut/model/board/mock_board.dart';
-import 'package:donut/model/event/event.dart';
-import 'package:donut/model/my_category/my_category.dart';
 import 'package:donut/model/my_location/my_location.dart';
-import 'package:donut/model/user/donutuser.dart';
 import 'package:donut/provider/session_provider.dart';
 import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
 import 'package:donut/views/pages/board/home_page/board_home_page_view_model.dart';
@@ -19,6 +13,7 @@ import 'package:donut/views/pages/board/home_page/component/board_home_list_page
 import 'package:donut/views/pages/board/map_page/board_map_page.dart';
 import 'package:donut/views/pages/chat/list_page/chat_list_page.dart';
 import 'package:donut/views/pages/user/detail_page/user_detail_page.dart';
+import 'package:donut/views/pages/user/hometown_page/user_set_hometown_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -69,7 +64,7 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
     if (model != null) {
       boardlist = model.BHPRdto.boards;
       categories = model.BHPRdto.myCategories;
-      mylocation = model.BHPRdto.myLocation;
+      mylocation = model.BHPRdto.myLocation!;
     }
     boardlist.forEach((element) {
       Marker mark = Marker(

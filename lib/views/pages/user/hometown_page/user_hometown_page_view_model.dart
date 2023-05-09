@@ -28,11 +28,10 @@ class UserHomeTownPageModel{
 class UserHomeTownPageViewModel extends StateNotifier<UserHomeTownPageModel?>{
   UserHomeTownPageViewModel(super.state);
 
-  // void notifyInit(List<Post> newPosts){
   void notifyInit(String jwt) async{
     ResponseDTO responseDTO = await MyLocationRepository().fetchMyLocation(jwt);
     MyLocationResDTO dto = responseDTO.data;
-    MyLocation location = MyLocation(state: dto.state, city: dto.city, town: dto.town);
+    MyLocation location = MyLocation(state: dto.myLocation.state, city: dto.myLocation.city, town: dto.myLocation.town);
     state = UserHomeTownPageModel(myLocation: location);
   }
 

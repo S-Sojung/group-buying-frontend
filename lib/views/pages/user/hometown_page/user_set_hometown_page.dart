@@ -33,6 +33,8 @@ class _UserSetHometownPageState extends ConsumerState<UserSetHometownPage> {
     if (model != null) {
       myLocation = model.myLocation;
       _AddressController.text="${myLocation!.state} ${myLocation.city} ${myLocation.town}";
+    }else{
+      ref.read(locationControllerProvider).defaultLocation();
     }
 
     return Scaffold(
