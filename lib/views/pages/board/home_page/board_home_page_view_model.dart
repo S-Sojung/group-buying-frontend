@@ -1,6 +1,8 @@
 
+import 'package:donut/dto/board/board_detail.dart';
 import 'package:donut/dto/board/board_home_page_response_dto.dart';
 import 'package:donut/dto/response_dto.dart';
+import 'package:donut/model/board/board.dart';
 import 'package:donut/model/board/board_repository.dart';
 import 'package:donut/model/my_location/my_location.dart';
 import 'package:donut/provider/session_provider.dart';
@@ -37,11 +39,11 @@ class BoardHomePageViewModel extends StateNotifier<BoardHomePageModel?>{
   }
 
   //추가 : 창고가 List형태(컬렉션) 이 아니라면 필요없다.
-  // void notifyAdd(Post post){
-  //   List<Post> posts = state!.posts;
-  //   List<Post> newPosts = [...posts, post]; //정규연산자 사용해서 기존값 뒤에 넣어줌.
-  //   state = PostHomePageModel(posts: newPosts);
-  // }
+  void notifyAdd(Board board){
+    BoardHomePageResponseDto BHPRdto = state!.BHPRdto;
+    BHPRdto.boards = [... BHPRdto.boards, board];
+    state = BoardHomePageModel(BHPRdto: BHPRdto);
+  }
   // //삭제
   // void notifyRemove(int id){
   //   List<Post> posts = state!.posts;

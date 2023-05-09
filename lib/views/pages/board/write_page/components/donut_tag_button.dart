@@ -19,7 +19,7 @@ class DonutTagButton extends StatelessWidget {
           Container(
             width: getScreenWidth(context)*0.6,
             child: DonutTextFormFieldSlim(
-                title: "해시태그 입력하기", funValidator: validateTitle(),controller: tagController),
+                title: "해시태그 입력하기", funValidator: validateTag(),controller: tagController),
           ),
           Padding(
             padding: EdgeInsets.only(bottom: 5, right:getScreenWidth(context)*0.05 ),
