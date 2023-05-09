@@ -55,7 +55,7 @@ class BoardDetailBottom extends StatelessWidget {
                 child:
                     board.organizer.id == sessionUser.user!.user.id ?
                 // Organizer ID를 통해서 주최자인지 확인, 혹은 내가 참여한 게시글인지 확인
-                    OrganizerButton():
+                    OrganizerButton(board: board,):
                     PurchaserButton(board: board,)
                 //     ParticipantButton()
                 )
@@ -67,7 +67,9 @@ class BoardDetailBottom extends StatelessWidget {
 }
 
 class OrganizerButton extends StatelessWidget {
-  const OrganizerButton({
+  BoardDetail board;
+  OrganizerButton({
+    required this.board,
     super.key,
   });
 
@@ -93,7 +95,7 @@ class OrganizerButton extends StatelessWidget {
                         //예약자가 한 명이라고 있는데 마감하면 취소 알림보내줌
                       }),
                       DonutButton(text: "예약중으로 변경하기", funPageRoute: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SelectParticipantPage(),));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SelectParticipantPage(board: board),));
                       }),
                     ],
                   ),
