@@ -12,7 +12,7 @@ class BoardCategoryAppbar extends StatefulWidget {
 }
 
 class _BoardCategoryAppbarState extends State<BoardCategoryAppbar> {
-  int? value = 0;
+  int? value ;
 
   @override
   Widget build(BuildContext context) {
