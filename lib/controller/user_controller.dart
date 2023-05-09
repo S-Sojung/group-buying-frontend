@@ -64,6 +64,8 @@ class UserController{
   Future<void> updateProfile(String password, File profile,String jwt) async{
 
     String base64 = base64Encode(profile.readAsBytesSync());
+
+
     UserProfileUpdateReq updateReq = UserProfileUpdateReq(password: password, profile: base64);
     ResponseDTO responseDTO = await UserRepository().fetchUpdate(updateReq,jwt);
 

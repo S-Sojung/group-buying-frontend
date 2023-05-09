@@ -29,6 +29,7 @@ class _ProfileUpdatePageState extends ConsumerState<ProfileUpdatePage> {
   Image? _image;
   final _picker = ImagePicker();
   var imgFile ;
+  String? imgPath;
 
   Future<void> _setImage() async {
     var xfile = await _picker.pickImage(
@@ -39,6 +40,7 @@ class _ProfileUpdatePageState extends ConsumerState<ProfileUpdatePage> {
       setState(() {
         _image = Image.file(File(xfile.path), fit: BoxFit.cover);
         imgFile = File(xfile.path);
+        imgPath = xfile.path;
       });
     }
   }
@@ -82,7 +84,8 @@ class _ProfileUpdatePageState extends ConsumerState<ProfileUpdatePage> {
               width: getScreenWidth(context)*0.9,
               child: DonutButton(text: "프로필 수정 완료", funPageRoute: () {
                 if(imgFile != null) {
-                  // print("${Image.file(File(imgPath!)).}");
+                  print(imgFile);
+                  print("${imgPath}");
                   ref.read(userControllerProvider).updateProfile(
                       _passwordController.text, imgFile, sessionUser.jwt!);
                 }
