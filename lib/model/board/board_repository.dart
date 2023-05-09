@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:donut/core/constants/http.dart';
 import 'package:donut/dto/board/board_detail.dart';
 import 'package:donut/dto/board/board_home_page_response_dto.dart';
+import 'package:donut/dto/board/mypage_board.dart';
 import 'package:donut/dto/board/save_board_req.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/model/board/board.dart';
@@ -14,6 +15,24 @@ class BoardRepository {
   }
 
   BoardRepository._single();
+
+
+  Future<ResponseDTO> fetchMyPostList(String jwt) async {
+    try {
+      Response response = await dio.get("/myPages/boards",
+          options: Options(headers: {"Authorization": "$jwt"}));
+
+      print("11111${response.data}");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      print("22222");
+      responseDTO.data = MyPageBoard.fromJson(responseDTO.data);
+      print("33333");
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(status: -1, msg: "실패 : ${e}");
+    }
+  }
 
   Future<ResponseDTO> fetchPostList(String jwt) async {
     //여기서 ref 접근 못하게 jwt를 매개변수로 받게끔 해줌
@@ -94,6 +113,7 @@ class BoardRepository {
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       print("데이터!!!! ${responseDTO.data}");
       responseDTO.data = BoardDetailDto.fromJson(responseDTO.data);
+
       return responseDTO;
     } catch (e) {
       print(e);

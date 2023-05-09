@@ -10,6 +10,7 @@ import 'package:donut/model/board/board.dart';
 import 'package:donut/model/board/board_repository.dart';
 import 'package:donut/provider/session_provider.dart';
 import 'package:donut/views/pages/board/home_page/board_home_page_view_model.dart';
+import 'package:donut/views/pages/user/boardlist_page/user_boardlist_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -52,6 +53,7 @@ class BoardController {
   //   Navigator.pop(mContext!);
   // }
   //
+
   Future<void> savePost(File? img,
       int categoryId, String title, String content,
       String state, String city, String town, double latitude,
@@ -95,6 +97,7 @@ class BoardController {
     );
 
     ref.read(boardHomePageProvider.notifier).notifyAdd(board);
+    ref.read(userBoardlistPageProvider.notifier).notifyMyBoardUpdate(sessionUser.jwt!);
     Navigator.pushNamedAndRemoveUntil(mContext!, Move.boardHomePage, (route) => false);
   }
 

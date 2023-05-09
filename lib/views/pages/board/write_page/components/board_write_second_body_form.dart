@@ -235,15 +235,15 @@ class _BoardDonutWriteSecondBodyFormState
                           time = time.replaceAll("분", "");
                           // print('$date $time');
                           DateTime tm = DateTime.parse('$date $time');
-
+                          print(_placeController.text.split(" ").length);
                           ref.read(boardControllerProvider).savePost(
                               widget.imgFile,
                               widget.category,
                               widget.title,
                               _contentController.text,
                               _placeController.text.split(" ")[1],
-                              _placeController.text.split(" ")[2],
-                              _placeController.text.split(" ")[3],
+                              _placeController.text.split(" ").length >2 ? _placeController.text.split(" ")[2]: " 구",
+                              _placeController.text.split(" ").length >3 ? _placeController.text.split(" ")[3]: " 동",
                               _marker!.position.latitude,
                               _marker!.position.longitude,
                               widget.qty,
