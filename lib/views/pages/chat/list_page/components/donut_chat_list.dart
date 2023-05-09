@@ -44,7 +44,7 @@ class DonutChatList extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      Text("인원수3명"),
+                      // Text("인원수3명"),
                     ],
                   ),
                   subtitle: Text(chatterList.content),
