@@ -21,13 +21,14 @@ List<MockCategory> mockCategories = [
 
 List<String> category_eng = [
   "household_appliances",
-  "baby_goods",
-  "food",
   "sports",
   "goods",
+  "baby_goods",
   "clothing",
+  "food",
   "beauty",
   "animal",
   "plants",
+  "pencil",
   "ticket"
 ];
