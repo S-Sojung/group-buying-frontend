@@ -43,7 +43,8 @@ class UserController{
     if(responseDTO.status == 200){
       await secureStorage.write(key: "jwt", value: responseDTO.token);
       ref.read (sessionProvider).loginSuccess(responseDTO.data, responseDTO.token!);
-      Navigator.popAndPushNamed(mContext!, Move.boardHomePage);
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.boardHomePage, (route) => false);
+      // Navigator.popAndPushNamed(mContext!, Move.boardHomePage);
 
     }else{
       final snackBar = SnackBar(content: Text("로그인 실패 : ${responseDTO.msg}"));
