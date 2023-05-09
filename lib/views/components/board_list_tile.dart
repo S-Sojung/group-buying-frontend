@@ -6,6 +6,7 @@ import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 String image(int index) {
   if (index % 2 == 1) {
@@ -81,7 +82,7 @@ class BoardListTile extends StatelessWidget {
                       style: footnote(),
                     ),
                     Text(
-                      "${board.endAt}", // 시간
+                      "${DateFormat.Md().add_jm().format(board.endAt)}", // 시간
                       style: footnote(),
                     ),
                   ],
@@ -90,7 +91,9 @@ class BoardListTile extends StatelessWidget {
                 IconButton(
                   // isSelected: ,
                   // iconSize: 0,
-                  onPressed: () {}, // 누를 시 SvgPicture 색 바뀜
+                  onPressed: () {
+
+                  }, // 누를 시 SvgPicture 색 바뀜
                   icon: SvgPicture.asset(image(1)), //내가 마음 했는지 봐야함
                 )
               ],

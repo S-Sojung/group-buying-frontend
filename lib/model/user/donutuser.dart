@@ -46,7 +46,7 @@ class DonutUser {
         type = json["type"],
         role = json["role"],
         statusCode = json["statusCode"],
-        created = DateFormat("yyyy-mm-dd").parse(json["created"]);
+        created = DateTime.parse(json["created"]);
 }
 
 List<DonutUser> users = [

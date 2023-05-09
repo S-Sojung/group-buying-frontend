@@ -29,10 +29,10 @@ class Event {
     longtitude: json["longtitude"]!.toDouble(),
     qty: json["qty"],
     paymentType: json["paymentType"],
-    startAt: DateFormat("yyyy-mm-dd").parse(json["created"]),
-    endAt: DateFormat("yyyy-mm-dd").parse(json["created"]),
+    startAt: DateTime.parse(json["created"]),
+    endAt: DateTime.parse(json["created"]),
     price: json["price"],
-    createdAt: DateFormat("yyyy-mm-dd").parse(json["created"]),
+    createdAt: DateTime.parse(json["created"]),
   );
 
   Map<String, dynamic> toJson() => {

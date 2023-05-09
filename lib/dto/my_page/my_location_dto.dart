@@ -39,7 +39,7 @@ class MyLocationResDTO {
     city: json["city"],
     town: json["town"],
     user: DoUser.fromJson(json["user"]),
-    createdAt: DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
+    createdAt: DateTime.parse(json["createdAt"]),
   );
 
   Map<String, dynamic> toJson() => {

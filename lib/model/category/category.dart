@@ -30,7 +30,7 @@ class CategoryData {
   factory CategoryData.fromJson(Map<String, dynamic> json) => CategoryData(
     id: json["id"],
     name: json["name"],
-    createdAt: DateFormat("yyyy-mm-dd").parse(json["created"]),
+    createdAt: DateTime.parse(json["created"]),
   );
 
   Map<String, dynamic> toJson() => {

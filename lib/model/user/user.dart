@@ -58,7 +58,7 @@ class DoUser {
     provider: json["provider"],
     providerId: json["providerId"],
     statusCode: json["statusCode"],
-    createdAt: DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
+    createdAt: DateTime.parse(json["createdAt"]),
   );
 
   Map<String, dynamic> toJson() => {

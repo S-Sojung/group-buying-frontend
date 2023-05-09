@@ -48,7 +48,8 @@ class Board {
         longtitude: json["longtitude"]?.toDouble(),
         paymentType: json["paymentType"],
         recommend: json["recommend"],
-        endAt: DateFormat("yyyy-mm-dd").parse(json["endAt"]),
+        //${DateFormat.yMd().add_jm().format(board.event.endAt)
+        endAt: DateTime.parse(json["endAt"]),
       );
 
   Map<String, dynamic> toJson() => {
