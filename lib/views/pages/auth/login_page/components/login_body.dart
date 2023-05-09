@@ -12,11 +12,10 @@ class LoginBody extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: getScreenWidth(context) * 0.05),
+            EdgeInsets.symmetric(horizontal: getScreenWidth(context) * 0.05,vertical: getScreenHeigth(context)*0.01),
         child: ListView(
           children: [
             Container(
-              height: getScreenHeigth(context)*0.9,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
