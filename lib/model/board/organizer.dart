@@ -43,7 +43,7 @@ class Organizer {
     provider: json["provider"],
     providerId: json["providerId"],
     statusCode: json["statusCode"],
-    createdAt: DateFormat("yyyy-mm-dd").parse(json["created"]),
+    createdAt: DateTime.parse(json["created"]),
   );
 
   Map<String, dynamic> toJson() => {

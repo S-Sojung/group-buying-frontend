@@ -2,11 +2,9 @@ import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/style.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/dto/board/board_detail.dart';
-import 'package:donut/model/board/board.dart';
-import 'package:donut/model/board/mock_board.dart';
-import 'package:donut/model/event/event.dart';
 import 'package:donut/views/components/donut_round_tag.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BoardDetailBodyContent extends StatelessWidget {
   final BoardDetail board;
@@ -51,8 +49,8 @@ class BoardDetailBodyContent extends StatelessWidget {
                     Text(
                       "${board.city}  ${board.town}",
                       style: caption1(mColor: donutGray200),
-                    ),
-                    Text("마감일자 ${events[0].endAt}",
+                    ),//${DateFormat.Md().add_jm().format(board.endAt)}
+                    Text("마감일자 ${DateFormat.Md().add_jm().format(board.event.endAt)} ",
                         style: caption1(mColor: donutGray200))
                   ],
                 )
