@@ -213,8 +213,8 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             3. 서버승인을 하고자 하실 때 (클라이언트 승인 X)
             return false; 후에 서버에서 결제승인 수행
          */
-        checkQtyFromServer(data);
-        return false;
+        // checkQtyFromServer(data);
+        return true;
       },
       onDone: (String data) {
         print('------- onDone: $data');
