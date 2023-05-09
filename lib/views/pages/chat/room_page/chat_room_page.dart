@@ -172,11 +172,11 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     }
 
     // extra.cardQuota = '3';
-    extra.openType = 'popup';
+    // extra.openType = 'popup';
     payload.user = user;
     payload.items = itemList;
     payload.extra = extra;
-    // payload.extra?.openType = "iframe";
+    payload.extra?.openType = "popup";
   }
 
 
@@ -213,8 +213,8 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             3. 서버승인을 하고자 하실 때 (클라이언트 승인 X)
             return false; 후에 서버에서 결제승인 수행
          */
-        // checkQtyFromServer(data);
-        return true;
+        checkQtyFromServer(data);
+        return false;
       },
       onDone: (String data) {
         print('------- onDone: $data');
@@ -222,12 +222,19 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     );
   }
 
+  bool checkQtyFromServer(var data){
+    bool check = true;
+    print("결제 확인 받는 중 .... : ${data}");
+    return check;
+  }
+
   Payload getPayload() {
     Item item = Item();
     item.name = "${boards[0].title}"; // 주문정보에 담길 상품명
     item.qty = events[0].qty ;// 해당 상품의 주문 수량
     item.id = "${boards[0].id}"; // 해당 상품의 고유 키
-    item.price = events[0].price.toDouble() ; // 상품의 가격
+    item.price = 100 ; // 상품의 가격
+    // item.price = events[0].price.toDouble() ; // 상품의 가격
     List<Item> itemList = [item];
 
     payload.webApplicationId = webApplicationId; // web application id
@@ -273,11 +280,11 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     }
 
     // extra.cardQuota = '3';
-    extra.openType = 'popup';
+    // extra.openType = 'popup';
     payload.user = user;
     payload.items = itemList;
     payload.extra = extra;
-    // payload.extra?.openType = "iframe";
+    payload.extra?.openType = "popup";
     return payload;
   }
 }

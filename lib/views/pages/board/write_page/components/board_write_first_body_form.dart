@@ -36,14 +36,14 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
   final _tagController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  List<String> cate = categorys.map((e) => e.name).toList();
-  var setDropdownItem = categorys[0].name;
+  List<String> cate = mockCategories.map((e) => e.name).toList();
+  var setDropdownItem = mockCategories[0].name;
 
   List<String> tags = [""];
   int onePrice = 0;
   int myPrice = 0;
   Image? _image;
-
+  File? imgFile;
   final _picker = ImagePicker();
 
   Future<void> _setImage() async {
@@ -55,6 +55,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
     if (xfile != null) {
       setState(() {
         _image = Image.file(File(xfile.path), fit: BoxFit.cover);
+        imgFile = File(xfile.path);
         // dynamic sendData = xfile.path;
         // var formData = FormData.fromMap({'images': await MultipartFile.fromFile(sendData)});
       });
@@ -63,7 +64,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
 
   @override
   Widget build(BuildContext context) {
-    _tagController.text = "#";
+    _tagController.text = "";
 
     return Form(
       key: _formKey,
@@ -191,7 +192,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                         return null;
                       } else {
                         tags.add(_tagController.text);
-                        _tagController.text = "#";
+                        _tagController.text = "";
                       }
                     });
                   }),
@@ -229,26 +230,28 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                 child: DonutButton(
                     text: "장소와 시간 설정하기",
                     funPageRoute: () {
-                      if (_titleController.text.isEmpty ||
-                          onePrice == 0 ||
-                          myPrice == 0) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("빈칸이 없는지 확인해주세요")));
-                      } else {
-                        if(_image==null){
-                          _image = Image.asset("assets/images/categories/${searchCategory(setDropdownItem)}.jpg");
+                      if (_formKey.currentState!.validate()) {
+                        if (_titleController.text.isEmpty ||
+                            onePrice == 0 ||
+                            myPrice == 0) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("빈칸이 없는지 확인해주세요")));
+                        } else {
+                          print("사진 : ${_image}");
+                          print("제목 : ${_titleController.text}");
+                          print("카테고리 : ${setDropdownItem}");
+                          print("총 금액 : ${_priceController.text}");
+                          print("총 수량 : ${_countController.text}");
+                          print("내가 구매할 수량 : ${_myCountController.text}");
+                          print("개당 수량 : ${onePrice}");
+                          int qty = int.parse(_countController.text) - int.parse(_myCountController.text);
+                          print("상대방이 선택가능한 수량 : ${qty}");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BoardWriteSecondPage(imgFile: imgFile,title: _titleController.text,category: setDropdownItem,onePrice: onePrice,qty: qty,tags: tags ),
+                              ));
                         }
-                        print("사진 : ${_image}");
-                        print("제목 : ${_titleController.text}");
-                        print("카테고리 : ${setDropdownItem}");
-                        print("총 금액 : ${_priceController.text}");
-                        print("총 수량 : ${_countController.text}");
-                        print("내가 구매할 수량 : ${_myCountController.text}");
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BoardWriteSecondPage(),
-                            ));
                       }
                     }),
               ),
@@ -257,15 +260,6 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
         ),
       ),
     );
-  }
-  String searchCategory(setDropdownItem){
-    String itme = "";
-    categorys.forEach((element) {
-      if(element == setDropdownItem){
-        itme = category_eng[element.id-1];
-      }
-    });
-    return itme;
   }
 }
 

@@ -14,7 +14,7 @@ class UserCategoryPage extends StatefulWidget {
 }
 
 class _UserCategoryPageState extends State<UserCategoryPage> {
-  List<MockCategory> notMyCategorylist = categorys.where((e) {
+  List<MockCategory> notMyCategorylist = mockCategories.where((e) {
     bool tri=false;
     myCategorys.forEach((element) {
       if(e.id == element.categoryId)
@@ -47,7 +47,7 @@ class _UserCategoryPageState extends State<UserCategoryPage> {
                     ? _donutCategoryButton(index)
                     : Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: myCategorys.length < categorys.length ? _donutAddCategoryButton(context)
+                        child: myCategorys.length < mockCategories.length ? _donutAddCategoryButton(context)
                             : Container(),
                       );
               },
@@ -62,7 +62,7 @@ class _UserCategoryPageState extends State<UserCategoryPage> {
     return InkWell(
                       onLongPress: () {
                         setState(() {
-                          notMyCategorylist.add(categorys[myCategorys[index].categoryId-1]);
+                          notMyCategorylist.add(mockCategories[myCategorys[index].categoryId-1]);
                           myCategorys.removeAt(index);
                         });
                       },
@@ -82,7 +82,7 @@ class _UserCategoryPageState extends State<UserCategoryPage> {
                                 Image.asset(
                                     "assets/categories/${category_eng[myCategorys[index].categoryId - 1]}.jpg"),
                                 Text(
-                                  "${categorys[myCategorys[index].categoryId - 1].name}",
+                                  "${mockCategories[myCategorys[index].categoryId - 1].name}",
                                 ),
                               ],
                             ),

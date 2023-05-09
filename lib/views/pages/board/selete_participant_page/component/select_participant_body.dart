@@ -85,12 +85,14 @@ class _SelectParticipantBodyState extends State<SelectParticipantBody> {
               ),
             ),
             //앱결제인지 직거래인지에 따라서 변경
-            //
+            SizedBox(height: 20),
+            widget.board.event.paymentType == "직거래" ?
+            DonutButton(text: "예약중으로 변경하고 채팅하기", funPageRoute: (){
+
+            }):
             DonutButton(text: "계좌 확인하기", funPageRoute: (){
               Navigator.push(context,MaterialPageRoute(builder: (context) => SelectAccountPage(board: widget.board),));
             } ),
-            DonutButton(text: "예약중으로 변경하고 채팅하기", funPageRoute: (){}),
-            
           ],
         ),
       ),

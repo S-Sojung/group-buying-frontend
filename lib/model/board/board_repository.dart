@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:donut/core/constants/http.dart';
 import 'package:donut/dto/board/board_detail.dart';
 import 'package:donut/dto/board/board_home_page_response_dto.dart';
+import 'package:donut/dto/board/save_board_req.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/model/board/board.dart';
 
@@ -81,20 +82,22 @@ class BoardRepository {
   //   }
   // }
 
-  // Future<ResponseDTO> fetchSave(
-  //     PostSaveReqDTO postSaveReqDTO, String jwt) async {
-  //   try {
-  //     Response response = await dio.post(
-  //       "/post",
-  //       options: Options(headers: {"Authorization": "$jwt"}),
-  //       data: postSaveReqDTO.toJson(),
-  //     );
-  //
-  //     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-  //     responseDTO.data = Post.fromJson(responseDTO.data);
-  //     return responseDTO;
-  //   } catch (e) {
-  //     return ResponseDTO(code: -1, msg: "실패 : ${e}");
-  //   }
-  // }
+  Future<ResponseDTO> fetchSave(
+      BoardSaveReq boardSaveReq, String jwt) async {
+    try {
+      Response response = await dio.post(
+        "/boards",
+        options: Options(headers: {"Authorization": "$jwt"}),
+        data: boardSaveReq.toJson(),
+      );
+
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      print("데이터!!!! ${responseDTO.data}");
+      responseDTO.data = BoardDetailDto.fromJson(responseDTO.data);
+      return responseDTO;
+    } catch (e) {
+      print(e);
+      return ResponseDTO(status: -1, msg: "실패 : ${e}");
+    }
+  }
 }

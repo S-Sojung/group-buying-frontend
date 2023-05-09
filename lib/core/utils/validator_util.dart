@@ -59,6 +59,19 @@ Function validateTitle() {
   };
 }
 
+Function validateTag() {
+  return (String? value) {
+    if (value!.isEmpty) {
+      return null;
+    } else if (value.length > 10) {
+      return "태그의 길이를 초과하였습니다.";
+    } else {
+      return null;
+    }
+  };
+}
+
+
 Function validateContent() {
   return (String? value) {
     if (value!.isEmpty) {
@@ -85,8 +98,8 @@ Function validateNikename() {
 
 Function validateCount() {
   return (String? value) {
-    if (value!.isNotEmpty) {
-      return "";
+    if (value!.isEmpty) {
+      return "수량을 입력해주세요";
     } else if (int.parse(value) > 100) {
       return "최대 수량은 100개 입니다.";
     } else {
@@ -96,8 +109,8 @@ Function validateCount() {
 }
 Function validateAccount() {
   return (String? value) {
-    if (value!.isNotEmpty) {
-      return "";
+    if (value!.isEmpty) {
+      return "공백이 들어갈 수 없습니다.";
     } else if (value.length <= 10) {
       return "최소 10자리";
     } else if (value.length >= 14) {
@@ -110,8 +123,8 @@ Function validateAccount() {
 
 Function validPrice() {
   return (String? value) {
-    if (value!.isNotEmpty) {
-      return "";
+    if (value!.isEmpty) {
+      return "작성해주세요";
     } else {
       return null;
     }
