@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class BoardWriteSecondPage extends StatelessWidget {
   File? imgFile;
   String title;
-  String category;
+  int category;
   int onePrice;
   int qty;
   List<String> tags;

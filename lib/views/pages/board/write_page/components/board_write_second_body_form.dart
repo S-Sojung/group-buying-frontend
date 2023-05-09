@@ -23,7 +23,7 @@ import 'package:intl/intl.dart';
 class BoardDonutWriteSecondBodyForm extends ConsumerStatefulWidget {
   File? imgFile;
   String title;
-  String category;
+  int category;
   int onePrice;
   int qty;
   List<String> tags;
@@ -224,12 +224,7 @@ class _BoardDonutWriteSecondBodyFormState
                       text: "모집 글 쓰기 완료",
                       funPageRoute: () {
                         //글쓰기 완료
-                        int categoryId = 1;
-                        mockCategories.forEach((element) {
-                          if (element.name == widget.category) {
-                            categoryId = element.id;
-                          }
-                        });
+
                         String paymentType = isDirect ? "직거래" : "앱결제";
                         if (_formKey.currentState!.validate()) {
 
@@ -243,7 +238,7 @@ class _BoardDonutWriteSecondBodyFormState
 
                           ref.read(boardControllerProvider).savePost(
                               widget.imgFile,
-                              categoryId,
+                              widget.category,
                               widget.title,
                               _contentController.text,
                               _placeController.text.split(" ")[1],

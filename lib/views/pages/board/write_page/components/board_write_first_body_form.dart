@@ -94,6 +94,10 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                           : _image as Image,
                     )),
               ),
+              Text(
+                "사진을 선택하지 않으면 카테고리에 맞춰서 기본 사진이 등록됩니다.",
+                style: caption1(mColor: donutColor2),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -237,6 +241,12 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text("빈칸이 없는지 확인해주세요")));
                         } else {
+                          int categoryId = 1;
+                          mockCategories.forEach((element) {
+                            if (element.name == setDropdownItem) {
+                              categoryId = element.id;
+                            }
+                          });
                           print("사진 : ${_image}");
                           print("제목 : ${_titleController.text}");
                           print("카테고리 : ${setDropdownItem}");
@@ -249,7 +259,7 @@ class _BoardWriteFirstBodyFormState extends State<BoardWriteFirstBodyForm> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => BoardWriteSecondPage(imgFile: imgFile,title: _titleController.text,category: setDropdownItem,onePrice: onePrice,qty: qty,tags: tags ),
+                                builder: (context) => BoardWriteSecondPage(imgFile: imgFile,title: _titleController.text,category: categoryId,onePrice: onePrice,qty: qty,tags: tags ),
                               ));
                         }
                       }

@@ -37,7 +37,7 @@ class BoardListTile extends StatelessWidget {
           child: Stack(
             alignment: Alignment(1.2, 1.3),
             children: [
-              Image(image: NetworkImage(board.img)),
+              Image(image: NetworkImage(board.img),height: 80,width: 80),
               // Image.asset('assets/images/testimage.jpg', fit: BoxFit.fill),
             ],
           ),
