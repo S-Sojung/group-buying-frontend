@@ -1,11 +1,12 @@
 import 'package:donut/core/constants/theme.dart';
+import 'package:donut/dto/board/board_detail.dart';
 import 'package:donut/views/pages/board/selete_participant_page/component/select_account_body.dart';
-import 'package:donut/views/pages/board/selete_participant_page/component/select_participant_body.dart';
 import 'package:donut/views/pages/board/selete_participant_page/component/select_participant_header.dart';
 import 'package:flutter/material.dart';
 
 class SelectAccountPage extends StatelessWidget {
-  const SelectAccountPage({Key? key}) : super(key: key);
+  BoardDetail board;
+  SelectAccountPage({required this.board, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class SelectAccountPage extends StatelessWidget {
             backgroundColor: Colors.white10,
             title: Text("예약자 선택"),
           ),
-          SeleteParticipantHeader(),
+          SeleteParticipantHeader(board: board),
           SelectAccountBody(),
         ],
       ),
