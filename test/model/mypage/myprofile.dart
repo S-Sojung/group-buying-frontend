@@ -12,14 +12,14 @@ void main() async {
 }
 
 Future<void> fetchMyprofile_test() async {
-  String jwt = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqd3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImV4cCI6MTY4MzU5MDAwMn0.nH5LKjlvqFBNZxauEniDtkaasd6OhfoQABAiQw0gW5sboPR9Vrpgfnqx1T-pxhF4-k_nMctPA_ko9GQlugj3_g";
+  String jwt = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqd3QiLCJyb2xlIjpudWxsLCJpZCI6NCwiZXhwIjoxNjgzNjI1NDU5fQ.SyiFtHyI4V2lB4vSfaTBNwHVcNaA1fxup7Jj3LfBNAHXEuFF7IMO61vzcOfM_dXTHfT1ZC_H0hBqHokCej_1zw";
 
   var img = File("C:/Users/G/Desktop/donut/donut.png");
   print(img);
   String base64 = base64Encode(img.readAsBytesSync());
-  print(base64);
-  var decoding = base64Decode(base64);
-  print("${decoding}");
+  // print(base64);
+  // var decoding = base64Decode(base64);
+  // print("${decoding}");
   UserProfileUpdateReq updateuser = UserProfileUpdateReq(password: "1234", profile: base64);
   ResponseDTO responseDTO =await UserRepository().fetchUpdate(updateuser,jwt);
   print(responseDTO.status);

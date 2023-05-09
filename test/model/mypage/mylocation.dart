@@ -14,6 +14,6 @@ Future<void> fetchMyLocation_test() async {
   print(responseDTO.status);
   print(responseDTO.msg);
   MyLocationResDTO dto = responseDTO.data;
-  print(dto.state);
+  print(dto.myLocation.state);
 }
 

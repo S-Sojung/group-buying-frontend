@@ -1,3 +1,4 @@
+import 'package:donut/core/constants/move.dart';
 import 'package:donut/dto/my_page/my_location_dto.dart';
 import 'package:donut/dto/response_dto.dart';
 import 'package:donut/main.dart';
@@ -41,13 +42,18 @@ class LocationController{
   Future<void> updateLocation(String state, String city, String town) async{
     MyLocationUpdateReqDTO myLocationUpdateReqDTO = MyLocationUpdateReqDTO(state: state, city: city,town: town);
     SessionUser sessionUser = ref.read(sessionProvider);
-
     ResponseDTO responseDTO = await MyLocationRepository().fetchLocationUpdate(myLocationUpdateReqDTO, sessionUser.jwt!);
-
 
     ref.read(userHomeTownPageProvider.notifier).notifyUpdate(responseDTO.data);
     ref.read(boardHomePageProvider.notifier).notifyLocationUpdate(sessionUser.jwt!, town);
-    Navigator.pop(mContext!);
+    Navigator.pushNamedAndRemoveUntil(mContext!, Move.boardHomePage, (route) => false);
+  }
+
+  Future<void> defaultLocation() async{
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await MyLocationRepository().fetchDefaultMyLocation(sessionUser.jwt!);
+
+    ref.read(userHomeTownPageProvider.notifier).notifyUpdate(responseDTO.data);
   }
   //
   // Future<void> savePost( String title, String content) async{
