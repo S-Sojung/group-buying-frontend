@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:donut/core/constants/http.dart';
 import 'package:donut/dto/board/board_detail.dart';
 import 'package:donut/dto/board/board_home_page_response_dto.dart';
+import 'package:donut/dto/board/board_search_req.dart';
+import 'package:donut/dto/board/board_search_res.dart';
 import 'package:donut/dto/board/mypage_board.dart';
 import 'package:donut/dto/board/save_board_req.dart';
 import 'package:donut/dto/response_dto.dart';
@@ -27,6 +29,25 @@ class BoardRepository {
       print("22222");
       responseDTO.data = MyPageBoard.fromJson(responseDTO.data);
       print("33333");
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(status: -1, msg: "실패 : ${e}");
+    }
+  }
+
+  Future<ResponseDTO> fetchSearchPostList(String jwt, String word) async {
+    try {
+      Response response = await dio.get("/boards/search",
+          options: Options(headers: {"Authorization": "$jwt"}),
+          data: BoardSearchReq(word: word).toJson(),
+      );
+
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      List<dynamic> mapList = responseDTO.data;
+      List<BoardSearchRes> boardList = mapList.map((e) => BoardSearchRes.fromJson(e)).toList();
+      responseDTO.data = boardList;
 
       return responseDTO;
     } catch (e) {

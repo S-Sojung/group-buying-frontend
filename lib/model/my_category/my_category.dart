@@ -16,7 +16,7 @@ class MyCategory {
 
 List<MyCategory> myCategorys = [
   MyCategory(id: 1, userId: 1, categoryId: 1,createdAt: DateTime.now()),
-  MyCategory(id: 1, userId: 1, categoryId: 2,createdAt: DateTime.now()),
-  MyCategory(id: 1, userId: 1, categoryId: 3,createdAt: DateTime.now()),
-  MyCategory(id: 1, userId: 1, categoryId: 4,createdAt: DateTime.now()),
+  MyCategory(id: 1, userId: 1, categoryId: 11,createdAt: DateTime.now()),
+  MyCategory(id: 1, userId: 1, categoryId: 9,createdAt: DateTime.now()),
+  MyCategory(id: 1, userId: 1, categoryId: 8,createdAt: DateTime.now()),
 ];
