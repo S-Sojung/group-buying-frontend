@@ -33,7 +33,7 @@ class ChatList extends ConsumerWidget {
                   padding: const EdgeInsets.all(5),
                   child: DonutRoundTag("도넛 마켓은 당사자간의 거래에는 개입하지 않으며 페이 사용 시 거래 확정 후 개설자에게 돈이 지급 됩니다.",code: "1"),
                 ),
-                DonutChat(message: "안녕하세요 오늘 아침 9시 서면역 1번 출구 괜찮나요?", user: DoUser(id: 2, username: "ssar@naver.com",nickname: "ssar", email: "ssar@naver.com", rate: Rate(id: 1, rateName: "글레이즈드", createdAt: DateTime.now()),ratePoint: 10,profile: "assets/images/donut.png", createdAt: DateTime.now()))
+                // DonutChat(message: "안녕하세요 오늘 아침 9시 서면역 1번 출구 괜찮나요?", user: DoUser(id: 2, username: "ssar@naver.com",nickname: "ssar", email: "ssar@naver.com", rate: Rate(id: 1, rateName: "글레이즈드", createdAt: DateTime.now()),ratePoint: 10,profile: "assets/images/donut.png", createdAt: DateTime.now()))
               ],
             );
           }

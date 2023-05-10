@@ -4,7 +4,9 @@ import 'package:donut/core/constants/move.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/category/category.dart';
+import 'package:donut/model/category/mock_category.dart';
 import 'package:donut/model/chatter_list/chatter_list.dart';
+import 'package:donut/model/my_category/my_category.dart';
 import 'package:donut/model/my_location/my_location.dart';
 import 'package:donut/provider/session_provider.dart';
 import 'package:donut/views/pages/board/detail_page/board_detail_page.dart';
@@ -45,6 +47,10 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
   void initState () {
     super.initState();
     _getCurrentLocation();
+    myCategorys.forEach((element) {
+      print("${mockCategories[element.categoryId-1].name}");
+      categories.add(Category(name: "${mockCategories[element.categoryId-1].name}"));
+    });
   }
 
   void changeScreen(int index) {
@@ -56,16 +62,16 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
   @override
   Widget build(BuildContext context) {
     // boardlist = widget.BHPRdto.boards;
-    // categories = widget.BHPRdto.myCategories;
     // mylocation = widget.BHPRdto.myLocation;
 
     SessionUser sessionUser = ref.read(sessionProvider);
     BoardHomePageModel? model = ref.watch(boardHomePageProvider);
     if (model != null) {
       boardlist = model.BHPRdto.boards;
-      categories = model.BHPRdto.myCategories;
+      // categories = model.BHPRdto.myCategories;
       mylocation = model.BHPRdto.myLocation!;
     }
+    _markers = [];
     boardlist.forEach((element) {
       Marker mark = Marker(
         infoWindow: InfoWindow(

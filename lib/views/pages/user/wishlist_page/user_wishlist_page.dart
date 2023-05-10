@@ -1,3 +1,4 @@
+import 'package:donut/core/constants/size.dart';
 import 'package:donut/core/constants/theme.dart';
 import 'package:donut/model/board/board.dart';
 import 'package:donut/model/board/mock_board.dart';
@@ -11,12 +12,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class UserWishlistPage extends ConsumerWidget {
   UserWishlistPage({Key? key}) : super(key: key);
 
+  List<Board> boardlist = [];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserWishlistPageModel? model = ref.watch(userWishlistPageProvider);
-    List<Board> boardlist = [];
 
     if (model != null) {
+      boardlist = [];
       model.myWishBoardList.wishlistList.forEach((element) {
         Board board = Board(
             id: element.board.id,
@@ -41,7 +43,7 @@ class UserWishlistPage extends ConsumerWidget {
       body: CustomScrollView(
         slivers: [
           boardlist.length == 0
-              ? Text("관심 게시글이 없습니다")
+              ? SliverToBoxAdapter(child: Container(height: getScreenHeigth(context)*0.5,child: Align(alignment: Alignment.center,child: Text("관심 게시글이 없습니다"))))
               : BoardList(
                   boards: boardlist,
                 ),
