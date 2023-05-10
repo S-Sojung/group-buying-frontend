@@ -4,7 +4,7 @@ import 'package:donut/dto/response_dto.dart';
 import 'package:donut/model/board/board_repository.dart';
 
 void main() async {
-  await fetchSavePost_test();
+  await fetchSearch_test();
 }
 
 Future<void> fetchPostList_test() async {
@@ -35,6 +35,16 @@ Future<void> fetchPost_test() async {
   print(responseDTO.msg);
   print(responseDTO.data);
 }
+
+Future<void> fetchSearch_test() async {
+  String jwt = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqd3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImV4cCI6MTY4MzcwNDMyMn0.6qcAaaSKuCYEaQJU6sldx0mc72HfEMJTz9tRva2zey5ny4Jd-W2BOR4fAC94Rfe7562qhsnoOvWzvMMHOIgrMA";
+  String word = "편의점";
+  ResponseDTO responseDTO = await BoardRepository().fetchSearchPostList(jwt, word);
+  print(responseDTO.status);
+  print(responseDTO.msg);
+  print(responseDTO.data);
+}
+
 
 Future<void> fetchSavePost_test() async {
   String jwt = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqd3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImV4cCI6MTY4MzYwNjIxNX0.WVQhZU89GIkJ6COislsBM5a9f_xXZIXyPVhaUHszzQmTxEjDz8RbYv_0s_PV2CwgztgTUEwSOiBNNPfgNv23sA";

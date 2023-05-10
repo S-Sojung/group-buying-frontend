@@ -79,7 +79,7 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
             snippet: "${element.price}원 ${element.qty}개 ${element.paymentType}",
             onTap: () =>
                 Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => BoardDetailPage(board: boardlist[0])))
+                    builder: (context) => BoardDetailPage(board: element)))
         ),
         markerId: MarkerId(element.id.toString()),
         position: LatLng(element.latitude,
@@ -109,7 +109,9 @@ class BoardHomePageState extends ConsumerState<BoardHomePage> {
           titleTextStyle: TextStyle(
               fontSize: 17, fontWeight: FontWeight.bold, color: donutColorBase),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search, size: 30,)),
+            IconButton(onPressed: () {
+              Navigator.pushNamed(context, Move.boardSearchPage);
+            }, icon: Icon(Icons.search, size: 30,)),
             IconButton(
                 onPressed: () {}, icon: Icon(Icons.notifications, size: 30,)),
           ],

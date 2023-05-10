@@ -18,7 +18,9 @@ class BoardDetailBodyContent extends StatelessWidget {
         width: double.infinity,
         child:
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image(image: NetworkImage(board.img!)),
+            AspectRatio(
+            aspectRatio: 1 / 1,
+            child: Image(image: NetworkImage(board.img!),fit: BoxFit.cover,),),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getScreenWidth(context) * 0.05, vertical: 5),

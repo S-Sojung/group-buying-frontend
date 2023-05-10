@@ -79,6 +79,7 @@ class DonutTextFormFieldSlim extends StatelessWidget {
       child: Column(
         crossAxisAlignment:  CrossAxisAlignment.start,
         children: [
+          title.isEmpty? Container():
           Text("${title}",style: callout(),),
           Container(
             height: 40,

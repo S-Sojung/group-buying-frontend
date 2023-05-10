@@ -105,4 +105,9 @@ class BoardController {
     SessionUser sessionUser = ref.read(sessionProvider);
     ref.read(boardHomePageProvider.notifier).notifyInit(sessionUser.jwt!);
   }
+
+  // Future<void> searchRefresh() async {
+  //   SessionUser sessionUser = ref.read(sessionProvider);
+  //   ref.read(boardHomePageProvider.notifier).notifyInit(sessionUser.jwt!);
+  // }
 }

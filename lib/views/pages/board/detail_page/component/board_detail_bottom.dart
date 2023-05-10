@@ -11,6 +11,7 @@ import 'package:donut/views/components/donut_label_round_textbox.dart';
 import 'package:donut/views/pages/board/selete_participant_page/select_participant_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 class BoardDetailBottom extends StatelessWidget {
   BoardDetail board;
@@ -57,7 +58,7 @@ class BoardDetailBottom extends StatelessWidget {
                 // Organizer ID를 통해서 주최자인지 확인, 혹은 내가 참여한 게시글인지 확인
                     OrganizerButton(board: board,):
                     PurchaserButton(board: board,)
-                //     ParticipantButton()
+                    // ParticipantButton(board: board)
                 )
           ],
         ),
@@ -147,7 +148,7 @@ class _PurchaserButtonState extends State<PurchaserButton> {
                       height: 20,
                     ),
                     Text(
-                      "${boards[0].title}",
+                      "${widget.board.title}",
                       style: title1(),
                     ),
                     Text(
@@ -176,7 +177,7 @@ class _PurchaserButtonState extends State<PurchaserButton> {
                     ),
                     DonutLabelRoundTextbox(
                       title: "시간",
-                      content: "${widget.board.event.endAt}",
+                      content: "${DateFormat.Md().add_jm().format(widget.board.event.endAt)}",
                     ),
                     SizedBox(
                       height: 10,
@@ -237,7 +238,9 @@ class _PurchaserButtonState extends State<PurchaserButton> {
 }
 
 class ParticipantButton extends StatelessWidget {
-  const ParticipantButton({
+  BoardDetail board;
+  ParticipantButton({
+    required this.board,
     super.key,
   });
 
@@ -265,7 +268,7 @@ class ParticipantButton extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      "${boards[0].title}",
+                      "${board.title}",
                       style: title1(),
                     ),
                     Text(
@@ -280,28 +283,28 @@ class ParticipantButton extends StatelessWidget {
                         child: Text("개설자가 정한 규칙이에요")),
                     DonutLabelRoundTextbox(
                       title: "결제 방식",
-                      content: events[0].paymentType,
+                      content: board.event.paymentType,
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     DonutLabelRoundTextbox(
                       title: "위치",
-                      content: "${boards[0].city} ${boards[0].town}",
+                      content: "${board.city} ${board.town}",
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     DonutLabelRoundTextbox(
                       title: "시간",
-                      content: "${events[0].endAt}",
+                      content: DateFormat.Md().add_jm().format(board.event.endAt),
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     DonutLabelRoundTextbox(
                       title: "구매 수량",
-                      content: "${participants[0].qty} 개",
+                      content: "1 개",
                     ),
                     SizedBox(
                       height: 20,
