@@ -43,7 +43,7 @@ class AccountController{
     MyAccountReqDTO myAccountReqDTO = MyAccountReqDTO(brand: brand, accountNumber: accountNumber);
     SessionUser sessionUser = ref.read(sessionProvider);
 
-    ResponseDTO responseDTO = await MyAccountRepository().fetchAccountSave(myAccountReqDTO, sessionUser.jwt!);
+    ResponseDTO responseDTO = await MyAccountRepository().fetchAccountUpdate(myAccountReqDTO, sessionUser.jwt!);
     ref.read(userAccountPageProvider.notifier).notifyUpdate(responseDTO.data);
     Navigator.pop(mContext!);
   }

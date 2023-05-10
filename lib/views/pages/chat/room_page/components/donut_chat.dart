@@ -91,7 +91,7 @@ class donutMyChat extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text("오전 8:23"),
+        Text("오전 8:21"),
         Container(
           constraints: BoxConstraints(
             minHeight: 60,

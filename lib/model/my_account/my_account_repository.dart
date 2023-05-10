@@ -51,13 +51,14 @@ class MyAccountRepository {
   Future<ResponseDTO> fetchAccountSave(
       MyAccountReqDTO myAccountReqDTO, String jwt) async {
     try {
-      Response response = await dio.put(
+      Response response = await dio.post(
         "/accounts",
         options: Options(headers: {"Authorization": "$jwt"}),
         data: myAccountReqDTO.toJson(),
       );
 
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      print(responseDTO.data);
       responseDTO.data = MyAccount.fromJson(responseDTO.data);
       return responseDTO;
     } catch (e) {
